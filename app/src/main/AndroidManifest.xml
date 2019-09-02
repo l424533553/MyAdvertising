@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.advertising.screen.myadvertising">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+
+    <!-- 基本的权限 -->
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <!-- 网络权限  基础权限 -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/><!-- 26 8.0以後沒有了 允许未知安装-->
+
+    <!-- 获取电话的 状态信息 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+    <!-- 修改声音设置信息 -->
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+
+    <!-- NFC 权限 -->
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+    <uses-permission android:name="android.permission.NFC"/>
+
+    <!--  系统弹框 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="Android.permission.INJECT_EVENTS"/>
+
+
+    <application
+            android:name="com.advertising.SysApplication"
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+            tools:replace="android:icon,android:allowBackup,android:theme,android:name"
+            android:theme="@style/AppTheme"
+            tools:ignore="GoogleAppIndexingWarning">
+
+        <!--ScreenActivity -->
+        <activity android:name=".HomeActivity"
+                  android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+
+        <activity android:name=".ScreenActivity"
+                  android:theme="@style/AppTheme"/>
+
+        <activity android:name=".activity.DataFlushActivity"
+                  android:screenOrientation="landscape"
+                  android:theme="@style/dialog"
+                  android:windowSoftInputMode="stateHidden|stateAlwaysHidden"
+                  />
+
+        <!--        <activity android:name=".ScreenActivity"/>-->
+        <!--<activity android:name=".download.ApkUpdateActivity"/>-->
+        <service android:name=".download.DownloadIntentService"/>
+        <service android:name=".download.WorkService"/>
+
+        <receiver
+                android:name=".BootReceiver"
+                android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+            <intent-filter>
+
+                <!-- 注册开机广播地址 -->
+                <action android:name="com.axecom.destroy"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </receiver>
+
+        <!-- <service
+                 android:name=".CarouselService"
+                 android:enabled="true"
+                 android:exported="true"
+                 android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+
+             <intent-filter android:priority="1000">
+
+                 &lt;!&ndash; 系统启动完成后会调用 &ndash;&gt;
+                 <action android:name="android.intent.action.BOOT_COMPLETED" /> &lt;!&ndash; 用户开机广播 &ndash;&gt;
+                 <action android:name="android.intent.action.DATE_CHANGED" />
+                 <action android:name="android.intent.action.MEDIA_MOUNTED" />
+                 <action android:name="android.intent.action.USER_PRESENT" /> &lt;!&ndash; 用户使用 唤醒 &ndash;&gt;
+                 <action android:name="android.intent.action.ACTION_TIME_TICK" />
+                 <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                 <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+                 <action android:name="android.intent.action.PACKAGE_RESTARTED" /> &lt;!&ndash; 应用状态改变 &ndash;&gt;
+             </intent-filter>
+         </service>-->
+
+    </application>
+
+</manifest>

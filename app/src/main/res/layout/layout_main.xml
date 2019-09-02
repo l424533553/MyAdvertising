@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="adUserBean" type="com.advertising.screen.myadvertising.entity.AdUserBean"/>
+    </data>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:background="@color/color_add24"
+            android:paddingTop="70dp"
+            android:layout_height="match_parent"
+            android:baselineAligned="false">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="7"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:paddingStart="30dp"
+                android:paddingEnd="10dp"
+                android:layout_height="0dp">
+
+            <ImageView
+                    android:id="@+id/ivPhoto"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/photo"
+                    android:scaleType="fitCenter"
+                    tools:ignore="NestedWeights"/>
+
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="4"
+                    android:orientation="vertical"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="0dp"
+                    android:gravity="center_vertical"
+                    android:visibility="visible"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="0dp"
+                    android:paddingBottom="5dp"
+                    android:layout_height="match_parent">
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:padding="5dp"
+                        android:layout_height="wrap_content">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="商户名:"
+                            android:textColor="@color/color_settings1"
+                            android:textSize="32sp"
+                            android:orientation="vertical"
+                            tools:ignore="NestedWeights"/>
+
+                    <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="2"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="0dp"
+                            android:gravity="center_vertical"
+                            android:layout_height="wrap_content"
+                            android:text="@{adUserBean.companyname}"
+                            android:textColor="@color/white"
+                            android:textSize="40sp"
+                            android:orientation="vertical"
+                            tools:ignore="NestedWeights"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:padding="5dp"
+                        android:gravity="center"
+
+                        android:layout_height="wrap_content">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="类    别:"
+                            android:textColor="@color/color_settings1"
+                            android:textSize="32sp"
+                            android:orientation="vertical"
+                            tools:ignore="NestedWeights"/>
+
+                    <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="2"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="0dp"
+                            android:gravity="center_vertical"
+                            android:layout_height="wrap_content"
+                            android:text="@{adUserBean.introduce}"
+                            android:textColor="@color/white"
+                            android:textSize="40sp"
+                            android:orientation="vertical"
+                            tools:ignore="NestedWeights"/>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:padding="5dp"
+                        android:gravity="center"
+                        android:layout_height="wrap_content">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="档位号:"
+                            android:textColor="@color/color_settings1"
+                            android:textSize="32sp"
+                            android:orientation="vertical"
+                            tools:ignore="NestedWeights"/>
+
+                    <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="2"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="0dp"
+                            android:gravity="center_vertical"
+                            android:layout_height="wrap_content"
+                            android:text="@{adUserBean.companyno}"
+                            android:textColor="@color/white"
+                            android:textSize="40sp"
+                            android:orientation="vertical"
+                            tools:ignore="NestedWeights"/>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:padding="5dp"
+                        android:layout_height="wrap_content">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center"
+                            android:text="服务星级:"
+                            android:textColor="@color/white"
+                            android:textSize="32sp"
+                            android:orientation="vertical"
+                            tools:ignore="NestedWeights"/>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_height="wrap_content">
+                    <ImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/ic_start"
+
+                    />
+                    <ImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/ic_start"
+                    />
+                    <ImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/ic_start"
+                    />
+                    <ImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/ic_start"
+                    />
+                    <ImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/ic_start"
+                    />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_weight="9"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    tools:ignore="NestedWeights">
+
+
+                <ImageView
+                        android:id="@+id/ivSmallRoutine"
+                        android:layout_marginStart="20dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginBottom="5dp"
+                        android:src="@drawable/wx3"
+                        android:scaleType="fitCenter"
+                        android:layout_marginTop="5dp"
+                        android:layout_width="250dp"
+                        android:layout_height="250dp"
+                />
+                <TextView
+                        android:layout_width="match_parent"
+                        android:text="扫码 点评"
+                        android:textColor="@color/text_white"
+                        android:textSize="42sp"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center"
+                        android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+
+                <ImageView
+                        android:id="@+id/ivDiBiao"
+                        android:layout_marginStart="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginBottom="5dp"
+                        android:src="@drawable/wx2"
+                        android:scaleType="fitCenter"
+                        android:layout_marginTop="5dp"
+                        android:layout_width="250dp"
+
+                        android:layout_height="250dp"/>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:text="扫码 追溯"
+                        android:textColor="@color/text_white"
+                        android:textSize="42sp"
+                        android:gravity="center"
+                        android:layout_marginBottom="10dp"
+                        android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</layout>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+
+        <variable name="inspectBean" type="com.axecom.smartweight.my.entity.InspectBean"/>
+        <variable name="position" type="Integer"/>
+    </data>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:background="@{position%2==0 ? @color/transparent : @color/color_add2}"
+            android:layout_height="wrap_content">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:gravity="center"
+                android:textColor="@color/color_white"
+                android:layout_height="wrap_content"
+                android:text="@{String.valueOf(position+1)}"
+                android:textSize="30sp"
+        />
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/color_white"
+                android:layout_height="wrap_content"
+                android:text="@{inspectBean.gsmc}"
+                android:textSize="30sp"
+        />
+
+        <!-- -->
+        <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@{inspectBean.hgzt.equals(@string/check_result)? @color/red_text : @color/color_white}"
+                android:text="@{inspectBean.hgzt}"
+                android:textSize="30sp"
+                android:layout_height="wrap_content"
+        />
+
+
+    </LinearLayout>
+</layout>

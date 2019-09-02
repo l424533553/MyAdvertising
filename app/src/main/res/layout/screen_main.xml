@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="fragment12" type="android.support.v4.app.Fragment"/>
+        <variable name="adUserBean" type="com.advertising.screen.myadvertising.entity.AdUserBean"/>
+
+    </data>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:descendantFocusability="blocksDescendants"
+            android:orientation="vertical"
+            android:background="@drawable/back2"
+            android:fitsSystemWindows="true"
+            tools:context=".ScreenActivity">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="93"
+                android:orientation="horizontal"
+                android:layout_height="0dp">
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="9"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent"
+                    tools:ignore="NestedWeights">
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:background="@color/color_add5"
+                        android:layout_height="0dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="0dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                    <TextView
+                            android:text='@{adUserBean.marketname+@string/unit}'
+                            android:textColor="@color/color_white"
+                            android:textSize="48sp"
+                            android:gravity="center_horizontal|bottom"
+                            android:paddingEnd="10dp"
+                            android:paddingStart="0dp"
+                            android:paddingTop="18dp"
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:layout_height="0dp"/>
+                    <TextView
+                            android:text="技术支持：深圳市安鑫宝科技发展有限公司"
+                            android:textColor="@color/color_white"
+                            android:textSize="20sp"
+                            android:paddingEnd="55dp"
+                            android:paddingStart="15dp"
+                            android:layout_marginBottom="10dp"
+                            android:gravity="bottom|end"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_weight="8"
+                        android:layout_height="0dp"
+                        android:orientation="horizontal">
+                    <include
+                            android:id="@+id/layout_main"
+                            layout="@layout/layout_main"
+                            android:layout_width="0dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="4"
+                            tools:ignore="NestedWeights">
+                    </include>
+
+
+                    <com.youth.banner.Banner
+                            android:id="@+id/banner"
+                            android:padding="10dp"
+                            android:background="@color/color_add2"
+                            android:layout_height="match_parent"
+                            android:layout_width="0dp"
+                            android:layout_weight="5"
+                            android:layout_margin="10dp"
+                            android:focusable="false"
+                            android:paddingStart="5dp"
+                            android:paddingEnd="5dp"
+                            app:delay_time="9000"
+                            app:image_scale_type="fit_center"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- 加个栏 -->
+            <include
+                    android:id="@+id/ilData"
+                    layout="@layout/layout_price"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="3">
+            </include>
+
+
+        </LinearLayout>
+
+
+        <!-- 最底部 消息栏 -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:background="@color/color_add5"
+                android:layout_height="0dp"
+
+                android:layout_weight="7"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/linearLayout"
+                android:orientation="horizontal">
+
+
+
+            <!-- https://github.com/385841539/MarqueeView -->
+            <com.marquee.dingrui.marqueeviewlib.MarqueeView
+                    android:id="@+id/mvContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:marqueeview_repet_type="repet_interval"
+                    app:marqueeview_text_size="36"
+                    app:marqueeview_text_speed="1" />
+
+            <com.sunfusheng.marqueeview.MarqueeView
+                    android:id="@+id/marqueeView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:visibility="gone"
+                    android:paddingBottom="5dp"
+                    app:mvAnimDuration="7100"
+                    app:mvDirection="bottom_to_top"
+                    app:mvInterval="7000"
+                    app:mvSingleLine="true"
+                    app:mvTextColor="@color/color_white"
+                    app:mvTextSize="36sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>
