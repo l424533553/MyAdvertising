@@ -15,7 +15,7 @@ android {
     defaultConfig {
         applicationId "com.advertising.screen.myadvertising"
         minSdkVersion 17
-        targetSdkVersion 19
+        targetSdkVersion 28
         multiDexEnabled true
         versionCode 1
         versionName "1.0"
@@ -47,7 +47,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    implementation project(':MyLibraryProject:mylibrary')
+
 
     //ormlite  框架引用包
     implementation 'com.j256.ormlite:ormlite-android:5.1'
@@ -87,7 +87,7 @@ dependencies {
     /*  走马灯 框架*/
     implementation 'com.sunfusheng:marqueeview:1.3.3'
     implementation 'com.jeremyliao:live-event-bus:1.4.0'
-    implementation project(path: ':marqueeviewlib')
+    implementation project(path: ':mylibrary')
 
 
 }

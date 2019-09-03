@@ -1,6 +1,5 @@
 package com.advertising.screen.myadvertising.activity;
 
-import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.axecom.smartweight.my.entity.*;
 import com.axecom.smartweight.my.helper.HttpHelper;
 import com.axecom.smartweight.my.helper.MyNetWorkUtils;
+
 import com.luofx.listener.VolleyListener;
 import com.luofx.newclass.ActivityController;
 import com.luofx.utils.MyPreferenceUtils;
@@ -208,10 +208,8 @@ public class DataFlushActivity extends MyBaseCommonActivity implements VolleyLis
     }
 
 
-    /*    *//**
-     * 保存 副屏图片地址
-     *//*
-    private void saveSecondImageUrl222(final String response) {
+
+/*    private void saveSecondImageUrl222(final String response) {
 
         sysApplication.getThreadPool().execute(new Runnable() {
             @Override

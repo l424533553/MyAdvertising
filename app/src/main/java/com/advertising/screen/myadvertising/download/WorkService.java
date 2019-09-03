@@ -247,10 +247,11 @@ public class WorkService extends Service implements VolleyListener {
             public void run() {
                 while (!isMessageInfo) {
                     try {
-                        Thread.sleep(20 * 60 * 1000);
+
                         upPrice();
                         Thread.sleep(2 * 1000);
                         upInspect();
+                        Thread.sleep(20 * 60 * 1000);
 
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -266,7 +267,7 @@ public class WorkService extends Service implements VolleyListener {
                 while (!isCommonInfo) {
                     try {
                         upSecondImage();
-                        Thread.sleep(2 * 60 * 1000);
+                        Thread.sleep(40 * 60 * 1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

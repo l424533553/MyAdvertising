@@ -20,11 +20,11 @@ import com.advertising.SysApplication;
 import com.advertising.screen.myadvertising.adapter.InspectAdapter;
 import com.advertising.screen.myadvertising.adapter.PriceAdapter;
 import com.advertising.screen.myadvertising.databinding.ScreenMainBinding;
-import com.advertising.screen.myadvertising.download.ApkUpdateHelper;
 import com.advertising.screen.myadvertising.download.WorkService;
 import com.advertising.screen.myadvertising.entity.*;
 import com.advertising.screen.myadvertising.help.LiveBus;
 import com.advertising.screen.myadvertising.help.MyImageLoader;
+import com.advertising.screen.myadvertising.view.MarqueeTextviewNofocus;
 import com.alibaba.fastjson.JSON;
 import com.android.volley.VolleyError;
 import com.axecom.smartweight.my.IConstants;
@@ -196,7 +196,7 @@ public class ScreenActivity extends AppCompatActivity implements IConstants, Vol
     }
 
     /**
-     * 更新
+     * 更新  基础信息
      */
     private void updateBaseInfo(boolean isFirst) {
         List<AdUserBean> userBeans = AdUserDao.getInstance(context).queryAll();
@@ -205,12 +205,21 @@ public class ScreenActivity extends AppCompatActivity implements IConstants, Vol
             binding.layoutMain.setAdUserBean(userBean);
             binding.setAdUserBean(userBean);
             info.clear();
-            info.add(userBean.getAdcontent());
-            info.add(userBean.getAdcontent());
-            if (isFirst) {
-                binding.marqueeView.startWithList(info, R.anim.anim_in, R.anim.anim_out);
-            }
-            binding.mvContent.setContent(userBean.getAdcontent());
+//            info.add(userBean.getAdcontent());
+//            info.add(userBean.getAdcontent());
+//            if (isFirst) {
+//                binding.marqueeView.startWithList(info, R.anim.anim_in, R.anim.anim_out);
+//            }
+//            binding.mvContent.setContent(userBean.getAdcontent());
+
+            binding.marquee .setText(userBean.getAdcontent());
+            // 初始化
+            binding.marquee .init(getWindowManager());
+            // 设置滚动方向
+            binding.marquee .setScrollDirection(MarqueeTextviewNofocus.RIGHT_TO_LEFT);
+            // 设置滚动速度
+            binding.marquee .setScrollMode(MarqueeTextviewNofocus.SCROLL_NORM);
+
         }
 
         initBannerData();
@@ -222,6 +231,9 @@ public class ScreenActivity extends AppCompatActivity implements IConstants, Vol
     private int inspectIndex;
 
     private void initAdapter() {
+
+
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         binding.ilData.rvPrice.setLayoutManager(linearLayoutManager);
@@ -373,8 +385,7 @@ public class ScreenActivity extends AppCompatActivity implements IConstants, Vol
                     return;
                 }
                 String url = apkInfo.getData().getFilepath();// 網絡下載地址
-                ApkUpdateHelper apkUpdateHelper = new ApkUpdateHelper(this);
-                apkUpdateHelper.startUpdown(13, url);
+
 
                 break;
             default:

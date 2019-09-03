@@ -107,7 +107,6 @@
                     android:layout_weight="3">
             </include>
 
-
         </LinearLayout>
 
 
@@ -116,17 +115,26 @@
                 android:layout_width="match_parent"
                 android:background="@color/color_add5"
                 android:layout_height="0dp"
-
+                android:gravity="center_vertical"
                 android:layout_weight="7"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:id="@+id/linearLayout"
                 android:orientation="horizontal">
 
 
+            <com.advertising.screen.myadvertising.view.MarqueeTextviewNofocus
+                    android:id="@+id/marquee"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/color_white"
+                    android:textSize="36sp"
+            />
 
-            <!-- https://github.com/385841539/MarqueeView -->
+       <!--     &lt;!&ndash; https://github.com/385841539/MarqueeView &ndash;&gt;
             <com.marquee.dingrui.marqueeviewlib.MarqueeView
                     android:id="@+id/mvContent"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:marqueeview_repet_type="repet_interval"
@@ -146,7 +154,7 @@
                     app:mvInterval="7000"
                     app:mvSingleLine="true"
                     app:mvTextColor="@color/color_white"
-                    app:mvTextSize="36sp"/>
+                    app:mvTextSize="36sp"/>-->
 
         </LinearLayout>
 
