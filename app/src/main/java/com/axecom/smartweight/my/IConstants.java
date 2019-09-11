@@ -27,6 +27,7 @@ public interface IConstants {
     int NOTIFY_TRACE_STATE = 9101;
     int NOTIFY_CLOSE_DIALOG = 9102;
     int FAILED = 9113;
+    int UPDATE_QR = 9114;
 
     /***************************************/
 //    int VOLLEY_UPDATE_GOOD = 4401;
@@ -42,6 +43,12 @@ public interface IConstants {
     // 销售id
     String SELLER_ID = "seller_id";
     String IS_FIRST_LOGIN = "isFirstLogin";
+    String DEFAULT_AD_CONTENT = "智慧农贸市场欢迎您！";
+
+
+    String DATA_MARK_ID = "mark_id";
+    String DATA_MARK_NAME = "mark_name";
+    String DATA_BOOTH_NUMBER = "booth_number";
     String DEFAULT_ID = "0000";
 
     String NOTIFY_MESSAGE_CHANGE = "com.axecom.smartweight.my.helper.notify.message";

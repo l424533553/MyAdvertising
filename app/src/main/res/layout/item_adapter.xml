@@ -8,7 +8,7 @@
     </data>
     <LinearLayout
             android:orientation="horizontal"
-            android:background="@{position%2==0 ? @color/transparent : @color/color_add25}"
+            android:background="@{position%2==0 ? @color/transparent : @color/color_add2345}"
             android:layout_width="match_parent"
             android:padding="10dp"
             android:layout_height="wrap_content">
@@ -30,6 +30,7 @@
                 android:gravity="center"
                 android:textColor="@color/color_white"
                 android:layout_height="wrap_content"
+                android:singleLine="true"
                 android:text="@{priceBean.name}"
                 android:textSize="30sp"
         />
@@ -38,6 +39,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:singleLine="true"
                 android:textColor="@color/red_text"
                 android:text="@{priceBean.avgprice}"
                 android:textSize="30sp"

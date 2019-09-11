@@ -12,7 +12,6 @@ import android.support.annotation.NonNull;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
-import com.luofx.utils.log.MyLog;
 
 import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
@@ -295,15 +294,15 @@ public class MyNetWorkUtils {
     /**
      * 没有网络
      */
-    public static final int NONETWORK = 0;
+    private static final int NONETWORK = 0;
     /**
      * 当前是wifi连接
      */
-    public static final int WIFI = 1;
+    private static final int WIFI = 1;
     /**
      * 不是wifi连接
      */
-    public static final int NOWIFI = 2;
+    private static final int NOWIFI = 2;
 
 
     /**
@@ -605,4 +604,5 @@ public class MyNetWorkUtils {
         }
 
     }
+
 }

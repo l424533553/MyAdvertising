@@ -5,13 +5,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import com.advertising.screen.myadvertising.R;
-import com.advertising.screen.myadvertising.databinding.ItemAdapterBinding;
 import com.advertising.screen.myadvertising.databinding.ItemAdapterInspectBinding;
 import com.axecom.smartweight.my.entity.InspectBean;
-import com.axecom.smartweight.my.entity.PriceBean;
 
 import java.util.List;
 

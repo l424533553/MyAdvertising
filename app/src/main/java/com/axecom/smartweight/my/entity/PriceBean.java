@@ -3,8 +3,6 @@ package com.axecom.smartweight.my.entity;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-import java.util.List;
-
 /**
  * 作者：罗发新
  * 时间：2019/8/28 0028    星期三

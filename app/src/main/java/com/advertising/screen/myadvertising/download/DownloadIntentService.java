@@ -8,10 +8,8 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.RemoteViews;
-
-import com.advertising.screen.myadvertising.NotificationHelpter;
 import com.advertising.screen.myadvertising.R;
-
+import com.advertising.screen.myadvertising.help.NotificationHelpter;
 import com.advertising.screen.myadvertising.net.retrofit.DownloadCallBack;
 import com.advertising.screen.myadvertising.net.retrofit.RetrofitHttp;
 import com.luofx.utils.apk.MyApkUtils;
@@ -65,6 +63,8 @@ public class DownloadIntentService extends IntentService {
 //            }
 //        }
 
+
+
         final RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.notify_download);
         remoteViews.setProgressBar(R.id.pb_progress, 100, progress, false);
         remoteViews.setTextViewText(R.id.tv_progress, "已下载" + progress + "%");
@@ -78,7 +78,6 @@ public class DownloadIntentService extends IntentService {
             @Override
             public void onStartDownload() {//开始下载
                 // 开始准备下载
-
             }
 
             @Override

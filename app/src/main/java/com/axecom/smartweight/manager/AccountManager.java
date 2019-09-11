@@ -57,13 +57,7 @@ public class AccountManager {
         return SPUtils.getString(mCtx, USER_SCALES_ID, null);
     }
 
-    public void saveRememberPwdState(boolean save) {
-        SPUtils.put(mCtx, IS_SAVE_PWD, save);
-    }
 
-    public boolean getRememberPwdState() {
-        return (boolean) SPUtils.get(mCtx, IS_SAVE_PWD, false);
-    }
 
     public void saveLastSerialNumber(String serialNumber) {
         SPUtils.putString(mCtx, LAST_SERIALNUMBER, serialNumber);
@@ -79,14 +73,6 @@ public class AccountManager {
 
     public String getPwdBySerialNumber(String serialNumber) {
         return SPUtils.getString(mCtx, serialNumber, null);
-    }
-
-    public void savePwdChecked(String serialNumber, boolean isChecked) {
-        SPUtils.put(mCtx, serialNumber, isChecked);
-    }
-
-    public Boolean getPwdChecked(String serialNumber) {
-        return (Boolean) SPUtils.get(mCtx, serialNumber, null);
     }
 
     public String getAdminToken() {

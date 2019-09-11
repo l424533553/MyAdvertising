@@ -3,14 +3,12 @@ package com.advertising.screen.myadvertising.entity;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import com.axecom.smartweight.my.entity.InspectBean;
-import com.axecom.smartweight.my.entity.InspectBeanDao;
 import com.axecom.smartweight.my.entity.PriceBean;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
-import com.luofx.entity.Deviceinfo;
-import com.luofx.entity.dao.OrmliteBaseHelper;
+import com.luofx.entity.OrmliteBaseHelper;
 import com.luofx.other.tid.UserInfo;
 import com.luofx.utils.log.MyLog;
 

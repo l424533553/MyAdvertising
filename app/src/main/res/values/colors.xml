@@ -48,11 +48,13 @@
     <color name="color_add255555">#cc165FE5</color>
    <!-- <color name="color_add2">#77165FE5</color>-->
 
-    <color name="color_add2">#77165FE5</color>
-    <color name="color_add5">#77165FE5</color>
+    <color name="color_add2">#165FE5</color>
+    <color name="color_add5">#aa165FE5</color>
     <color name="color_add2345">#94D8F6</color>
-    <color name="color_add24">#770C7F2E</color>
+    <color name="color_add24">#ABD8B9</color>
+
     <color name="color_add25">#0C7F2E</color>
+    <color name="color_add26">#30C65D</color>
     <color name="color_add22">#165FE5</color>
     <color name="color_add3">#5492E5</color>
     <color name="color_add_pressed">#165FE5</color>

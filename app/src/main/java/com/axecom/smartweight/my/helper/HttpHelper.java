@@ -1,22 +1,11 @@
 package com.axecom.smartweight.my.helper;
 
 
-import android.support.annotation.NonNull;
-import android.text.TextUtils;
 import com.advertising.SysApplication;
-import com.alibaba.fastjson.JSON;
-
 import com.axecom.smartweight.my.IConstants;
 import com.luofx.listener.VolleyListener;
 import com.luofx.listener.VolleyStringListener;
-import okhttp3.Call;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.RequestBody;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**

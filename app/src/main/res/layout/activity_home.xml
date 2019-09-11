@@ -4,7 +4,8 @@
              android:layout_height="match_parent" xmlns:tools="http://schemas.android.com/tools"
              android:gravity="center"
              android:background="@drawable/back2"
-             tools:context=".HomeActivity">
+             tools:context=".activity.HomeActivity">
+
 
     <ImageView
             android:id="@+id/ivLog"

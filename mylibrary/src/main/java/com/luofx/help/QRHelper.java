@@ -2,6 +2,7 @@ package com.luofx.help;//package com.luofx.help;
 
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.widget.ImageView;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
@@ -233,9 +234,6 @@ public class QRHelper {
     /**
      * 商通打印机  二维码 生成打印指令
      *
-     * @param contents1
-     * @param width
-     * @param height
      * @return
      */
     public static byte[] createPixelsQR2(String contents1, int width, int height) {
@@ -381,8 +379,9 @@ public class QRHelper {
                 return null;
             }
 
-            Hashtable<EncodeHintType, String> hints = new Hashtable<EncodeHintType, String>();
-            hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
+            Hashtable<EncodeHintType, Object> hints = new Hashtable<>();
+            hints.put(EncodeHintType.CHARACTER_SET, "gbk");
+            hints.put(EncodeHintType.MARGIN, 1);  //设置白边
             //图像数据转换，使用了矩阵转换
             BitMatrix bitMatrix = new QRCodeWriter().encode(contents, BarcodeFormat.QR_CODE, QR_WIDTH, QR_HEIGHT, hints);
             int[] pixels = new int[QR_WIDTH * QR_HEIGHT];
@@ -398,6 +397,26 @@ public class QRHelper {
                     }
                 }
             }
+
+
+
+//            for (int x = 0;x<QR_WIDTH; x++){
+//                for (int y = 0;y<QR_HEIGHT;y++){
+//                    if (bitMatrix.get(x,y)){
+//
+//                        int red = (53 - (53- 30) / QR_HEIGHT * (y + 1));
+//                        int green = (155 - (155 - 30) / QR_HEIGHT * (y + 1));
+//                        int blue = (84 - (84-10) / QR_HEIGHT * (y + 1));
+////                        Color color = new Color();
+//                        int colorInt = Color.argb(255, red, green, blue);
+//                        // 修改二维码的颜色，可以分别制定二维码和背景的颜色
+////                        pixels[x * QR_HEIGHT + y] = bitMatrix.get(x, y) ? colorInt: 16777215;// 0x000000:0xffffff
+//                        pixels[x * QR_HEIGHT + y] = bitMatrix.get(x, y) ? colorInt: 65461023;// 0x000000:0xffffff
+//                    }else {
+//                        pixels[x * QR_HEIGHT + y] = 0xffffffff;// 背景颜色
+//                    }
+//                }
+//            }
 
             //生成二维码图片的格式，使用ARGB_8888
             Bitmap bitmap = Bitmap.createBitmap(QR_WIDTH, QR_HEIGHT, Bitmap.Config.ARGB_8888);

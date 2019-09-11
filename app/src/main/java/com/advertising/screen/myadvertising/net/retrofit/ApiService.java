@@ -1,6 +1,5 @@
 package com.advertising.screen.myadvertising.net.retrofit;
 
-import com.axecom.smartweight.my.IConstants;
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 import retrofit2.http.GET;

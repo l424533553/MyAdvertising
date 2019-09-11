@@ -10,16 +10,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import com.advertising.SysApplication;
 import com.advertising.screen.myadvertising.R;
-import com.advertising.screen.myadvertising.ScreenActivity;
 import com.advertising.screen.myadvertising.databinding.ActivityDataFlushBinding;
 import com.advertising.screen.myadvertising.entity.*;
 import com.alibaba.fastjson.JSON;
 import com.android.volley.VolleyError;
-
 import com.axecom.smartweight.my.entity.*;
 import com.axecom.smartweight.my.helper.HttpHelper;
 import com.axecom.smartweight.my.helper.MyNetWorkUtils;
-
 import com.luofx.listener.VolleyListener;
 import com.luofx.newclass.ActivityController;
 import com.luofx.utils.MyPreferenceUtils;
@@ -33,7 +30,7 @@ import java.util.List;
 import static com.axecom.smartweight.my.IConstants.*;
 
 
-public class DataFlushActivity extends MyBaseCommonActivity implements VolleyListener, View.OnClickListener {
+public class DataFlushActivity extends MyCommonActivity implements VolleyListener, View.OnClickListener {
 
     /**
      * 底部标题 、热键商品更新  ,商品类型更新  ，所有商品更新,  小程序 图片  ,强制更新热键
@@ -41,10 +38,6 @@ public class DataFlushActivity extends MyBaseCommonActivity implements VolleyLis
     private TextView tvTitle, tvSmallRoutine;
 
     private TextView tvSecondImage;
-
-
-    //是否自动更新   0:首次接入自动更新   1.更新按键进入，可以支持单项更新    2.普通更新必须选项
-    private int isAutoUp;
 
     private void initView() {
         tvTitle = findViewById(R.id.tvTitle);
@@ -317,9 +310,15 @@ public class DataFlushActivity extends MyBaseCommonActivity implements VolleyLis
             @Override
             public void run() {
                 if (adUserBean != null) {
+
+                    MyPreferenceUtils.getSp(context).edit()
+                            .putInt(DATA_MARK_ID, adUserBean.getMarketid())
+                            .putString(DATA_MARK_NAME, adUserBean.getMarketname())
+                            .putString(DATA_BOOTH_NUMBER, adUserBean.getCompanyno())
+                            .apply();
                     // 更新时间
                     adUserBean.setId(1);
-                    boolean isSuccess = adUserDao.updateOrInsert(adUserBean);
+                    adUserDao.updateOrInsert(adUserBean);
                     imageDao.deleteAll();
 
                     /* 图片修改   *******************/
@@ -400,10 +399,7 @@ public class DataFlushActivity extends MyBaseCommonActivity implements VolleyLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnUpData:
-                //自动更新 模式
-                isAutoUp = 0;
                 break;
-
             case R.id.btnSmallRoutine:
                 upSmallRoutine();
                 break;

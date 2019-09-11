@@ -40,11 +40,14 @@ public class BaseVolleyApplication extends MultiDexApplication {
         return queues;
     }
 
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
-
         queues = Volley.newRequestQueue(getApplicationContext());
     }
 

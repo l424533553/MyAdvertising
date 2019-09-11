@@ -13,7 +13,7 @@
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
                 android:layout_width="match_parent"
-                android:background="@color/color_add24"
+                android:background="@color/color_add2"
                 android:layout_height="0dp"
                 android:layout_weight="1">
 
@@ -29,14 +29,13 @@
             <android.support.v7.widget.RecyclerView
                     android:id="@+id/rvCheck"
                     android:layout_width="match_parent"
-                    android:paddingBottom="10dp"
+                    android:paddingBottom="15dp"
                     android:paddingEnd="4dp"
                     android:paddingStart="4dp"
                     android:layout_marginBottom="5dp"
                     android:paddingTop="5dp"
                     android:layout_height="match_parent">
             </android.support.v7.widget.RecyclerView>
-
 
         </LinearLayout>
 
@@ -49,7 +48,7 @@
         </View>
 
         <LinearLayout
-                android:background="@color/color_add24"
+                android:background="@color/color_add2"
                 android:id="@+id/llPrice"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -83,10 +82,11 @@
             </LinearLayout>
             <android.support.v7.widget.RecyclerView
                     android:id="@+id/rvPrice"
-                    android:paddingBottom="10dp"
-                    android:paddingTop="5dp"
+                    android:paddingBottom="15dp"
                     android:paddingEnd="4dp"
                     android:paddingStart="4dp"
+                    android:layout_marginBottom="5dp"
+                    android:paddingTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
             </android.support.v7.widget.RecyclerView>

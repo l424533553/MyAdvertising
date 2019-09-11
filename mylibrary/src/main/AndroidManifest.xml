@@ -40,19 +40,18 @@
     <!--否则需要  tools:replace=”android:name”  覆盖着 用 -->
 
 
-<!--    <application
-            android:supportsRtl="true"
-            android:theme="@style/AppTheme"
-            tools:ignore="GoogleAppIndexingWarning">
+    <!--    <application
+                android:supportsRtl="true"
+                android:theme="@style/AppTheme"
+                tools:ignore="GoogleAppIndexingWarning">
 
-        &lt;!&ndash; HomeLibActivity &ndash;&gt;
-        <activity android:name=".HelpActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
-
-    </application>-->
+            &lt;!&ndash; HomeLibActivity &ndash;&gt;
+            <activity android:name=".HelpActivity">
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN"/>
+                    <category android:name="android.intent.category.LAUNCHER"/>
+                </intent-filter>
+            </activity>
+        </application>-->
 
 </manifest>

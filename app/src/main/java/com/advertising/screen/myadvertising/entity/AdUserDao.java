@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.UpdateBuilder;
-import com.luofx.entity.dao.OrmliteBaseHelper;
 
 import java.sql.SQLException;
 import java.util.List;

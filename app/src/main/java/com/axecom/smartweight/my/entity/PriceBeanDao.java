@@ -4,7 +4,6 @@ package com.axecom.smartweight.my.entity;
 import android.content.Context;
 import com.advertising.screen.myadvertising.entity.My2OrmliteBaseHelper;
 import com.j256.ormlite.dao.Dao;
-import com.luofx.entity.dao.OrmliteBaseHelper;
 
 import java.sql.SQLException;
 import java.util.List;

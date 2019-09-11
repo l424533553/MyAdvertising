@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.multidex.MultiDex;
 import android.support.v4.app.ActivityCompat;
 import android.telephony.TelephonyManager;
 import com.android.volley.toolbox.Volley;
@@ -15,8 +14,7 @@ import com.android.volley.toolbox.Volley;
 
 import com.luofx.config.IBaseConstants;
 import com.luofx.entity.Deviceinfo;
-import com.luofx.entity.dao.DeviceInfoDao;
-import com.luofx.help.CrashHandler;
+import com.luofx.entity.DeviceInfoDao;
 import com.luofx.other.tid.UserInfo;
 import com.luofx.listener.OkHttpListener;
 import com.luofx.utils.MyPreferenceUtils;
@@ -72,20 +70,6 @@ public class MyBaseApplication extends BaseVolleyApplication implements OkHttpLi
     }
 
 
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-        MultiDex.install(this);
-    }
-
-
-//    @SuppressLint("StaticFieldLeak")
-//    protected static MyBaseApplication sInstance;
-//    public static Context getInstance() {
-//        return sInstance;
-//    }
-
-
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -95,8 +79,7 @@ public class MyBaseApplication extends BaseVolleyApplication implements OkHttpLi
         singleThread = Executors.newSingleThreadExecutor();
 
 
-        readyDevice();
-
+//        readyDevice();
 
         //TODO
 //        // 异常处理，不需要处理时注释掉这两句即可！

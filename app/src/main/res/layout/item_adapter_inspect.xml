@@ -9,7 +9,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:padding="10dp"
-            android:background="@{position%2==0 ? @color/transparent : @color/color_add2}"
+            android:background="@{position%2==0 ? @color/transparent : @color/color_add2345}"
             android:layout_height="wrap_content">
 
         <TextView
@@ -29,21 +29,18 @@
                 android:gravity="center"
                 android:textColor="@color/color_white"
                 android:layout_height="wrap_content"
+                android:singleLine="true"
                 android:text="@{inspectBean.gsmc}"
-                android:textSize="30sp"
-        />
+                android:textSize="30sp"/>
 
-        <!-- -->
         <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@{inspectBean.hgzt.equals(@string/check_result)? @color/red_text : @color/color_white}"
+                android:singleLine="true"
+                android:textColor="@{inspectBean.hgzt.equals(@string/check_result)? @color/color_add26 : @color/red_text}"
                 android:text="@{inspectBean.hgzt}"
                 android:textSize="30sp"
-                android:layout_height="wrap_content"
-        />
-
-
+                android:layout_height="wrap_content"/>
     </LinearLayout>
 </layout>

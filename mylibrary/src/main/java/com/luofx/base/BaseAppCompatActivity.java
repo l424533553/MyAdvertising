@@ -7,11 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.luofx.R;
 import com.luofx.config.IBaseConstants;
-import com.luofx.entity.BusEvent;
 import com.luofx.newclass.ActivityController;
 import com.luofx.utils.log.MyLog;
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
 
 @SuppressLint("Registered")
 public abstract class BaseAppCompatActivity extends AppCompatActivity implements IBaseConstants {
@@ -27,13 +25,6 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
      * 3.設置 this.isNeedRgEventBus=  true or  false
      */
     protected abstract void setNeedRgEventBus();
-
-    protected abstract void onEventMainBack(BusEvent event);
-
-    @Subscribe
-    public void onEventMain(BusEvent event) {
-        onEventMainBack(event);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

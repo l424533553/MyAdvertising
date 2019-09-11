@@ -13,20 +13,38 @@ import com.j256.ormlite.table.DatabaseTable;
  */
 @DatabaseTable(tableName = "AdUserbean")
 public class AdUserBean {
-
     /**
-     * licence : ups/uploads/file/20181112/IMG_20180713_110859.jpg;ups/uploads/file/20181112/IMG_20180713_110849.jpg;ups/uploads/file/20181112/IMG_20180713_110846.jpg;ups/uploads/file/20181112/IMG_20180713_110842.jpg;ups/uploads/file/20181112/IMG_20180713_110839.jpg;ups/uploads/file/20181112/IMG_20180713_110836.jpg;
-     * ad : ups/uploads/file/20181112/IMG_20180713_111513.jpg;ups/uploads/file/20181112/IMG_20180713_111437.jpg;ups/uploads/file/20181112/IMG_20180713_111411.jpg;ups/uploads/file/20181112/IMG_20180713_111348.jpg;ups/uploads/file/20181112/IMG_20180713_111346.jpg;ups/uploads/file/20181112/IMG_20180713_111319.jpg;ups/uploads/file/20181112/IMG_20180713_111315.jpg;
-     * photo : assets/files/20181112135404790.jpg
-     * companyno : A066
+     * licence : ups/uploads/file/20190902/20170531084035264_0001.jpg
+     * ad :
+     * photo : assets/files/20190902105319436.png
+     * marketname : 黄田智慧农贸市场
+     * marketid : 1
+     * companyno : B102
      * introduce : 蔬菜档
-     * companyname : 胡启城
-     * linkphone : 15818546414
-     * companyid : 1126
+     * adcontent : 这是一个测试广告
+     * companyname : 内测03
+     * linkphone : 13056489536
+     * companyid : 1152
+     * status :
      * baseurl : https://data.axebao.com/smartsz/
      */
 
-
+    /**
+     * licence : ups/uploads/file/20190902/20170531084035264_0001.jpg
+     * ad :
+     * photo : assets/files/20190902105319436.png
+     * marketname : 黄田智慧农贸市场
+     * marketid : 1
+     * companyno : B102
+     * introduce : 蔬菜档
+     * adcontent : 这是一个测试广告
+     * companyname : 内测03
+     * linkphone : 13056489536
+     * companyid : 1152
+     * status :
+     * baseurl : https://data.axebao.com/smartsz/
+     * commcontent : 欢迎顾客扫描追溯码，可以知道菜品检疫检测信息及来源，食用更放心；扫码点评，为经营户点赞！
+     */
     @DatabaseField(id = true)
     private int id;
     private String licence;
@@ -46,11 +64,28 @@ public class AdUserBean {
     private String adcontent;
     private String baseurl;
     public String status;
-
     @DatabaseField
     private String marketname;
+    @DatabaseField
+    private int marketid;
+    @DatabaseField
+    private String commcontent;
 
+    public String getCommcontent() {
+        return commcontent;
+    }
 
+    public void setCommcontent(String commcontent) {
+        this.commcontent = commcontent;
+    }
+
+    public int getMarketid() {
+        return marketid;
+    }
+
+    public void setMarketid(int marketid) {
+        this.marketid = marketid;
+    }
 
     public AdUserBean() {
     }
@@ -153,6 +188,9 @@ public class AdUserBean {
     }
 
     public String getMarketname() {
+        if (marketname == null) {
+            return "智慧农贸市场";
+        }
         return marketname;
     }
 

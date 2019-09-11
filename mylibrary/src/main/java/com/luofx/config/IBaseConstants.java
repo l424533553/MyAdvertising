@@ -11,7 +11,6 @@ public interface IBaseConstants {
 
     String APP_SECRET = "4b0acb6311d75fc749bca3c128c14d8a";
 
-
     /**
      * 默认的连续点击时间 间隔   2000 退出
      */
@@ -22,8 +21,6 @@ public interface IBaseConstants {
     String BASE_IP = "http://119.23.43.64";
 
     String BASE_COMPANY_NAME = "深圳市安鑫宝科技发展有限公司";
-
-
 
 
 }

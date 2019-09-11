@@ -1,7 +1,6 @@
 package com.luofx.mvp.login;
 
 import android.support.annotation.NonNull;
-import com.luofx.entity.LoginBean;
 import com.luofx.mvp.base.presenter.BasePresenter;
 import com.luofx.mvp.base.presenter.HttpResponseListener;
 

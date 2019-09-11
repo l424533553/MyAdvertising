@@ -1,6 +1,7 @@
 package com.advertising.screen.myadvertising.adapter;
 
 import android.databinding.DataBindingUtil;
+import android.databinding.ObservableArrayList;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,9 +9,6 @@ import android.view.ViewGroup;
 import com.advertising.screen.myadvertising.R;
 import com.advertising.screen.myadvertising.databinding.ItemAdapterBinding;
 import com.axecom.smartweight.my.entity.PriceBean;
-
-
-import java.util.List;
 
 /**
  * 作者：leavesC
@@ -21,9 +19,9 @@ import java.util.List;
  */
 public class PriceAdapter extends RecyclerView.Adapter<PriceAdapter.UserAdapterHolder> {
 
-    private List<PriceBean> beans;
+    private ObservableArrayList<PriceBean> beans;
 
-    public PriceAdapter(List<PriceBean> userList) {
+    public PriceAdapter(ObservableArrayList<PriceBean> userList) {
         this.beans = userList;
     }
 
@@ -50,7 +48,6 @@ public class PriceAdapter extends RecyclerView.Adapter<PriceAdapter.UserAdapterH
 
     class UserAdapterHolder extends RecyclerView.ViewHolder {
         private ItemAdapterBinding binding;
-
         UserAdapterHolder(ItemAdapterBinding binding) {
             super(binding.getRoot());
             this.binding = binding;

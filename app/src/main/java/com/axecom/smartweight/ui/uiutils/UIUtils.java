@@ -5,13 +5,11 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.*;
-import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
-import com.advertising.SysApplication;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -31,13 +29,6 @@ public class UIUtils {
      */
     public static Resources getResources(Context context) {
         return context.getResources();
-    }
-
-    /**
-     * 得到主线程的一个handler
-     */
-    public static Handler getMainThreadHandler() {
-        return SysApplication.getHandler();
     }
 
 
