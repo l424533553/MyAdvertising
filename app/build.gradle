@@ -45,6 +45,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.release
+        multiDexEnabled true    // true时，生成多个dex
     }
     buildTypes {
         release {
@@ -52,14 +53,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
             debuggable = true
-            multiDexEnabled true    // true时，生成多个dex
+
 //            setMultiDexKeepFile file("multiDexKeep.txt")        // 当前项目中指定的classes，编译到class.dex中
         }
 
         debug {
             minifyEnabled false
             debuggable = true
-            multiDexEnabled true    // true时，生成多个dex
 //            setMultiDexKeepFile file("multiDexKeep.txt")        // 当前项目中指定的classes，编译到class.dex中
 
         }

@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import com.advertising.screen.myadvertising.R;
 import com.advertising.screen.myadvertising.databinding.ItemAdapterBinding;
-import com.advertising.screen.myadvertising.my.entity.PriceBean;
+import com.advertising.screen.myadvertising.entity.PriceBean;
 
 /**
  * 作者：leavesC
@@ -20,7 +20,6 @@ import com.advertising.screen.myadvertising.my.entity.PriceBean;
 public class PriceAdapter extends RecyclerView.Adapter<PriceAdapter.UserAdapterHolder> {
 
     private ObservableArrayList<PriceBean> beans;
-
     public PriceAdapter(ObservableArrayList<PriceBean> userList) {
         this.beans = userList;
     }
@@ -52,10 +51,8 @@ public class PriceAdapter extends RecyclerView.Adapter<PriceAdapter.UserAdapterH
             super(binding.getRoot());
             this.binding = binding;
         }
-
         public ItemAdapterBinding getBinding() {
             return binding;
         }
     }
-
 }

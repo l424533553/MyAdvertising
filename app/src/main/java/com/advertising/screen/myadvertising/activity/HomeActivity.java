@@ -8,7 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import com.advertising.screen.myadvertising.R;
-import com.advertising.screen.myadvertising.my.IConstants;
+import com.advertising.screen.myadvertising.config.IConstants;
 import com.xuanyuan.library.MyToast;
 import com.xuanyuan.library.utils.log.MyLog;
 import com.xuanyuan.library.utils.net.MyNetWorkUtils;

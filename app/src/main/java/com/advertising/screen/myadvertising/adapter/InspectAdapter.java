@@ -7,21 +7,19 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import com.advertising.screen.myadvertising.R;
 import com.advertising.screen.myadvertising.databinding.ItemAdapterInspectBinding;
-import com.advertising.screen.myadvertising.my.entity.InspectBean;
+import com.advertising.screen.myadvertising.entity.InspectBean;
 
 import java.util.List;
 
 /**
  * 作者：leavesC
  * 时间：2019/2/27 21:36
- * 描述：
+ * 描述：bingding的适配器
  * GitHub：https://github.com/leavesC
  * Blog：https://www.jianshu.com/u/9df45b87cfdf
  */
 public class InspectAdapter extends RecyclerView.Adapter<InspectAdapter.UserAdapterHolder> {
-
     private List<InspectBean> beans;
-
     public InspectAdapter(List<InspectBean> userList) {
         this.beans = userList;
     }
@@ -49,15 +47,12 @@ public class InspectAdapter extends RecyclerView.Adapter<InspectAdapter.UserAdap
 
     class UserAdapterHolder extends RecyclerView.ViewHolder {
         private ItemAdapterInspectBinding binding;
-
         UserAdapterHolder(ItemAdapterInspectBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
-
         public ItemAdapterInspectBinding getBinding() {
             return binding;
         }
     }
-
 }

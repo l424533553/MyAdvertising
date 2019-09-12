@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
 
-        <variable name="inspectBean" type="com.advertising.screen.myadvertising.my.entity.InspectBean"/>
+        <variable name="inspectBean" type="com.advertising.screen.myadvertising.entity.InspectBean"/>
         <variable name="position" type="Integer"/>
     </data>
     <LinearLayout

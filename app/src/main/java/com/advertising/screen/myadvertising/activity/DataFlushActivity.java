@@ -12,10 +12,13 @@ import com.advertising.screen.myadvertising.SysApplication;
 import com.advertising.screen.myadvertising.R;
 import com.advertising.screen.myadvertising.databinding.ActivityDataFlushBinding;
 import com.advertising.screen.myadvertising.entity.*;
+import com.advertising.screen.myadvertising.entity.dao.AdUserDao;
+import com.advertising.screen.myadvertising.entity.dao.ImageDao;
+import com.advertising.screen.myadvertising.entity.dao.InspectBeanDao;
+import com.advertising.screen.myadvertising.entity.dao.PriceBeanDao;
 import com.alibaba.fastjson.JSON;
 import com.android.volley.VolleyError;
-import com.advertising.screen.myadvertising.my.entity.*;
-import com.advertising.screen.myadvertising.my.helper.HttpHelper;
+import com.advertising.screen.myadvertising.help.HttpHelper;
 import com.xuanyuan.library.MyToast;
 import com.xuanyuan.library.help.ActivityController;
 import com.xuanyuan.library.listener.VolleyListener;
@@ -27,7 +30,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.advertising.screen.myadvertising.my.IConstants.*;
+import static com.advertising.screen.myadvertising.config.IConstants.*;
 
 
 public class DataFlushActivity extends MyCommonActivity implements VolleyListener, View.OnClickListener {

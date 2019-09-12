@@ -5,7 +5,6 @@ import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "AdImageInfo")
 public class AdImageInfo {
-
     @DatabaseField(generatedId = true)
     private int id;
     @DatabaseField

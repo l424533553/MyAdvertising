@@ -77,11 +77,11 @@
 
         <!--        <activity android:name=".ScreenActivity"/>-->
         <!--<activity android:name=".download.ApkUpdateActivity"/>-->
-        <service android:name=".download.DownloadIntentService"/>
-        <service android:name=".WorkService"/>
+ <!--       <service android:name=".net.retrofit.DownloadIntentService"/>-->
+        <service android:name=".service.WorkService"/>
 
         <receiver
-                android:name=".help.BootReceiver"
+                android:name=".help.BootBroadcastReceiver"
                 android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
             <intent-filter>
 

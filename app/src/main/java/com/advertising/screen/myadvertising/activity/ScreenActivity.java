@@ -19,35 +19,37 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import com.advertising.screen.myadvertising.SysApplication;
 import com.advertising.screen.myadvertising.R;
 import com.advertising.screen.myadvertising.adapter.InspectAdapter;
 import com.advertising.screen.myadvertising.adapter.PriceAdapter;
 import com.advertising.screen.myadvertising.databinding.ScreenMainBinding;
-import com.advertising.screen.myadvertising.WorkService;
+import com.advertising.screen.myadvertising.service.WorkService;
 import com.advertising.screen.myadvertising.entity.*;
-import com.advertising.screen.myadvertising.help.LiveBus;
-import com.advertising.screen.myadvertising.help.MyImageLoader;
-import com.advertising.screen.myadvertising.view.MarqueeTextviewNofocus;
+import com.advertising.screen.myadvertising.entity.dao.AdUserDao;
+import com.advertising.screen.myadvertising.entity.dao.ImageDao;
+import com.xuanyuan.library.view.MarqueeTextviewNofocus;
 import com.alibaba.fastjson.JSON;
 import com.android.volley.VolleyError;
-import com.advertising.screen.myadvertising.my.IConstants;
-import com.advertising.screen.myadvertising.my.entity.InspectBean;
-import com.advertising.screen.myadvertising.my.entity.InspectBeanDao;
-import com.advertising.screen.myadvertising.my.entity.PriceBean;
-import com.advertising.screen.myadvertising.my.entity.PriceBeanDao;
+import com.advertising.screen.myadvertising.config.IConstants;
+import com.advertising.screen.myadvertising.entity.InspectBean;
+import com.advertising.screen.myadvertising.entity.dao.InspectBeanDao;
+import com.advertising.screen.myadvertising.entity.PriceBean;
+import com.advertising.screen.myadvertising.entity.dao.PriceBeanDao;
 import com.xuanyuan.library.adapter.AdvertiseLinearLayoutManager;
 import com.bumptech.glide.Glide;
-import com.taobao.sophix.SophixManager;
 import com.xuanyuan.library.MyToast;
 import com.xuanyuan.library.help.QRCodeUtil;
 import com.xuanyuan.library.listener.VolleyStringListener;
+import com.xuanyuan.library.utils.LiveBus;
 import com.xuanyuan.library.utils.log.MyLog;
 import com.xuanyuan.library.utils.net.MyNetWorkUtils;
 import com.xuanyuan.library.utils.storage.MyPreferenceUtils;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
+import com.youth.banner.loader.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -163,7 +165,7 @@ public class ScreenActivity extends AppCompatActivity implements IConstants, Vie
             @Override
             public void run() {
                 String stringZS = "https://data.axebao.com/smartsz/trace/trace2.php?companyid=" + sellerId;
-                bitmapZS = QRCodeUtil.createBitmap(stringZS,30,30);
+                bitmapZS = QRCodeUtil.createBitmap(stringZS, 30, 30);
 
 //                Bitmap logoBmp2 = BitmapFactory.decodeResource(getResources(),R.drawable.ic_traceback2);
 //                bitmapZS = QRCodeUtil.makeQRImage(logoBmp2, stringZS, 300, 300);
@@ -173,7 +175,7 @@ public class ScreenActivity extends AppCompatActivity implements IConstants, Vie
                         MyPreferenceUtils.getSp(context).getString(DATA_BOOTH_NUMBER, "A001");
 
                 String stringDP = "https://data.axebao.com/html/home.php?id=" + stringData;
-                bitmapZS = QRCodeUtil.createBitmap(stringZS,30,30);
+                bitmapZS = QRCodeUtil.createBitmap(stringZS, 30, 30);
 //                Bitmap logoBmp = BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher);
 //                bitmapDP = QRCodeUtil.makeQRImage(logoBmp, stringDP, 300, 300);
                 handler.sendEmptyMessage(UPDATE_QR);
@@ -361,6 +363,8 @@ public class ScreenActivity extends AppCompatActivity implements IConstants, Vie
         binding.ilData.rvPrice.setLayoutManager(linearLayoutManager);
         binding.ilData.rvCheck.setLayoutManager(new LinearLayoutManager(context));
         priceAdapter = new PriceAdapter(priceBeans);
+
+
         inspectAdapter = new InspectAdapter(inspectBeans);
         binding.ilData.rvPrice.setAdapter(priceAdapter);
         binding.ilData.rvCheck.setAdapter(inspectAdapter);
@@ -666,6 +670,15 @@ public class ScreenActivity extends AppCompatActivity implements IConstants, Vie
     public void onClick(View v) {
         String sellerId = MyPreferenceUtils.getSp(context).getString(SELLER_ID, DEFAULT_ID);
         showSellerIdDialog(sellerId);
+    }
+
+    private class MyImageLoader extends ImageLoader {
+        @Override
+        public void displayImage(Context context, Object path, ImageView imageView) {
+            Glide.with(context.getApplicationContext()).load(path).into(imageView);
+//            //Glide 加载图片简单用法
+//            Glide.with(context).load(path).into(imageView);
+        }
     }
 
 }

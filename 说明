@@ -1,58 +1,12 @@
-5 分钟请求一次数据
+########## 该软件为配合农贸市场使用，专用于21寸广告屏上
+
+
+
+// 数据  测试  功能开发
+55 分钟请求一次数据
+// 使用情况
 
 检测见过 9点以后不再  请求  ，其他时间5分钟请求一次
 
-
-
-
-build.gradle使用该插件。配置步骤如下：
+build.gradle步使用该插件。配置骤如下：
 1. 修改项目级目录下build.gradle（{project}/build.gradle）：
-
-
-1
-buildscript {
-2
-  repositories {
-3
-    maven {
-4
-      url 'http://maven.aliyun.com/nexus/content/repositories/releases/'
-5
-    }
-6
-  dependencies {
-7
-    // 添加emas-services插件
-8
-    classpath 'com.aliyun.ams:emas-services:1.0.1'
-9
-  }
-10
-}
-11
-allprojects {
-12
-  repositories {
-13
-    ...
-14
-    maven {
-15
-      url 'http://maven.aliyun.com/nexus/content/repositories/releases/'
-16
-    }
-17
-  }
-18
-}
-2. 修改应用级build.gradle（{project}/<app-module>/build.gradle）: `
-
-
-1
-// 在 apply plugin: 'com.android.application' 下添加
-2
-apply plugin: 'com.aliyun.ams.emas-services'
-3. 修改应用目录下json文件
-（{project}/<app-module>/ aliyun-emas-services.json），
-将不需要使用的产品service对应的status状态置为0
-（status=0或1时，分别表示不加载或加载该产品SDK）。
