@@ -19,7 +19,7 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
-import com.advertising.SysApplication;
+import com.advertising.screen.myadvertising.SysApplication;
 import com.advertising.screen.myadvertising.R;
 import com.advertising.screen.myadvertising.adapter.InspectAdapter;
 import com.advertising.screen.myadvertising.adapter.PriceAdapter;
@@ -31,19 +31,20 @@ import com.advertising.screen.myadvertising.help.MyImageLoader;
 import com.advertising.screen.myadvertising.view.MarqueeTextviewNofocus;
 import com.alibaba.fastjson.JSON;
 import com.android.volley.VolleyError;
-import com.axecom.smartweight.my.IConstants;
-import com.axecom.smartweight.my.entity.InspectBean;
-import com.axecom.smartweight.my.entity.InspectBeanDao;
-import com.axecom.smartweight.my.entity.PriceBean;
-import com.axecom.smartweight.my.entity.PriceBeanDao;
-import com.axecom.smartweight.my.helper.MyNetWorkUtils;
-import com.axecom.smartweight.ui.adapter.AdvertiseLinearLayoutManager;
+import com.advertising.screen.myadvertising.my.IConstants;
+import com.advertising.screen.myadvertising.my.entity.InspectBean;
+import com.advertising.screen.myadvertising.my.entity.InspectBeanDao;
+import com.advertising.screen.myadvertising.my.entity.PriceBean;
+import com.advertising.screen.myadvertising.my.entity.PriceBeanDao;
+import com.xuanyuan.library.adapter.AdvertiseLinearLayoutManager;
 import com.bumptech.glide.Glide;
-import com.luofx.help.QRHelper;
-import com.luofx.listener.VolleyStringListener;
-import com.luofx.utils.MyPreferenceUtils;
-import com.luofx.utils.common.MyToast;
-import com.luofx.utils.log.MyLog;
+import com.taobao.sophix.SophixManager;
+import com.xuanyuan.library.MyToast;
+import com.xuanyuan.library.help.QRCodeUtil;
+import com.xuanyuan.library.listener.VolleyStringListener;
+import com.xuanyuan.library.utils.log.MyLog;
+import com.xuanyuan.library.utils.net.MyNetWorkUtils;
+import com.xuanyuan.library.utils.storage.MyPreferenceUtils;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -104,7 +105,7 @@ public class ScreenActivity extends AppCompatActivity implements IConstants, Vie
                     updateBaseInspect();
                     break;
                 case NOTIFY_NET_CHANGE://网络变化了
-                    if (MyNetWorkUtils.isConnected(context)) {
+                    if (MyNetWorkUtils.isNetworkAvailable(context)) {
                         binding.ivNet.setImageResource(R.drawable.ic_net);
                     } else {
                         binding.ivNet.setImageResource(R.drawable.ic_net2);
@@ -129,7 +130,7 @@ public class ScreenActivity extends AppCompatActivity implements IConstants, Vie
         binding.setOnClickListener(this);
         myApplication = (SysApplication) getApplication();
         context = this;
-        if (MyNetWorkUtils.isConnected(context)) {
+        if (MyNetWorkUtils.isNetworkAvailable(context)) {
             binding.ivNet.setImageResource(R.drawable.ic_net);
         } else {
             binding.ivNet.setImageResource(R.drawable.ic_net2);
@@ -144,7 +145,12 @@ public class ScreenActivity extends AppCompatActivity implements IConstants, Vie
 
         initQR();
         handler.sendEmptyMessageDelayed(NOTIFY_DATA_MOVE, 5000);
+
+        // 自动加载补丁包
+//        Toast.makeText(this, "点击下载补丁", Toast.LENGTH_SHORT).show();
+//        SophixManager.getInstance().queryAndLoadNewPatch();
     }
+
 
     /**
      * 追溯码  和 点评码
@@ -157,19 +163,19 @@ public class ScreenActivity extends AppCompatActivity implements IConstants, Vie
             @Override
             public void run() {
                 String stringZS = "https://data.axebao.com/smartsz/trace/trace2.php?companyid=" + sellerId;
-                bitmapZS = QRHelper.createQRImage(stringZS);
+                bitmapZS = QRCodeUtil.createBitmap(stringZS,30,30);
 
 //                Bitmap logoBmp2 = BitmapFactory.decodeResource(getResources(),R.drawable.ic_traceback2);
-//                bitmapZS = MakeQRCodeUtil.makeQRImage(logoBmp2, stringZS, 300, 300);
+//                bitmapZS = QRCodeUtil.makeQRImage(logoBmp2, stringZS, 300, 300);
 
                 String stringData = MyPreferenceUtils.getSp(context).getInt(DATA_MARK_ID, 1) + "." +
                         MyPreferenceUtils.getSp(context).getString(DATA_MARK_NAME, "黄田智慧农贸市场") + "." +
                         MyPreferenceUtils.getSp(context).getString(DATA_BOOTH_NUMBER, "A001");
 
                 String stringDP = "https://data.axebao.com/html/home.php?id=" + stringData;
-                bitmapDP = QRHelper.createQRImage(stringDP);
+                bitmapZS = QRCodeUtil.createBitmap(stringZS,30,30);
 //                Bitmap logoBmp = BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher);
-//                bitmapDP = MakeQRCodeUtil.makeQRImage(logoBmp, stringDP, 300, 300);
+//                bitmapDP = QRCodeUtil.makeQRImage(logoBmp, stringDP, 300, 300);
                 handler.sendEmptyMessage(UPDATE_QR);
             }
         });
@@ -348,6 +354,7 @@ public class ScreenActivity extends AppCompatActivity implements IConstants, Vie
     private int inspectIndex;
 
     private void initAdapter() {
+
         AdvertiseLinearLayoutManager linearLayoutManager = new AdvertiseLinearLayoutManager(context);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
@@ -472,12 +479,12 @@ public class ScreenActivity extends AppCompatActivity implements IConstants, Vie
 
 
     @Override
-    public void onResponseError(VolleyError volleyError, int flag) {
+    public void onStringResponse(VolleyError volleyError, int flag) {
         MyToast.toastShort(context, "网络请求失败");
     }
 
     @Override
-    public void onResponse(String response, int flag) {
+    public void onStringResponse(String response, int flag) {
         switch (flag) {
             case 2:
                 MyLog.mylog("===" + System.currentTimeMillis() + "");
@@ -660,4 +667,5 @@ public class ScreenActivity extends AppCompatActivity implements IConstants, Vie
         String sellerId = MyPreferenceUtils.getSp(context).getString(SELLER_ID, DEFAULT_ID);
         showSellerIdDialog(sellerId);
     }
+
 }

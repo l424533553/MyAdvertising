@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import com.advertising.screen.myadvertising.R;
 import com.advertising.screen.myadvertising.databinding.ItemAdapterInspectBinding;
-import com.axecom.smartweight.my.entity.InspectBean;
+import com.advertising.screen.myadvertising.my.entity.InspectBean;
 
 import java.util.List;
 

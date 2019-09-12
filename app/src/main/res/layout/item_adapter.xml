@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
 
-        <variable name="priceBean" type="com.axecom.smartweight.my.entity.PriceBean"/>
+        <variable name="priceBean" type="com.advertising.screen.myadvertising.my.entity.PriceBean"/>
         <variable name="position" type="Integer"/>
 
     </data>

@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import com.advertising.screen.myadvertising.R;
 import com.advertising.screen.myadvertising.databinding.ItemAdapterBinding;
-import com.axecom.smartweight.my.entity.PriceBean;
+import com.advertising.screen.myadvertising.my.entity.PriceBean;
 
 /**
  * 作者：leavesC

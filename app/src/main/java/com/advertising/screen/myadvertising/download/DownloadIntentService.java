@@ -12,7 +12,7 @@ import com.advertising.screen.myadvertising.R;
 import com.advertising.screen.myadvertising.help.NotificationHelpter;
 import com.advertising.screen.myadvertising.net.retrofit.DownloadCallBack;
 import com.advertising.screen.myadvertising.net.retrofit.RetrofitHttp;
-import com.luofx.utils.apk.MyApkUtils;
+import com.xuanyuan.library.apk_update.MyApkUtils;
 
 import java.io.File;
 

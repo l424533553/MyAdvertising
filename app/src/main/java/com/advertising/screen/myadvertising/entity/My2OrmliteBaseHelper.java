@@ -2,15 +2,13 @@ package com.advertising.screen.myadvertising.entity;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import com.axecom.smartweight.my.entity.InspectBean;
-import com.axecom.smartweight.my.entity.PriceBean;
+import com.advertising.screen.myadvertising.my.entity.InspectBean;
+import com.advertising.screen.myadvertising.my.entity.PriceBean;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
-import com.luofx.entity.OrmliteBaseHelper;
-import com.luofx.other.tid.UserInfo;
-import com.luofx.utils.log.MyLog;
+import com.xuanyuan.library.utils.log.MyLog;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -46,7 +44,7 @@ public class My2OrmliteBaseHelper extends OrmLiteSqliteOpenHelper {
     public static synchronized My2OrmliteBaseHelper getInstance(Context context) {
         MyLog.mylog("数据库版本22================ getInstance");
         if (instance == null) {
-            synchronized (OrmliteBaseHelper.class) {
+            synchronized (My2OrmliteBaseHelper.class) {
                 if (instance == null) {
                     instance = new My2OrmliteBaseHelper(context);
                 }
@@ -85,7 +83,6 @@ public class My2OrmliteBaseHelper extends OrmLiteSqliteOpenHelper {
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
         MyLog.mylog("数据库版本22 ================  onCreate");
         try {
-            TableUtils.createTable(connectionSource, UserInfo.class);
             TableUtils.createTable(connectionSource, AdImageInfo.class);
             TableUtils.createTable(connectionSource, AdUserBean.class);
             TableUtils.createTable(connectionSource, PriceBean.class);

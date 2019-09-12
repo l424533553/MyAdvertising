@@ -3,6 +3,7 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="com.advertising.screen.myadvertising">
 
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -10,39 +11,33 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
 
-    <!-- 基本的权限 -->
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <!-- 网络权限  基础权限 -->
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/><!-- 26 8.0以後沒有了 允许未知安装-->
 
-    <!-- 获取电话的 状态信息 -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <!-- <uses-permission android:name="android.permission.GET_TASKS" /> -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
-    <!-- 修改声音设置信息 -->
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <!-- 在sdcard中创建/删除文件的权限 -->
+    <permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <permission android:name="android.permission.WRITE_SETTINGS"/>
 
-    <!-- NFC 权限 -->
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.FLASHLIGHT"/>
-    <uses-permission android:name="android.permission.NFC"/>
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
-    <!--  系统弹框 -->
+    <!-- 允许系统 弹框 ，想要在Service 和 application中启动弹框，需要添加 改权限 -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-    <uses-permission android:name="Android.permission.INJECT_EVENTS"/>
+    <!-- 息屏不被锁死 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
-
+    <!--  -->
     <application
-            android:name="com.advertising.SophixStubApplication"
+            android:name=".SophixStubApplication"
             android:allowBackup="true"
             android:icon="@mipmap/logo"
             android:label="@string/app_name"
@@ -54,13 +49,13 @@
 
         <meta-data
                 android:name="com.taobao.android.hotfix.IDSECRET"
-                android:value="27768424-1" />
+                android:value="27846376"/>
         <meta-data
                 android:name="com.taobao.android.hotfix.APPSECRET"
-                android:value="6f2e8c9d40295d3e25781c69f3e5349c" />
+                android:value="af6fec7c82bd2a43e82c92cfb3ff9dfe"/>
         <meta-data
                 android:name="com.taobao.android.hotfix.RSASECRET"
-                android:value="MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCPQbfVVRZvA62N+c42nSNzhVAnuhOv+PGyBFPsszoffCvJaFLY76k4er007FzTmhAj6R+I65yg/XBixpn6l3ND05PXqeBUlDW1Wa3cejOufCW0pokLTmj4ZBD76Wa/n15Kgakgz+3FARZxvMTdveu7AyktLvT9MNXIvHegqmBoYwdlzNRnThfqodC10pe4qTgBNatWrZB+0zbiKWhaUZNaj81ow3yUUVd5Rakfs9cNOi4IRg7TeQbgUk7t4I42A5Pc1AqXyQuMW/byIGcMi0sftI6Mc5w1WhMvfiITC0L4P6eNZwwca33mIF7ddDF/TKZ8G0PQyVbSgzEgFJPRZhcrAgMBAAECggEAb5XZA6rLVp2eykASiCfOPWVSEh+2xhM68Fa+qFjSpUOrN66zGZdUUFIKnvadN5WBjPdBQP2Fe0DuEYJw3eiqN+LN/easfjUTwLah3mKxbu/0zsoJZW0mBpSrRg1/ozMX1yE4A/7yTcmTGfTXw4Dz5S+JG1DAM5eebkWfSN5tSeDuU3ReNl1ExVx18/A2Aq45ar3H3Pzr2iXlOVUZtkanPE1Pde/Q/aUjP9S5Lt4OwzNNwkEuphj99WDY62ok7nnaSKEKhSJbWU1ujaFsDYvw863M7bsLqa6qRCf76x/3rAwtgGTxBB8/8z9K+q7ginYYsrV+ZLv5xAgNipyRItiawQKBgQDKMMDR6q/dCJB2qCBdi0XxENLhlmbissjERSkw7lSwbZVbRsMgNzmp2EY2jVE1ns3R1VSoJNuoDfTtB63fldThcoD0u5y4ADXcKKJwiSpt2I+wcrc1UCUXc2Stj2NH+rERllvksW7VkhM3ypGAKR86C+27pir1pjh2DOBaSJwFbwKBgQC1Yc5rJNHthS+Vv6x6/snNDWVh/TuumqU6+NJinPivuAnVK6x6JQ40pRcSlsMWu7jxVX2nKDewMQMAq1Pwav2WXBDK94KKNiErs7UeRsIpJSEX5Pq9ctsYxFAESRpYkXTxIf+2hHYT4AfdpVne0zIFfRCuRLltaMhLsObQ8l/EBQKBgQDB1TNFCuRF1iwIVO2SQC5xCFvigDlqI1NtNZBjpFf0O1nwA0qU29ygAwJs0dWEvhU6kHV0LMGXvqmLgs0hh5Zp+0e9Vw7LJwh7Y0k28YiHfhFiatdQeODWNn3SFaBsJN0Tqz21ZJSIkl1yIvSSFNom38CtIIQWs591LKr4YpuQaQKBgArmH6MsiTi+ggd7hv+1A6dAoNDsiIOLY1ZR0UJ/sCnO4zhd8XU9eMcNDH/fc0WQbiKCQpSixAXgTA/kO5z8sNQyIAgyKzPm4MNhfwactdoHEx/+cFql5ihs02oOgnjD9MTwiA8NkpLLKW3WG7pZ8m2GAFSYaJP8cdyqepQfnEWJAoGBAK2g7mDiYwZGMhgFXiXbxXFbXPUHeTkgBXmcxz+proOu+NHAdzfkc3aZqLY9ZcgZ1mKy5g+E6gEW6P+5JPWUMAH2qKTYzYGI7WnM44b7BTMxtjAk6okj0VEAGWKqh7lSBS/uFdGUS+EdXCX2HbabPznVxs6M31564KH/K1H9HDJz" />
+                android:value="MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCd61WhnpRny61gI9ooERerSDVqsCVlfpcUqXvClm4vM8Jrv+lpWQXZckM/lRTPzGJzHJ3a2ycacPFCPGzhEpt2ovzJcqcM/l1ZqhK6A910wcnj+ZYaJ1SLgPaFpnriJEey/RjIkPtC+71Uwc+/NPepPhqnonYpWsE0t8ofbDcaJRjvEN2Hdt2xatMuufCz8Amn+XAohXQ+r9xEO6yn6VK2X8pRvgurnqWlWDO54gbYQ6I2lRz83pCA1pVtmkiLDm9WBoBLX4Bhyg6Y+EnZZRDiwMR8sAfgV0lN/t04sOh5S5IIaP1172yGN7DJRj8bYsKja/wnYHC0gJuHW1Pd0JErAgMBAAECggEAKcfIiREGnIuDnEr//de/1l4tW8OssTSTzjClAK+CCVT9XDqTC381D/muFxVfQzcE2QW6MdwHdXRqMCcCe23L2dB3ZujBj6uAkSdw+uvo3Gok+v7emp7LPHlrP6LzIf+NRKq3suDAyVEHH3SDfUgLOiinLrDJ6FkNguAZRsT/sxeuxqs9IZh2N4ve2hB+6+8kSXEq/0nI/95qhz2UnNxvn5hmfR9i4HCCZ6YgdiDovfpjYYI3mp/9w5Fh7nLDfpsJ1povaYgMPUCl1vpj1oofHpswxknEkOsibwK+xXLkCqAruFA4PGS6WN5C9fUp+uLz3xXgijw90fU2xOWqF4yTKQKBgQD4JFGYs42O4uV59z/r57RgmxQ4X7G9Dp0fhm1kxKIx3o5FlRzSRLgDVXdKQdGh90GoJTN8r7R3TjdSi7PChI8qz2OT0R5O/NgDicASXx92fBVwPRYESfQruSfCp4hpUHcq3zK9agDPJbCic03+MhJSNEC1skRM3CaMil9Fym+LjwKBgQCi65U80CrONWmozDzV02wg7cAjVDxYvriBkh3GR4M95h/yHltymhGSOzNXC/BXqp0dqpj2JN0U4NcE39pMqQQNW01zz/DChiM1Edgh94ifsNOG5eZc5ubh9enfX6h7ap3jP6eaaRTMoQ3E2aMIyogLpuD8fHN4fIvVWKpGbaOCpQKBgQDjUjJGF8dI7OeYsj8m2B9QmQEPG+tx7N9YMAgrVk/YK7BeYloC7t08gKFFr8JiBGdrqJjgUv6ahVb9Eepd+p5Fc7QfiGWhqtQheaIxsl7aZpYlOnDfAPjkzTx1gJDhGcvxxINxLpkLK9YDHGqIwkoycJgPW/5iAxR1j5X0E53YVQKBgCIFGYuyWE3o/2A9DbMEy/5wRv/ZliRd5v8/eLIvuqsRQ7h2OFhM7cBgVk8l8hEMUnSgbAJyHiw+6wdciyQY4vy7BQha8oZcJjvttvkYzFG0RedUWG8r1Ch5BlYbjn3+/Gs4npHywWIde1eQrqemSxRLy41Nm3scXsK1GhFM0aj1AoGBANJmJWLH86yICTqCon/xD/kSE62DOJyzPMBu/FOgAdaqdzJhzMvwz/s88Kb5t1zJqCwfRrs7UDGp7moAZess89ew552g2x3S51ksXMupvA/Y1hTE5QsO4nrxns5e5RfWQkgl7zArZXgRcrhl10bNaYthCs6GPqM3YaJVkbK3Gub6"/>
 
         <!--ScreenActivity -->
         <activity android:name=".activity.HomeActivity"
@@ -78,7 +73,7 @@
                   android:screenOrientation="landscape"
                   android:theme="@style/dialog"
                   android:windowSoftInputMode="stateHidden|stateAlwaysHidden"
-                  />
+        />
 
         <!--        <activity android:name=".ScreenActivity"/>-->
         <!--<activity android:name=".download.ApkUpdateActivity"/>-->
@@ -95,34 +90,10 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
                 <action
                         android:name="android.net.conn.CONNECTIVITY_CHANGE"
-                        tools:ignore="BatteryLife" />
+                        tools:ignore="BatteryLife"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </receiver>
-
-
-
-
-
-        <!-- <service
-                 android:name=".CarouselService"
-                 android:enabled="true"
-                 android:exported="true"
-                 android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
-
-             <intent-filter android:priority="1000">
-                 &lt;!&ndash; 系统启动完成后会调用 &ndash;&gt;
-                 <action android:name="android.intent.action.BOOT_COMPLETED" /> &lt;!&ndash; 用户开机广播 &ndash;&gt;
-                 <action android:name="android.intent.action.DATE_CHANGED" />
-                 <action android:name="android.intent.action.MEDIA_MOUNTED" />
-                 <action android:name="android.intent.action.USER_PRESENT" /> &lt;!&ndash; 用户使用 唤醒 &ndash;&gt;
-                 <action android:name="android.intent.action.ACTION_TIME_TICK" />
-                 <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
-                 <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
-                 <action android:name="android.intent.action.PACKAGE_RESTARTED" /> &lt;!&ndash; 应用状态改变 &ndash;&gt;
-             </intent-filter>
-         </service>-->
-
     </application>
 
 </manifest>

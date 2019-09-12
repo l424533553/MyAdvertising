@@ -1,7 +1,7 @@
 package com.advertising.screen.myadvertising.download;
 
 import android.os.Environment;
-import com.advertising.SysApplication;
+import com.advertising.screen.myadvertising.SysApplication;
 
 
 /**

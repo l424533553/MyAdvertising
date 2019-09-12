@@ -8,11 +8,11 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import com.advertising.screen.myadvertising.R;
-import com.axecom.smartweight.my.IConstants;
-import com.luofx.utils.MyPreferenceUtils;
-import com.luofx.utils.common.MyToast;
-import com.luofx.utils.log.MyLog;
-import com.luofx.utils.net.NetWorkJudge;
+import com.advertising.screen.myadvertising.my.IConstants;
+import com.xuanyuan.library.MyToast;
+import com.xuanyuan.library.utils.log.MyLog;
+import com.xuanyuan.library.utils.net.MyNetWorkUtils;
+import com.xuanyuan.library.utils.storage.MyPreferenceUtils;
 
 /**
  * 作者：罗发新
@@ -52,7 +52,7 @@ public class HomeActivity extends MyCommonActivity implements IConstants {
     private void nextActivity() {
         String sellerId = MyPreferenceUtils.getSp(context).getString(SELLER_ID, DEFAULT_ID);
         if (!DEFAULT_ID.equals(sellerId)) {
-            if (NetWorkJudge.isNetworkAvailable(context)) {
+            if (MyNetWorkUtils.isNetworkAvailable(context)) {
                 // 进行数据更新
                 boolean isFirstLogin = MyPreferenceUtils.getSp(context).getBoolean(IS_FIRST_LOGIN, false);
                 if (!isFirstLogin) {

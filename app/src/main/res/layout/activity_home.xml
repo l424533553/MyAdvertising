@@ -6,7 +6,6 @@
              android:background="@drawable/back2"
              tools:context=".activity.HomeActivity">
 
-
     <ImageView
             android:id="@+id/ivLog"
             android:layout_width="64dp"

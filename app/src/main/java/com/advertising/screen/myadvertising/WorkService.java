@@ -7,25 +7,24 @@ import android.content.ServiceConnection;
 import android.os.Binder;
 import android.os.IBinder;
 import android.text.TextUtils;
-import com.advertising.SysApplication;
 import com.advertising.screen.myadvertising.entity.*;
 import com.advertising.screen.myadvertising.help.LiveBus;
 import com.alibaba.fastjson.JSON;
 import com.android.volley.VolleyError;
-import com.axecom.smartweight.my.entity.*;
-import com.axecom.smartweight.my.helper.HttpHelper;
-import com.axecom.smartweight.my.helper.MyNetWorkUtils;
-import com.luofx.listener.VolleyListener;
-import com.luofx.utils.MyPreferenceUtils;
-import com.luofx.utils.common.MyToast;
-import com.luofx.utils.log.MyLog;
+import com.advertising.screen.myadvertising.my.entity.*;
+import com.advertising.screen.myadvertising.my.helper.HttpHelper;
+import com.xuanyuan.library.MyToast;
+import com.xuanyuan.library.listener.VolleyListener;
+import com.xuanyuan.library.utils.log.MyLog;
+import com.xuanyuan.library.utils.net.MyNetWorkUtils;
+import com.xuanyuan.library.utils.storage.MyPreferenceUtils;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.advertising.screen.myadvertising.config.IEventBus.*;
-import static com.axecom.smartweight.my.IConstants.*;
+import static com.advertising.screen.myadvertising.my.IConstants.*;
 
 
 /**

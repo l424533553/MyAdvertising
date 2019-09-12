@@ -1,4 +1,6 @@
-include ':app', ':mylibrary'
-//include ':MyLibraryProject'
-//project (':MyLibraryProject').projectDir = new File('../MyLibraryProject/')
-//include ':MyLibraryProject:mylibrary'
+include ':app'
+
+include ':LibraryProject'
+project(':LibraryProject').projectDir = new File('../LibraryProject/')
+include ':LibraryProject:jarlibrary'
+include ':LibraryProject:arrlibrary'

@@ -1,10 +1,10 @@
 package com.advertising.screen.myadvertising.net.retrofit;
 
 
-import com.advertising.SysApplication;
+import com.advertising.screen.myadvertising.SysApplication;
 import com.advertising.screen.myadvertising.download.Constant_APK;
 import com.advertising.screen.myadvertising.download.JsDownloadInterceptor;
-import com.luofx.utils.MyPreferenceUtils;
+import com.xuanyuan.library.utils.storage.MyPreferenceUtils;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -75,7 +75,7 @@ public class RetrofitHttp {
             totalLength += file.length();
         }
         // ResponseBody 后面紧跟着多种方法， 需要后续跟进学习
-        apiService.executeDownload("bytes=" + Long.toString(range) + totalLength, url)
+        apiService.executeDownload("bytes=" + range + totalLength, url)
                 .subscribeOn(Schedulers.io())  //指定Observable自身在哪个调度器上执行
 //                .observeOn(AndroidSchedulers.mainThread())//指定一个观察者在哪个调度器上观察这个Observable
                 .unsubscribeOn(Schedulers.io())  //  取消订阅

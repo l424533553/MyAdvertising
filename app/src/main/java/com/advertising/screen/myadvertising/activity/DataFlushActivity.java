@@ -8,26 +8,26 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import com.advertising.SysApplication;
+import com.advertising.screen.myadvertising.SysApplication;
 import com.advertising.screen.myadvertising.R;
 import com.advertising.screen.myadvertising.databinding.ActivityDataFlushBinding;
 import com.advertising.screen.myadvertising.entity.*;
 import com.alibaba.fastjson.JSON;
 import com.android.volley.VolleyError;
-import com.axecom.smartweight.my.entity.*;
-import com.axecom.smartweight.my.helper.HttpHelper;
-import com.axecom.smartweight.my.helper.MyNetWorkUtils;
-import com.luofx.listener.VolleyListener;
-import com.luofx.newclass.ActivityController;
-import com.luofx.utils.MyPreferenceUtils;
-import com.luofx.utils.common.MyToast;
-import com.luofx.utils.log.MyLog;
+import com.advertising.screen.myadvertising.my.entity.*;
+import com.advertising.screen.myadvertising.my.helper.HttpHelper;
+import com.xuanyuan.library.MyToast;
+import com.xuanyuan.library.help.ActivityController;
+import com.xuanyuan.library.listener.VolleyListener;
+import com.xuanyuan.library.utils.log.MyLog;
+import com.xuanyuan.library.utils.net.MyNetWorkUtils;
+import com.xuanyuan.library.utils.storage.MyPreferenceUtils;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.axecom.smartweight.my.IConstants.*;
+import static com.advertising.screen.myadvertising.my.IConstants.*;
 
 
 public class DataFlushActivity extends MyCommonActivity implements VolleyListener, View.OnClickListener {

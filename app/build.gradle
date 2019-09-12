@@ -26,7 +26,6 @@ repositories {
     }
 }
 
-
 android {
     signingConfigs {
         release {
@@ -53,6 +52,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
             debuggable = true
+            multiDexEnabled true    // true时，生成多个dex
+//            setMultiDexKeepFile file("multiDexKeep.txt")        // 当前项目中指定的classes，编译到class.dex中
+        }
+
+        debug {
+            minifyEnabled false
+            debuggable = true
+            multiDexEnabled true    // true时，生成多个dex
+//            setMultiDexKeepFile file("multiDexKeep.txt")        // 当前项目中指定的classes，编译到class.dex中
+
         }
     }
 
@@ -70,7 +79,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
 
 
     //ormlite  框架引用包
@@ -110,7 +118,14 @@ dependencies {
     /*  走马灯 框架*/
     implementation 'com.sunfusheng:marqueeview:1.3.3'
     implementation 'com.jeremyliao:live-event-bus:1.4.0'
-    implementation project(path: ':mylibrary')
     implementation 'com.aliyun.ams:alicloud-android-hotfix:3.2.8'
+    implementation project(path: ':LibraryProject:jarlibrary')
+    implementation project(path: ':LibraryProject:arrlibrary')
+
+    implementation 'com.github.garretyoder:Colorful:2.3.4'
+    implementation "com.android.support:multidex:1.0.3"
+
+//    implementation project(path: ':LibraryProject:arrlibrary')
+//    implementation project(path: ':LibraryProject:jarlibrary')
 
 }
