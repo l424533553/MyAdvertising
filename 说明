@@ -1,12 +1,23 @@
 ########## 该软件为配合农贸市场使用，专用于21寸广告屏上
-
-
-
-// 数据  测试  功能开发
-55 分钟请求一次数据
-// 使用情况
+//
 
 检测见过 9点以后不再  请求  ，其他时间5分钟请求一次
-
 build.gradle步使用该插件。配置骤如下：
 1. 修改项目级目录下build.gradle（{project}/build.gradle）：
+
+1. 修改 网络循环访问时间，  并测试 新增内容数据
+
+// 参考学习 网址：
+
+https://github.com/googlesamples/android-architecture-components/blob/88747993139224a4bb6dbe985adf652d557de621/GithubBrowserSample/app/src/main/java/com/android/example/github/repository/NetworkBoundResource.kt
+
+NetworkBoundResource 类的完整实现作为 android 架构组件 GitHub 项目:
+
+https://github.com/googlesamples/android-architecture-components/blob/88747993139224a4bb6dbe985adf652d557de621/GithubBrowserSample/app/src/main/java/com/android/example/github/repository/NetworkBoundResource.kt
+
+测试：
+Android 界面插桩测试     >>>>>>>>>>>>>>>>>>>>使用 Espresso 库
+JUnit >>>>>>>>>>>>>>>>>测试来
+
+//  属性和功能
+//

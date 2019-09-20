@@ -21,9 +21,9 @@ public class AdUserDao {
     private Dao<AdUserBean, Integer> dao;
     private My2OrmliteBaseHelper ormliteBaseHelper;
 
-    public AdUserDao(Context context) {
+    public AdUserDao( ) {
         try {
-            ormliteBaseHelper = My2OrmliteBaseHelper.getInstance(context);
+            ormliteBaseHelper = My2OrmliteBaseHelper.getInstance();
             this.dao = ormliteBaseHelper.getDao(AdUserBean.class);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -32,9 +32,9 @@ public class AdUserDao {
 
     private static AdUserDao baseDao;
 
-    public static  AdUserDao getInstance(Context context) {
+    public static  AdUserDao getInstance( ) {
         if (baseDao == null) {
-            baseDao = new AdUserDao(context);
+            baseDao = new AdUserDao();
         }
         return baseDao;
     }

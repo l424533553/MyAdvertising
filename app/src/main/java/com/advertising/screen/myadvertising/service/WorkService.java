@@ -56,7 +56,7 @@ public class WorkService extends Service implements VolleyListener {
             @Override
             public void run() {
                 if (adUserBean != null) {
-                    MyPreferenceUtils.getSp(context).edit()
+                    MyPreferenceUtils.getSp().edit()
                             .putInt(DATA_MARK_ID, adUserBean.getMarketid())
                             .putString(DATA_MARK_NAME, adUserBean.getMarketname())
                             .putString(DATA_BOOTH_NUMBER, adUserBean.getCompanyno())
@@ -64,8 +64,8 @@ public class WorkService extends Service implements VolleyListener {
 
                     // 更新时间
                     adUserBean.setId(1);
-                    AdUserDao.getInstance(context).updateOrInsert(adUserBean);
-                    ImageDao.getInstance(context).deleteAll();
+                    AdUserDao.getInstance().updateOrInsert(adUserBean);
+                    ImageDao.getInstance().deleteAll();
 
                     /* 图片修改   *******************/
                     String baseUrl = adUserBean.getBaseurl();//开头路径
@@ -132,7 +132,7 @@ public class WorkService extends Service implements VolleyListener {
                             }
                         }
                     }
-                    ImageDao.getInstance(context).inserts(imageInfos);
+                    ImageDao.getInstance().inserts(imageInfos);
                 }
                 LiveBus.post(NOTIFY_LIVEBUS_KEY, String.class, NOTIFY_BASE_INFO);
             }
@@ -148,8 +148,8 @@ public class WorkService extends Service implements VolleyListener {
                     if (resultAd != null && resultAd.getStatus() == 0) {
                         AdUserBean adUserBean = resultAd.getData();
                         if (adUserBean == null) {
-                            AdUserDao.getInstance(context).deleteAll();
-                            ImageDao.getInstance(context).deleteAll();
+                            AdUserDao.getInstance().deleteAll();
+                            ImageDao.getInstance().deleteAll();
                             LiveBus.post(NOTIFY_LIVEBUS_KEY, String.class, NOTIFY_BASE_INFO);
                             MyToast.showError(context, "未获取到配置信息！");
                         } else {
@@ -164,8 +164,8 @@ public class WorkService extends Service implements VolleyListener {
                             ResultInfo resultInfo = JSON.parseObject(jsonObject.toString(), ResultInfo.class);
                             if (resultInfo.getStatus() == 0) {
                                 List<PriceBean> list = JSON.parseArray(resultInfo.getData(), PriceBean.class);
-                                PriceBeanDao.getInstance(getApplicationContext()).deleteAll();
-                                PriceBeanDao.getInstance(getApplicationContext()).insert(list);
+                                PriceBeanDao.getInstance().deleteAll();
+                                PriceBeanDao.getInstance().insert(list);
                             }
                             LiveBus.post(NOTIFY_LIVEBUS_KEY, String.class, NOTIFY_BASE_PRICE);
                         }
@@ -178,10 +178,10 @@ public class WorkService extends Service implements VolleyListener {
                             ResultInfo resultInfo = JSON.parseObject(jsonObject.toString(), ResultInfo.class);
                             if (resultInfo.getStatus() == 0) {
                                 List<InspectBean> list = JSON.parseArray(resultInfo.getData(), InspectBean.class);
-                                InspectBeanDao.getInstance(getApplicationContext()).deleteAll();
-                                InspectBeanDao.getInstance(getApplicationContext()).insert(list);
+                                InspectBeanDao.getInstance().deleteAll();
+                                InspectBeanDao.getInstance().insert(list);
                             } else {
-                                InspectBeanDao.getInstance(getApplicationContext()).deleteAll();
+                                InspectBeanDao.getInstance().deleteAll();
                             }
                             LiveBus.post(NOTIFY_LIVEBUS_KEY, String.class, NOTIFY_BASE_INSPECT);
                         }
@@ -212,8 +212,8 @@ public class WorkService extends Service implements VolleyListener {
      * 更新副屏证件照及广告图
      */
     private void upSecondImage() {
-        if (MyNetWorkUtils.isNetworkAvailable(context)) {
-            String sellerId = MyPreferenceUtils.getSp(context).getString(SELLER_ID, DEFAULT_ID);
+        if (MyNetWorkUtils.isNetworkAvailable()) {
+            String sellerId = MyPreferenceUtils.getSp().getString(SELLER_ID, DEFAULT_ID);
             HttpHelper.getmInstants(sysApplication).httpQuestImageEx22(this, sellerId, VOLLEY_UPDATE_IMAGE);
         }
     }
@@ -222,8 +222,8 @@ public class WorkService extends Service implements VolleyListener {
      * 更新所有商品
      */
     private void upPrice() {
-        if (MyNetWorkUtils.isNetworkAvailable(context)) {
-            String sellerId = MyPreferenceUtils.getSp(context).getString(SELLER_ID, DEFAULT_ID);
+        if (MyNetWorkUtils.isNetworkAvailable()) {
+            String sellerId = MyPreferenceUtils.getSp().getString(SELLER_ID, DEFAULT_ID);
             HttpHelper.getmInstants(sysApplication).questPrice(this, sellerId, VOLLEY_UPDATE_PRICE);
         }
     }
@@ -232,8 +232,8 @@ public class WorkService extends Service implements VolleyListener {
      * 获取检测结果
      */
     private void upInspect() {
-        if (MyNetWorkUtils.isNetworkAvailable(context)) {
-            String sellerId = MyPreferenceUtils.getSp(context).getString(SELLER_ID, DEFAULT_ID);
+        if (MyNetWorkUtils.isNetworkAvailable()) {
+            String sellerId = MyPreferenceUtils.getSp().getString(SELLER_ID, DEFAULT_ID);
             HttpHelper.getmInstants(sysApplication).questInspect(this, sellerId, VOLLEY_UPDATE_INSPECT);
         }
     }

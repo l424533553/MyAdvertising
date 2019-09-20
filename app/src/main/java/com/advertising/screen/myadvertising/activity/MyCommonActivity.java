@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 /**
+ *
  * 作者：罗发新
  * 时间：2018/12/21 0021    11:10
  * 邮件：424533553@qq.com
@@ -36,5 +37,4 @@ public class MyCommonActivity extends Activity {
             this.finish();
         }
     }
-
 }

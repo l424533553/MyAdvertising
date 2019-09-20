@@ -1,10 +1,12 @@
 package com.advertising.screen.myadvertising.adapter;
 
+
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
 import com.advertising.screen.myadvertising.R;
 import com.advertising.screen.myadvertising.databinding.ItemAdapterInspectBinding;
 import com.advertising.screen.myadvertising.entity.InspectBean;
@@ -20,8 +22,20 @@ import java.util.List;
  */
 public class InspectAdapter extends RecyclerView.Adapter<InspectAdapter.UserAdapterHolder> {
     private List<InspectBean> beans;
+
     public InspectAdapter(List<InspectBean> userList) {
         this.beans = userList;
+    }
+
+    public InspectAdapter() {
+
+    }
+
+    public void setBeans(List<InspectBean> beans) {
+        this.beans = beans;
+//        if(beans!=null){
+//            notifyDataSetChanged();
+//        }
     }
 
     @NonNull
@@ -47,10 +61,12 @@ public class InspectAdapter extends RecyclerView.Adapter<InspectAdapter.UserAdap
 
     class UserAdapterHolder extends RecyclerView.ViewHolder {
         private ItemAdapterInspectBinding binding;
+
         UserAdapterHolder(ItemAdapterInspectBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
+
         public ItemAdapterInspectBinding getBinding() {
             return binding;
         }

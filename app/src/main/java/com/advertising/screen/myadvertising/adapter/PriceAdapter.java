@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
 import com.advertising.screen.myadvertising.R;
 import com.advertising.screen.myadvertising.databinding.ItemAdapterBinding;
 import com.advertising.screen.myadvertising.entity.PriceBean;
@@ -22,6 +23,10 @@ public class PriceAdapter extends RecyclerView.Adapter<PriceAdapter.UserAdapterH
     private ObservableArrayList<PriceBean> beans;
     public PriceAdapter(ObservableArrayList<PriceBean> userList) {
         this.beans = userList;
+    }
+
+    public PriceAdapter() {
+
     }
 
     @NonNull

@@ -11,6 +11,7 @@ public interface IConstants {
 
     int NOTIFY_SUCCESS = 9555;
     int NOTIFY_DATA_MOVE = 9515;
+    int NOTIFY_PATCH_UPDATE = 9525;
     int NOTIFY_JUMP = 9888;
 
     int FAILED = 9113;

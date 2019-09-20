@@ -339,7 +339,5 @@
                 android:textSize="@dimen/sp30"
                 android:textStyle="bold"
                 tools:ignore="NestedWeights"/>
-
-
     </LinearLayout>
 </layout>

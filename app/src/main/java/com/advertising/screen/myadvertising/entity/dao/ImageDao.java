@@ -21,9 +21,9 @@ public class ImageDao {
     private Dao<AdImageInfo, Integer> dao;
     private My2OrmliteBaseHelper myOrmliteBaseHelper;
 
-    public ImageDao(Context context) {
+    public ImageDao( ) {
         try {
-            myOrmliteBaseHelper = My2OrmliteBaseHelper.getInstance(context.getApplicationContext());
+            myOrmliteBaseHelper = My2OrmliteBaseHelper.getInstance();
             this.dao = myOrmliteBaseHelper.getDao(AdImageInfo.class);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -32,9 +32,9 @@ public class ImageDao {
 
     private static ImageDao baseDao;
 
-    public  static ImageDao getInstance(Context context) {
+    public  static ImageDao getInstance( ) {
         if (baseDao == null) {
-            baseDao = new ImageDao(context);
+            baseDao = new ImageDao();
         }
         return baseDao;
     }

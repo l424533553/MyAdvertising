@@ -2,8 +2,10 @@ package com.advertising.screen.myadvertising.entity.dao;
 
 
 import android.content.Context;
+
 import com.advertising.screen.myadvertising.entity.PriceBean;
 import com.j256.ormlite.dao.Dao;
+import com.xuanyuan.library.base.application.MyBaseApplication;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -18,9 +20,9 @@ public class PriceBeanDao {
     // ORMLite提供的DAO类对象，第一个泛型是要操作的数据表映射成的实体类；第二个泛型是这个实体类中ID的数据类型
     private Dao<PriceBean, Integer> dao;
 
-    public PriceBeanDao(Context context) {
+    public PriceBeanDao() {
         try {
-            this.dao = My2OrmliteBaseHelper.getInstance(context).getDao(PriceBean.class);
+            this.dao = My2OrmliteBaseHelper.getInstance().getDao(PriceBean.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -28,9 +30,9 @@ public class PriceBeanDao {
 
     private static PriceBeanDao baseDao;
 
-    public static PriceBeanDao getInstance(Context context) {
+    public static PriceBeanDao getInstance() {
         if (baseDao == null) {
-            baseDao = new PriceBeanDao(context);
+            baseDao = new PriceBeanDao();
         }
         return baseDao;
     }

@@ -2,6 +2,7 @@ package com.advertising.screen.myadvertising.entity.dao;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+
 import com.advertising.screen.myadvertising.entity.AdImageInfo;
 import com.advertising.screen.myadvertising.entity.AdUserBean;
 import com.advertising.screen.myadvertising.entity.InspectBean;
@@ -10,6 +11,7 @@ import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import com.xuanyuan.library.base.application.MyBaseApplication;
 import com.xuanyuan.library.utils.log.MyLog;
 
 import java.sql.SQLException;
@@ -43,12 +45,12 @@ public class My2OrmliteBaseHelper extends OrmLiteSqliteOpenHelper {
     protected Map<String, Dao> daos = new HashMap<>();
 
     // 获取本类单例对象的方法
-    public static synchronized My2OrmliteBaseHelper getInstance(Context context) {
+    public static synchronized My2OrmliteBaseHelper getInstance() {
         MyLog.mylog("数据库版本22================ getInstance");
         if (instance == null) {
             synchronized (My2OrmliteBaseHelper.class) {
                 if (instance == null) {
-                    instance = new My2OrmliteBaseHelper(context);
+                    instance = new My2OrmliteBaseHelper(MyBaseApplication.getInstance());
                 }
             }
         }

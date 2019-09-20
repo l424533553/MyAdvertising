@@ -7,8 +7,10 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+
 import com.advertising.screen.myadvertising.R;
 import com.advertising.screen.myadvertising.config.IConstants;
+import com.advertising.screen.myadvertising.ui.screen.ScreenActivity;
 import com.xuanyuan.library.MyToast;
 import com.xuanyuan.library.utils.log.MyLog;
 import com.xuanyuan.library.utils.net.MyNetWorkUtils;
@@ -25,15 +27,15 @@ public class HomeActivity extends MyCommonActivity implements IConstants {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        context = this;
 
         findViewById(R.id.ivLog).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String sellerId = MyPreferenceUtils.getSp(context).getString(SELLER_ID, DEFAULT_ID);
+                String sellerId = MyPreferenceUtils.getSp().getString(SELLER_ID, DEFAULT_ID);
                 showSellerIdDialog(sellerId);
             }
         });
+
     }
 
     @Override
@@ -50,11 +52,11 @@ public class HomeActivity extends MyCommonActivity implements IConstants {
     }
 
     private void nextActivity() {
-        String sellerId = MyPreferenceUtils.getSp(context).getString(SELLER_ID, DEFAULT_ID);
+        String sellerId = MyPreferenceUtils.getSp().getString(SELLER_ID, DEFAULT_ID);
         if (!DEFAULT_ID.equals(sellerId)) {
-            if (MyNetWorkUtils.isNetworkAvailable(context)) {
+            if (MyNetWorkUtils.isNetworkAvailable()) {
                 // 进行数据更新
-                boolean isFirstLogin = MyPreferenceUtils.getSp(context).getBoolean(IS_FIRST_LOGIN, false);
+                boolean isFirstLogin = MyPreferenceUtils.getSp().getBoolean(IS_FIRST_LOGIN, false);
                 if (!isFirstLogin) {
                     jumpActivity(DataFlushActivity.class,true);
                 } else {
@@ -89,7 +91,7 @@ public class HomeActivity extends MyCommonActivity implements IConstants {
                 if (TextUtils.isEmpty(sellerId)) {
                     MyToast.showError(context, "商户id不可为空");
                 } else {
-                    MyPreferenceUtils.getSp(context).edit().putString(SELLER_ID, sellerId).apply();
+                    MyPreferenceUtils.getSp().edit().putString(SELLER_ID, sellerId).apply();
                     MyToast.toastShort(context, "设置成功！");
                     dialog.dismiss();//关闭对话框
                     nextActivity();

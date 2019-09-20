@@ -1,169 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
-        <variable name="fragment12" type="android.support.v4.app.Fragment"/>
-        <variable name="adUserBean" type="com.advertising.screen.myadvertising.entity.AdUserBean"/>
-        <variable name="onClickListener" type="android.view.View.OnClickListener"/>
+        <import type="android.view.View" />
+
+        <!--  -->
+        <variable
+            name="fragment12"
+            type="android.support.v4.app.Fragment" />
+
+        <variable
+            name="adUserBean"
+            type="com.advertising.screen.myadvertising.entity.AdUserBean" />
+
+
+        <variable
+            name="onClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="screenState"
+            type="com.advertising.screen.myadvertising.data.ScreenState" />
 
     </data>
+
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:descendantFocusability="blocksDescendants"
-            android:orientation="vertical"
-            android:background="@color/color_white"
-            android:fitsSystemWindows="true"
-            tools:context=".activity.ScreenActivity">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_white"
+        android:descendantFocusability="blocksDescendants"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical"
+        tools:context=".ui.screen.ScreenActivity">
 
         <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_weight="93"
-                android:orientation="horizontal"
-                android:layout_height="0dp">
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="93"
+            android:orientation="horizontal">
+
             <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="9"
-                    android:orientation="vertical"
-                    android:layout_height="match_parent"
-                    tools:ignore="NestedWeights">
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="9"
+                android:orientation="vertical"
+                tools:ignore="NestedWeights">
 
                 <LinearLayout
-                        android:layout_width="match_parent"
-                        android:background="@color/color_add2"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginStart="0dp"
-                        android:orientation="vertical">
-
-
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/color_add2"
+                    android:orientation="vertical">
 
                     <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
 
-                            android:layout_width="match_parent"
-                            android:layout_weight="1"
-                            android:layout_height="0dp">
                         <TextView
-                                android:text='@{adUserBean.marketname+@string/unit}'
-                                android:textColor="@color/color_white"
-                                android:textSize="48sp"
-                                android:gravity="center_horizontal|bottom"
-                                android:paddingEnd="10dp"
-                                android:paddingStart="0dp"
-                                android:paddingTop="18dp"
-                                android:layout_centerHorizontal="true"
-                                android:layout_centerVertical="true"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:gravity="center_horizontal|bottom"
+                            android:paddingStart="0dp"
+                            android:paddingTop="18dp"
+                            android:paddingEnd="10dp"
+                            android:text='@{adUserBean.marketname+@string/unit}'
+                            android:textColor="@color/color_white"
+                            android:textSize="48sp" />
 
+                     <!--   android:src="@drawable/ic_net"-->
+                        <!--  android:id="@+id/ivNet"-->
                         <ImageView
-                                android:id="@+id/ivNet"
-                                android:src="@drawable/ic_net"
-                                android:layout_marginEnd="20dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_alignParentTop="true"
-                                android:layout_alignParentEnd="true"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"/>
+                            android:layout_width="28dp"
+                            android:layout_height="23dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="20dp"
+                            android:src="@{screenState.wifi?@drawable/ic_net:@drawable/ic_net2}" />
 
+                        <!--  android:id="@+id/ivNet"-->
+                <!--    <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="23dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="20dp"
+                            android:src="@drawable/ic_net"
+                            android:visibility="@{screenState.wifi?View.VISIBLE:View.GONE}" />-->
                     </RelativeLayout>
+
                     <LinearLayout
-                            android:layout_width="match_parent"
-                            android:paddingEnd="35dp"
-                            android:paddingStart="25dp"
-                            android:orientation="horizontal"
-                            android:layout_marginBottom="10dp"
-                            android:layout_height="wrap_content">
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal"
+                        android:paddingStart="25dp"
+                        android:paddingEnd="35dp">
 
                         <TextView
-                                android:id="@+id/tvHelp"
-                                android:text="技术支持：深圳市安鑫宝科技发展有限公司"
-                                android:textColor="@color/color_white"
-                                android:textSize="20sp"
-                                android:onClick="@{onClickListener}"
-                                android:gravity="bottom|end"
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="wrap_content"/>
-
-
-
+                            android:id="@+id/tvHelp"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="bottom|end"
+                            android:onClick="@{onClickListener}"
+                            android:text="技术支持：深圳市安鑫宝科技发展有限公司"
+                            android:textColor="@color/color_white"
+                            android:textSize="20sp" />
                     </LinearLayout>
-
-
                 </LinearLayout>
 
                 <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_weight="8"
-                        android:layout_height="0dp"
-                        android:orientation="horizontal">
-                    <include
-                            android:id="@+id/layout_main"
-                            layout="@layout/layout_main"
-                            android:layout_width="0dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="4"
-                            tools:ignore="NestedWeights">
-                    </include>
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="8"
+                    android:orientation="horizontal">
 
+                    <include
+                        android:id="@+id/layout_main"
+                        layout="@layout/layout_main"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="4"
+                        bind:adUserBean="@{adUserBean}"
+                        tools:ignore="NestedWeights"/>
 
                     <com.youth.banner.Banner
-                            android:id="@+id/banner"
-                            android:padding="10dp"
-                            android:background="@color/color_add2"
-                            android:layout_height="match_parent"
-                            android:layout_width="0dp"
-                            android:layout_weight="5"
-                            android:layout_margin="10dp"
-                            android:focusable="false"
-                            android:paddingStart="5dp"
-                            android:paddingEnd="5dp"
-                            app:delay_time="9000"
-                            app:image_scale_type="fit_center"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                    />
-
+                        android:id="@+id/banner"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:layout_weight="5"
+                        android:background="@color/color_add2"
+                        android:focusable="false"
+                        android:padding="10dp"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        app:delay_time="9000"
+                        app:image_scale_type="fit_center"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
                 </LinearLayout>
             </LinearLayout>
 
             <!-- 加个栏 -->
             <include
-                    android:id="@+id/ilData"
-                    layout="@layout/layout_price"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="10dp"
-                    android:layout_weight="3">
-            </include>
+                android:id="@+id/ilData"
+                layout="@layout/layout_price"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="3" />
 
         </LinearLayout>
 
-
         <!-- 最底部 消息栏 -->
         <LinearLayout
-                android:layout_width="match_parent"
-                android:background="@color/color_add2"
-                android:layout_height="0dp"
-                android:gravity="center_vertical"
-                android:layout_weight="7"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:id="@+id/linearLayout"
-                android:orientation="horizontal">
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="7"
+            android:background="@color/color_add2"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent">
 
-
+            <!-- 可以 -->
             <com.xuanyuan.library.view.MarqueeTextviewNofocus
-                    android:id="@+id/marquee"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/color_white"
-                    android:textSize="36sp"
-            />
+                android:id="@+id/marquee"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:textColor="@color/color_white"
+                android:textSize="36sp" />
 
             <!--     &lt;!&ndash; https://github.com/385841539/MarqueeView &ndash;&gt;
                  <com.marquee.dingrui.marqueeviewlib.MarqueeView
@@ -191,6 +212,5 @@
                          app:mvTextSize="36sp"/>-->
 
         </LinearLayout>
-
     </LinearLayout>
 </layout>

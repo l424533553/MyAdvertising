@@ -30,6 +30,8 @@
 -keep class com.ta.utdid2.device.**{*;}
 -dontwarn com.alibaba.sdk.android.utils.**
 
+-keep class android.support.multidex.**{*;}
+
 -keepclassmembers com.advertising.screen.myadvertising.SysApplication {
     public <init>();
 }

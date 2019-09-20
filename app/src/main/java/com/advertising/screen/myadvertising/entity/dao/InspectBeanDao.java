@@ -2,8 +2,10 @@ package com.advertising.screen.myadvertising.entity.dao;
 
 
 import android.content.Context;
+
 import com.advertising.screen.myadvertising.entity.InspectBean;
 import com.j256.ormlite.dao.Dao;
+import com.xuanyuan.library.base.application.MyBaseApplication;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -20,7 +22,7 @@ public class InspectBeanDao {
 
     public InspectBeanDao(Context context) {
         try {
-            this.dao = My2OrmliteBaseHelper.getInstance(context).getDao(InspectBean.class);
+            this.dao = My2OrmliteBaseHelper.getInstance().getDao(InspectBean.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -28,9 +30,9 @@ public class InspectBeanDao {
 
     private static InspectBeanDao baseDao;
 
-    public static InspectBeanDao getInstance(Context context) {
+    public static InspectBeanDao getInstance() {
         if (baseDao == null) {
-            baseDao = new InspectBeanDao(context);
+            baseDao = new InspectBeanDao(MyBaseApplication.getInstance());
         }
         return baseDao;
     }

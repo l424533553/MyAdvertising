@@ -1,6 +1,8 @@
 package com.advertising.screen.myadvertising.entity;
 
+
 import android.support.annotation.NonNull;
+
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -60,6 +62,7 @@ public class AdUserBean {
     private String linkphone;
     @DatabaseField
     private String companyid;
+    //自定义广告
     @DatabaseField
     private String adcontent;
     private String baseurl;
@@ -68,8 +71,14 @@ public class AdUserBean {
     private String marketname;
     @DatabaseField
     private int marketid;
+    //市场公共广告
     @DatabaseField
     private String commcontent;
+
+
+    public AdUserBean() {
+    }
+
 
     public String getCommcontent() {
         return commcontent;
@@ -86,10 +95,6 @@ public class AdUserBean {
     public void setMarketid(int marketid) {
         this.marketid = marketid;
     }
-
-    public AdUserBean() {
-    }
-
 
     public String getStatus() {
         return status;
