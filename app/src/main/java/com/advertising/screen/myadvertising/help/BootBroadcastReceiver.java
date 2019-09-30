@@ -3,14 +3,16 @@ package com.advertising.screen.myadvertising.help;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import com.advertising.screen.myadvertising.activity.HomeActivity;
+import com.advertising.screen.myadvertising.activity.HomeActivity1;
 import com.advertising.screen.myadvertising.config.IConstants;
 import com.xuanyuan.library.utils.LiveBus;
 
 import static com.advertising.screen.myadvertising.config.IEventBus.NOTIFY_LIVEBUS_KEY;
 import static com.advertising.screen.myadvertising.config.IEventBus.NOTIFY_NET_CHANGE;
 
-
+/**
+ * 注册广播
+ */
 public class BootBroadcastReceiver extends BroadcastReceiver implements IConstants {
 
     private static final String ACTION_BOOT = "android.intent.action.BOOT_COMPLETED";
@@ -23,10 +25,9 @@ public class BootBroadcastReceiver extends BroadcastReceiver implements IConstan
         if (action != null) {
             switch (action) {
                 case ACTION_BOOT:
-                    Intent mBootIntent = new Intent(context, HomeActivity.class);
+                    Intent mBootIntent = new Intent(context, HomeActivity1.class);
                     mBootIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(mBootIntent);
-
                     break;
                 case CONNECTIVITY_CHANGE:
                     LiveBus.post(NOTIFY_LIVEBUS_KEY, String.class, NOTIFY_NET_CHANGE);

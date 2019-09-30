@@ -49,6 +49,7 @@ public class InspectAdapter extends RecyclerView.Adapter<InspectAdapter.UserAdap
     public void onBindViewHolder(@NonNull UserAdapterHolder holder, int position) {
         holder.getBinding().setInspectBean(beans.get(position));
         holder.getBinding().setPosition(position);
+        holder.getBinding().executePendingBindings();
     }
 
     @Override

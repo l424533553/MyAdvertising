@@ -2,8 +2,8 @@ package com.advertising.screen.myadvertising.data;
 
 
 import android.databinding.BaseObservable;
-import android.databinding.Bindable;
 import android.databinding.ObservableArrayList;
+import android.databinding.ObservableBoolean;
 import android.graphics.Bitmap;
 
 import com.advertising.screen.myadvertising.entity.InspectBean;
@@ -16,11 +16,20 @@ import com.advertising.screen.myadvertising.entity.PriceBean;
  * 说明：
  */
 public class ScreenState extends BaseObservable {
-    private boolean isWifi;
+
     private Bitmap bitmapDP;
     private Bitmap bitmapZS;
 
+    public ObservableBoolean getIsWifi() {
+        return isWifi;
+    }
+
+    public void setIsWifi(ObservableBoolean isWifi) {
+        this.isWifi = isWifi;
+    }
+
     private ObservableArrayList<PriceBean> priceBeans = new ObservableArrayList<>();
+    private ObservableBoolean isWifi = new ObservableBoolean();
     private ObservableArrayList<InspectBean> inspectBeans = new ObservableArrayList<>();
 
     public ObservableArrayList<PriceBean> getPriceBeans() {
@@ -39,16 +48,7 @@ public class ScreenState extends BaseObservable {
         this.inspectBeans = inspectBeans;
     }
 
-    @Bindable
-    public boolean isWifi() {
-        return isWifi;
-    }
 
-    // 很忙，
-    public void setWifi(boolean wifi) {
-        isWifi = wifi;
-        notifyPropertyChanged(com.advertising.screen.myadvertising.BR.wifi);
-    }
 
     public Bitmap getBitmapDP() {
         return bitmapDP;

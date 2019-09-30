@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
@@ -17,8 +18,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.advertising.screen.myadvertising.R;
-import com.advertising.screen.myadvertising.adapter.InspectAdapter;
-import com.advertising.screen.myadvertising.adapter.PriceAdapter;
 import com.advertising.screen.myadvertising.config.IConstants;
 import com.advertising.screen.myadvertising.databinding.ScreenMainBinding;
 import com.advertising.screen.myadvertising.entity.AdUserBean;
@@ -36,13 +35,13 @@ import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.youth.banner.loader.ImageLoader;
+
 import java.util.List;
 
 import static com.advertising.screen.myadvertising.config.IEventBus.NOTIFY_LIVEBUS_KEY;
 
 /**
  * Created by Administrator on 2018/7/20.
- *
  */
 public class ScreenActivity extends AppCompatActivity implements IConstants, View.OnClickListener {
     /**
@@ -54,7 +53,6 @@ public class ScreenActivity extends AppCompatActivity implements IConstants, Vie
      */
     private Intent workIntent;
     private Banner mBanner;
-
     private ScreenMainBinding binding;
     private ScreenViewModel viewModel;
 
@@ -66,28 +64,30 @@ public class ScreenActivity extends AppCompatActivity implements IConstants, Vie
         binding = DataBindingUtil.setContentView(this, R.layout.screen_main);
         viewModel = ViewModelProviders.of(this, new ViewModelFactory()).get(ScreenViewModel.class);
         binding.setScreenState(viewModel.getScreenState());
+//                viewModel.getScreenState().getIsWifi().get()
 
         LiveBus.observe(NOTIFY_LIVEBUS_KEY, String.class, this, viewModel.observer);
-
         context = this;
         initHandler();
         initAdapter();
-        //
-        startService();
 
+        startService();
         initBanner();
 
         handler.sendEmptyMessageDelayed(NOTIFY_DATA_MOVE, 5000);
-        handler.sendEmptyMessageDelayed(NOTIFY_PATCH_UPDATE, 4000);
+//        handler.sendEmptyMessageDelayed(NOTIFY_PATCH_UPDATE, 4000);
+
 
         setListener();
         setObserve();
 
         viewModel.init();
+
+        SophixManager.getInstance().queryAndLoadNewPatch();
     }
 
     /**
-     * 那你
+     *
      * 设置监听
      */
     private void setListener() {
@@ -115,6 +115,12 @@ public class ScreenActivity extends AppCompatActivity implements IConstants, Vie
             } else {
                 binding.ilData.llPrice.setVisibility(View.VISIBLE);
             }
+
+            if (screenState.getIsWifi().get()) {
+                binding.ivWifi.setImageResource(R.drawable.ic_net);
+            } else {
+                binding.ivWifi.setImageResource(R.drawable.ic_net2);
+            }
         });
 
         //监听AdUser的基础信息
@@ -132,8 +138,7 @@ public class ScreenActivity extends AppCompatActivity implements IConstants, Vie
             // 设置滚动方向
             binding.marquee.setScrollDirection(MarqueeTextviewNofocus.RIGHT_TO_LEFT);
             // 设置滚动速度
-            binding.marquee.setScrollMode(MarqueeTextviewNofocus.SCROLL_NORM);
-
+            binding.marquee.setScrollMode(MarqueeTextviewNofocus.SCROLL_SLOW);
 
             String photoString = adInfoLiveBean.getPhotoString();
             if (photoString != null) {
@@ -208,7 +213,6 @@ public class ScreenActivity extends AppCompatActivity implements IConstants, Vie
 
     /**
      * 初始化Banner 设置功能
-     *
      */
     private void initBanner() {
         MyImageLoader mMyImageLoader = new MyImageLoader();
@@ -228,21 +232,14 @@ public class ScreenActivity extends AppCompatActivity implements IConstants, Vie
         //设置指示器的位置，小点点，居中显示
         mBanner.setIndicatorGravity(BannerConfig.CENTER);
         //设置图片加载地址
-//        mBanner.setImages(imagePath);
 //        mBanner.setImages(imagePath);// 这是资源id集合
 
         //开始调用的方法，启动轮播图。//轮播图的监听
 //        mBanner.setOnBannerListener(this).start();
     }
 
-
-    private PriceAdapter priceAdapter;
-    private int priceIndex;
-    private InspectAdapter inspectAdapter;
-    private int inspectIndex;
-
     /**
-     * VM
+     * VM  初始化Adapter
      */
     private void initAdapter() {
         AdvertiseLinearLayoutManager linearLayoutManager = new AdvertiseLinearLayoutManager(context);
@@ -252,15 +249,12 @@ public class ScreenActivity extends AppCompatActivity implements IConstants, Vie
 
         binding.ilData.rvPrice.setLayoutManager(linearLayoutManager);
         binding.ilData.rvCheck.setLayoutManager(linearLayoutManager2);
-        priceAdapter = new PriceAdapter(viewModel.getScreenState().getPriceBeans());
-        inspectAdapter = new InspectAdapter(viewModel.getScreenState().getInspectBeans());
-
-        binding.ilData.rvPrice.setAdapter(priceAdapter);
-        binding.ilData.rvCheck.setAdapter(inspectAdapter);
+        binding.ilData.rvPrice.setAdapter(viewModel.getPriceAdapter());
+        binding.ilData.rvCheck.setAdapter(viewModel.getInspectAdapter());
     }
 
     /**
-     * 数据 handler
+     * 数据 handler，
      */
     private Handler handler;
 
@@ -271,34 +265,16 @@ public class ScreenActivity extends AppCompatActivity implements IConstants, Vie
         handler = new Handler(msg -> {
             switch (msg.what) {
                 case NOTIFY_DATA_MOVE:
-                    int priceCount = priceAdapter.getItemCount();
-                    if (priceCount > 0) {
-                        if (priceIndex == priceCount - 1) {
-                            priceIndex = 0;
-                        } else {
-                            priceIndex += 6;
-                        }
-
-                        if (priceIndex >= priceCount - 1) {
-                            priceIndex = priceCount - 1;
-                        }
-                        binding.ilData.rvPrice.scrollToPosition(priceIndex);
+                    int priceIndex = viewModel.getSmollPriceIndex();
+                    if (priceIndex >= 0) {
+                        binding.ilData.rvPrice.smoothScrollToPosition(priceIndex);
                     }
 
-                    int inspectCount = inspectAdapter.getItemCount();
-                    if (inspectCount > 0) {
-                        if (inspectIndex == inspectCount - 1) {
-                            inspectIndex = 0;
-                        } else {
-                            inspectIndex += 6;
-                        }
-
-                        if (inspectIndex >= inspectCount - 1) {
-                            inspectIndex = inspectCount - 1;
-                        }
-//                            binding.ilData.rvCheck.scrollToPosition(inspectIndex);
+                    int inspectIndex = viewModel.getSmollInspectIndex();
+                    if (inspectIndex >= 0) {
                         binding.ilData.rvCheck.smoothScrollToPosition(inspectIndex);
                     }
+
                     handler.sendEmptyMessageDelayed(NOTIFY_DATA_MOVE, 5000);
                     break;
                 case NOTIFY_JUMP:
@@ -309,17 +285,14 @@ public class ScreenActivity extends AppCompatActivity implements IConstants, Vie
                 case NOTIFY_PATCH_UPDATE:
                     // 自动加载补丁包
                     //  Toast.makeText(this, "点击下载补丁", Toast.LENGTH_SHORT).show();
-                    SophixManager.getInstance().queryAndLoadNewPatch();
+//                        SophixManager.getInstance().queryAndLoadNewPatch();
                     break;
-
             }
             return false;
         });
     }
 
-
     /**
-     *
      * VM 初始化数据
      */
     private void startService() {
@@ -329,7 +302,7 @@ public class ScreenActivity extends AppCompatActivity implements IConstants, Vie
 
     /**
      * VM  点击事件
-     * 数据
+     * 
      */
     @Override
     public void onClick(View v) {
@@ -348,7 +321,5 @@ public class ScreenActivity extends AppCompatActivity implements IConstants, Vie
 //            Glide.with(context).load(path).into(imageView);
         }
     }
-
-
 
 }

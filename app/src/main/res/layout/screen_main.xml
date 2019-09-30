@@ -7,10 +7,6 @@
     <data>
         <import type="android.view.View" />
 
-        <!--  -->
-        <variable
-            name="fragment12"
-            type="android.support.v4.app.Fragment" />
 
         <variable
             name="adUserBean"
@@ -78,14 +74,17 @@
                      <!--   android:src="@drawable/ic_net"-->
                         <!--  android:id="@+id/ivNet"-->
                         <ImageView
-                            android:layout_width="28dp"
-                            android:layout_height="23dp"
+                            android:id="@+id/ivWifi"
+                            android:layout_width="34dp"
+                            android:layout_height="41dp"
                             android:layout_alignParentTop="true"
                             android:layout_alignParentEnd="true"
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="20dp"
-                            android:src="@{screenState.wifi?@drawable/ic_net:@drawable/ic_net2}" />
+                            android:src="@{screenState.getIsWifi().get()?@drawable/ic_net:@drawable/ic_net2}"
+                            />
 
+                        <!-- android:src="@{screenState.getIsWifi().get()?@drawable/ic_net:@drawable/ic_net2}"   -->
                         <!--  android:id="@+id/ivNet"-->
                 <!--    <ImageView
                             android:layout_width="28dp"
@@ -173,7 +172,6 @@
             android:layout_height="0dp"
             android:layout_weight="7"
             android:background="@color/color_add2"
-            android:gravity="center_vertical"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent">
 
@@ -185,6 +183,8 @@
                 android:gravity="center_vertical"
                 android:textColor="@color/color_white"
                 android:textSize="36sp" />
+
+
 
             <!--     &lt;!&ndash; https://github.com/385841539/MarqueeView &ndash;&gt;
                  <com.marquee.dingrui.marqueeviewlib.MarqueeView
@@ -212,5 +212,24 @@
                          app:mvTextSize="36sp"/>-->
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="wrap_content">
+            <com.advertising.screen.myadvertising.MarqueeTextView
+                android:layout_width="match_parent"
+                android:background="#aaaaaa"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:focusableInTouchMode="true"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:textSize="36sp"
+                android:text="你发发发发发发发沙发沙发发发发发发发发  发骄傲拉法基爱福家安防垃圾啊法拉发建安费劲啊拉飞机啊拉法基放假拉飞机啊发建安费劲啊拉法基法法垃圾分类急啊发发件方垃圾"
+                android:layout_height="100dp"/>
+        </LinearLayout>
+
     </LinearLayout>
 </layout>

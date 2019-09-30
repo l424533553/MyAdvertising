@@ -22,6 +22,8 @@ import com.taobao.sophix.listener.PatchLoadStatusListener;
  * AndroidManifest中设置application为此类，而SophixEntry中设为原先Application类。
  * 注意原先Application里不需要再重复初始化Sophix，并且需要避免混淆原先Application类。
  * 如有其它自定义改造，请咨询官方后妥善处理。
+ * 使用结果： 注意继承Application时修改注册名，SophixStubApplication。
+ * 使用情况： 使用情况
  */
 public class SophixStubApplication extends SophixApplication {
     private final String TAG = "SophixStubApplication";
@@ -40,6 +42,9 @@ public class SophixStubApplication extends SophixApplication {
         initSophix();
     }
 
+    /**
+     *
+     */
     private void initSophix() {
         String appVersion = "1.0.2";
         try {

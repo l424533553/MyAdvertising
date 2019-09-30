@@ -3,6 +3,7 @@ package com.advertising.screen.myadvertising.entity.dao;
 
 import android.content.Context;
 import android.database.Cursor;
+
 import com.advertising.screen.myadvertising.entity.AdUserBean;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.UpdateBuilder;
@@ -21,7 +22,7 @@ public class AdUserDao {
     private Dao<AdUserBean, Integer> dao;
     private My2OrmliteBaseHelper ormliteBaseHelper;
 
-    public AdUserDao( ) {
+    public AdUserDao() {
         try {
             ormliteBaseHelper = My2OrmliteBaseHelper.getInstance();
             this.dao = ormliteBaseHelper.getDao(AdUserBean.class);
@@ -32,7 +33,7 @@ public class AdUserDao {
 
     private static AdUserDao baseDao;
 
-    public static  AdUserDao getInstance( ) {
+    public static AdUserDao getInstance() {
         if (baseDao == null) {
             baseDao = new AdUserDao();
         }

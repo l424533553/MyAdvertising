@@ -7,7 +7,7 @@ import java.util.List;
  * 作者：罗发新
  * 时间：2019/9/18 0018    星期三
  * 邮件：424533553@qq.com
- * 说明：
+ * 说明：广告信息中的内容
  */
 public class AdInfoLiveBean {
     private AdUserBean adUserBean;

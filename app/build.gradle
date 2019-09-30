@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
 
@@ -38,7 +39,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.advertising.screen.myadvertising"
-        minSdkVersion 17
+        minSdkVersion 21
         targetSdkVersion 28
         multiDexEnabled true
         versionCode 15
@@ -73,6 +74,7 @@ android {
     dataBinding {
         enabled = true
     }
+    buildToolsVersion = '29.0.2'
 }
 
 dependencies {
@@ -97,8 +99,8 @@ dependencies {
     // json 解析框架
     implementation 'com.alibaba:fastjson:1.2.60'
 
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.1.1'
-    implementation 'com.squareup.okhttp3:okhttp:4.1.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.2.0'
     implementation 'com.squareup.okio:okio:2.4.0'
 
     //轮播图片

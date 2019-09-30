@@ -8,6 +8,8 @@ import android.text.TextUtils;
 import android.util.Patterns;
 
 import com.advertising.screen.myadvertising.R;
+import com.advertising.screen.myadvertising.adapter.InspectAdapter;
+import com.advertising.screen.myadvertising.adapter.PriceAdapter;
 import com.advertising.screen.myadvertising.data.ScreenRepository;
 import com.advertising.screen.myadvertising.data.ScreenState;
 import com.advertising.screen.myadvertising.entity.AdImageInfo;
@@ -57,10 +59,76 @@ public class ScreenViewModel extends ViewModel {
         return screenState;
     }
 
+
+
+    private PriceAdapter priceAdapter;
+    private int priceIndex;
+    private InspectAdapter inspectAdapter;
+    private int inspectIndex;
+
+    public PriceAdapter getPriceAdapter() {
+        if (priceAdapter == null) {
+            priceAdapter = new PriceAdapter(getScreenState().getPriceBeans());
+        }
+        return priceAdapter;
+    }
+
+    /**
+     * 获取要滑动的索引
+     */
+    public int getSmollPriceIndex() {
+        int priceCount = getPriceAdapter().getItemCount();
+        if (priceCount > 0) {
+            if (priceIndex == priceCount - 1) {
+                priceIndex = 0;
+            } else {
+                priceIndex += 6;
+            }
+
+            if (priceIndex >= priceCount - 1) {
+                priceIndex = priceCount - 1;
+            }
+            return priceIndex;
+        } else {
+            return -1;
+        }
+    }
+
+    /**
+     *
+     * @return
+     */
+    public InspectAdapter getInspectAdapter() {
+        if (inspectAdapter == null) {
+            inspectAdapter=   new InspectAdapter(getScreenState().getInspectBeans());
+        }
+        return inspectAdapter;
+    }
+
+    /**
+     * 获取要滑动的索引
+     */
+    public int getSmollInspectIndex() {
+        int inspectCount = getInspectAdapter().getItemCount();
+        if (inspectCount > 0) {
+            if (inspectIndex == inspectCount - 1) {
+                inspectIndex = 0;
+            } else {
+                inspectIndex += 6;
+            }
+
+            if (inspectIndex >= inspectCount - 1) {
+                inspectIndex = inspectCount - 1;
+            }
+            return inspectIndex;
+        }
+        return -1;
+    }
+
+
     private AdInfoLiveBean getAdInfoLiveBean() {
         return adInfoLiveBean;
     }
-
 
     //  登陆数据库控制器
     private ScreenRepository repository;
@@ -79,8 +147,11 @@ public class ScreenViewModel extends ViewModel {
         updateBaseInfo();
     }
 
+    /**
+     * 观察者
+     */
     public Observer<String> observer = s -> {
-        if(s==null){
+        if (s == null) {
             return;
         }
         switch (s) {
@@ -105,6 +176,7 @@ public class ScreenViewModel extends ViewModel {
     };
 
     /**
+     *
      * 更新  基础信息
      */
     private void updateBaseInfo() {
@@ -172,14 +244,17 @@ public class ScreenViewModel extends ViewModel {
      */
     public void discoverNet() {
         if (MyNetWorkUtils.isNetworkAvailable()) {
-            screenState.setWifi(true);
+            screenState.getIsWifi().set(true);
+//            screenStateLiveData.setValue(screenState);
 //          binding.ivNet.setImageResource(R.drawable.ic_net);
         } else {
-            screenState.setWifi(false);
+            screenState.getIsWifi().set(false);
+//            screenStateLiveData.setValue(screenState);
 //          binding.ivNet.setImageResource(R.drawable.ic_net2);
         }
     }
 
+    //
     public void initQR() {
         String sellerId = MyPreferenceUtils.getSp().getString(SELLER_ID, DEFAULT_ID);
         String stringZS = "https://data.axebao.com/smartsz/trace/trace2.php?companyid=" + sellerId;

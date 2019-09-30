@@ -25,10 +25,6 @@ public class PriceAdapter extends RecyclerView.Adapter<PriceAdapter.UserAdapterH
         this.beans = userList;
     }
 
-    public PriceAdapter() {
-
-    }
-
     @NonNull
     @Override
     public UserAdapterHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -40,6 +36,7 @@ public class PriceAdapter extends RecyclerView.Adapter<PriceAdapter.UserAdapterH
     public void onBindViewHolder(@NonNull UserAdapterHolder holder, int position) {
         holder.getBinding().setPriceBean(beans.get(position));
         holder.getBinding().setPosition(position);
+        holder.getBinding().executePendingBindings();
     }
 
     @Override

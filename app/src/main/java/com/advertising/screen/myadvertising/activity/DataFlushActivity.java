@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.advertising.screen.myadvertising.R;
 import com.advertising.screen.myadvertising.SysApplication;
@@ -26,6 +24,7 @@ import com.advertising.screen.myadvertising.help.HttpHelper;
 import com.advertising.screen.myadvertising.ui.screen.ScreenActivity;
 import com.alibaba.fastjson.JSON;
 import com.android.volley.VolleyError;
+import com.google.gson.Gson;
 import com.xuanyuan.library.MyToast;
 import com.xuanyuan.library.help.ActivityController;
 import com.xuanyuan.library.listener.VolleyListener;
@@ -57,28 +56,16 @@ import static com.advertising.screen.myadvertising.config.IConstants.VOLLEY_UPDA
 import static com.advertising.screen.myadvertising.config.IConstants.VOLLEY_UPDATE_SMALL_QR;
 
 
-public class DataFlushActivity extends MyCommonActivity implements VolleyListener, View.OnClickListener {
+public class DataFlushActivity extends MyCommonKtActivity implements VolleyListener, View.OnClickListener {
 
     /**
-     * 底部标题 、热键商品更新  ,商品类型更新  ，所有商品更新,  小程序 图片  ,强制更新热键
+     * 消息转发机制  handler,使用情况 时间功能
      */
-    private TextView tvTitle, tvSmallRoutine;
-
-    private TextView tvSecondImage;
-
-    private void initView() {
-        tvTitle = findViewById(R.id.tvTitle);
-        tvSmallRoutine = findViewById(R.id.tvSmallRoutine);
-        tvSecondImage = findViewById(R.id.tvSecondImage);
-
-
-        Button btnSmallRoutine = findViewById(R.id.btnSmallRoutine);
-        btnSmallRoutine.setOnClickListener(this);
-    }
-
-    //
     private Handler handler;
 
+    /**
+     * 初始化handler
+     */
     private void initHandler() {
         handler = new Handler(msg -> {
             switch (msg.what) {
@@ -92,7 +79,7 @@ public class DataFlushActivity extends MyCommonActivity implements VolleyListene
                     upSecondImage();
                     break;
                 case HANDLER_SMALL_ROUTINE:
-                    tvSmallRoutine.setText("更新成功");
+                    binding.tvSmallRoutine.setText("更新成功");
                     handler.sendEmptyMessage(HANDLER_SECOND_IMAGE);
                     break;
                 case HANDLER_SECOND_IMAGE:
@@ -107,33 +94,34 @@ public class DataFlushActivity extends MyCommonActivity implements VolleyListene
         });
     }
 
+    /**
+     * 返回 按键  操作返回结果
+     */
     @Override
     public void onBackPressed() {
         super.onBackPressed();
     }
 
     private SysApplication sysApplication;
-
-
-    private AdUserDao adUserDao;
-    private ImageDao imageDao;
-
+    //    private AdUserDao adUserDao;
+//    private ImageDao imageDao;
     private ActivityDataFlushBinding binding;
-//
+
+    /**
+     * 时间、功能、速度
+     *
+     * @param savedInstanceState 保存原始的状态
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_data_flush);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_data_flush);
+        binding.setOnClickListener(this);
         ActivityController.addActivity(this);
         sysApplication = (SysApplication) getApplication();
 
-        initView();
         initHandler();
-        adUserDao = new AdUserDao();
-        imageDao = new ImageDao();
         upPrice();
-
     }
 
     @Override
@@ -150,18 +138,17 @@ public class DataFlushActivity extends MyCommonActivity implements VolleyListene
                 break;
 
             case VOLLEY_UPDATE_SMALL_QR:
-                tvSmallRoutine.setText("更新失败");
+                binding.tvSmallRoutine.setText("更新失败");
                 handler.sendEmptyMessage(HANDLER_SECOND_IMAGE);
                 break;
             case VOLLEY_UPDATE_IMAGE:
-                tvSecondImage.setText("更新失败");
+                binding.tvSecondImage.setText("更新失败");
                 handler.sendEmptyMessageDelayed(HANDLER_UPDATE_FINISH, 500);
                 break;
             default:
                 break;
         }
     }
-
 
     @Override
     public void onResponse(JSONObject jsonObject, int flag) {
@@ -170,6 +157,7 @@ public class DataFlushActivity extends MyCommonActivity implements VolleyListene
             switch (flag) {
                 case VOLLEY_UPDATE_PRICE:
                     resultInfo = JSON.parseObject(jsonObject.toString(), ResultInfo.class);
+
                     MyLog.logTest("55555555555 ==" + resultInfo.toString());
                     if (resultInfo.getStatus() == 0) {
                         List<PriceBean> list = JSON.parseArray(resultInfo.getData(), PriceBean.class);
@@ -187,7 +175,7 @@ public class DataFlushActivity extends MyCommonActivity implements VolleyListene
                         InspectBeanDao.getInstance().deleteAll();
                         InspectBeanDao.getInstance().insert(list);
                     } else {
-                        binding.tvPrice.setText("更新失败");
+                        binding.tvInspect.setText("更新失败");
                     }
                     handler.sendEmptyMessage(HANDLER_FINISH_INSPECT);
                     break;
@@ -196,10 +184,9 @@ public class DataFlushActivity extends MyCommonActivity implements VolleyListene
                     if (result != null && result.getCode() == 0) {
                         String url = result.getUrl();
                         MyPreferenceUtils.getSp().edit().putString(SMALLROUTINE_URL, url).apply();
-//                        LiveEventBus.get().with(EVENT_BUS_COMMON, String.class).post(NOTIFY_SMALLL_ROUTINE);
-                        tvSmallRoutine.setText("更新成功");
+                        binding.tvSmallRoutine.setText("更新成功");
                     } else {
-                        tvSmallRoutine.setText("更新失败");
+                        binding.tvSmallRoutine.setText("更新失败");
                     }
 
                     handler.sendEmptyMessage(HANDLER_SECOND_IMAGE);
@@ -209,9 +196,9 @@ public class DataFlushActivity extends MyCommonActivity implements VolleyListene
                     if (resultAd != null && resultAd.getStatus() == 0) {
                         AdUserBean adUserBean = resultAd.getData();
                         saveSecondImageUrl(adUserBean);
-                        tvSecondImage.setText("更新成功");
+                        binding.tvSecondImage.setText("更新成功");
                     } else {
-                        tvSecondImage.setText("更新失败");
+                        binding.tvSecondImage.setText("更新失败");
                         handler.sendEmptyMessageDelayed(HANDLER_UPDATE_FINISH, 500);
                     }
 
@@ -229,95 +216,97 @@ public class DataFlushActivity extends MyCommonActivity implements VolleyListene
      * 保存 副屏图片地址
      */
     private void saveSecondImageUrl(final AdUserBean adUserBean) {
-        sysApplication.getThreadPool().execute(new Runnable() {
-            @Override
-            public void run() {
-                if (adUserBean != null) {
+        sysApplication.getThreadPool().execute(() -> {
+            if (adUserBean != null) {
 
-                    MyPreferenceUtils.getSp().edit()
-                            .putInt(DATA_MARK_ID, adUserBean.getMarketid())
-                            .putString(DATA_MARK_NAME, adUserBean.getMarketname())
-                            .putString(DATA_BOOTH_NUMBER, adUserBean.getCompanyno())
-                            .apply();
-                    // 更新时间
-                    adUserBean.setId(1);
-                    adUserDao.updateOrInsert(adUserBean);
-                    imageDao.deleteAll();
+                MyPreferenceUtils.getSp().edit()
+                        .putInt(DATA_MARK_ID, adUserBean.getMarketid())
+                        .putString(DATA_MARK_NAME, adUserBean.getMarketname())
+                        .putString(DATA_BOOTH_NUMBER, adUserBean.getCompanyno())
+                        .apply();
+                // 更新时间
+                adUserBean.setId(1);
+                AdUserDao.getInstance().updateOrInsert(adUserBean);
+                ImageDao.getInstance().deleteAll();
 
-                    /* 图片修改   *******************/
-                    String baseUrl = adUserBean.getBaseurl();//开头路径
-                    List<AdImageInfo> imageInfos = new ArrayList<>();
+                /* 图片修改   *******************/
+                String baseUrl = adUserBean.getBaseurl();//开头路径
+                List<AdImageInfo> imageInfos = new ArrayList<>();
 
-                    String ads = adUserBean.getAd();
-                    if (ads != null) {
-                        String[] adArray = ads.split(";");
-                        if (adArray.length > 0) {
-                            // 限制长度最长 为8
-                            int piclength;
-                            if (adArray.length > 8) {
-                                piclength = 8;
-                            } else {
-                                piclength = adArray.length;
-                            }
+                String ads = adUserBean.getAd();
+                if (ads != null) {
+                    String[] adArray = ads.split(";");
+                    if (adArray.length > 0) {
+                        // 限制长度最长 为8
+                        int piclength;
+                        if (adArray.length > 8) {
+                            piclength = 8;
+                        } else {
+                            piclength = adArray.length;
+                        }
 
-                            for (int i = 0; i < piclength; i++) {
-                                String comUrl = adArray[i].replace(" ", "");
-                                if (!TextUtils.isEmpty(comUrl)) {
-                                    String netUrl = baseUrl + comUrl;
-                                    AdImageInfo AdImageInfo = new AdImageInfo();
-                                    AdImageInfo.setNetPath(netUrl);
-                                    AdImageInfo.setType(1);
-                                    imageInfos.add(AdImageInfo);
-                                }
+                        for (int i = 0; i < piclength; i++) {
+                            String comUrl = adArray[i].replace(" ", "");
+                            if (!TextUtils.isEmpty(comUrl)) {
+                                String netUrl = baseUrl + comUrl;
+                                AdImageInfo AdImageInfo = new AdImageInfo();
+                                AdImageInfo.setNetPath(netUrl);
+                                AdImageInfo.setType(1);
+                                imageInfos.add(AdImageInfo);
                             }
                         }
                     }
-
-                    String photo = adUserBean.getPhoto();
-                    if (photo != null) {
-                        String comUrl = photo.replace(" ", "");
-                        if (!TextUtils.isEmpty(comUrl)) {
-                            String netUrl = baseUrl + comUrl;
-                            AdImageInfo AdImageInfo = new AdImageInfo();
-                            AdImageInfo.setNetPath(netUrl);
-                            AdImageInfo.setType(0);
-                            imageInfos.add(AdImageInfo);
-                        }
-                    }
-
-
-                    String licences = adUserBean.getLicence();
-                    if (licences != null) {
-                        String[] adArray = licences.split(";");
-                        if (adArray.length > 0) {
-                            // 限制长度最长 为8
-                            int piclength;
-                            if (adArray.length > 4) {
-                                piclength = 4;
-                            } else {
-                                piclength = adArray.length;
-                            }
-
-                            for (int i = 0; i < piclength; i++) {
-                                String comUrl = adArray[i].replace(" ", "");
-                                if (!TextUtils.isEmpty(comUrl)) {
-                                    String netUrl = baseUrl + comUrl;
-                                    AdImageInfo AdImageInfo = new AdImageInfo();
-                                    AdImageInfo.setNetPath(netUrl);
-                                    AdImageInfo.setType(2);
-                                    imageInfos.add(AdImageInfo);
-                                }
-                            }
-                        }
-                    }
-
-                    imageDao.inserts(imageInfos);
                 }
-                handler.sendEmptyMessage(HANDLER_UPDATE_FINISH);
+
+                String photo = adUserBean.getPhoto();
+                if (photo != null) {
+                    String comUrl = photo.replace(" ", "");
+                    if (!TextUtils.isEmpty(comUrl)) {
+                        String netUrl = baseUrl + comUrl;
+                        AdImageInfo AdImageInfo = new AdImageInfo();
+                        AdImageInfo.setNetPath(netUrl);
+                        AdImageInfo.setType(0);
+                        imageInfos.add(AdImageInfo);
+                    }
+                }
+
+
+                String licences = adUserBean.getLicence();
+                if (licences != null) {
+                    String[] adArray = licences.split(";");
+                    if (adArray.length > 0) {
+                        // 限制长度最长 为8
+                        int piclength;
+                        if (adArray.length > 4) {
+                            piclength = 4;
+                        } else {
+                            piclength = adArray.length;
+                        }
+
+                        for (int i = 0; i < piclength; i++) {
+                            String comUrl = adArray[i].replace(" ", "");
+                            if (!TextUtils.isEmpty(comUrl)) {
+                                String netUrl = baseUrl + comUrl;
+                                AdImageInfo AdImageInfo = new AdImageInfo();
+                                AdImageInfo.setNetPath(netUrl);
+                                AdImageInfo.setType(2);
+                                imageInfos.add(AdImageInfo);
+                            }
+                        }
+                    }
+                }
+
+                ImageDao.getInstance().inserts(imageInfos);
             }
+            handler.sendEmptyMessage(HANDLER_UPDATE_FINISH);
         });
     }
 
+    /**
+     * 点击监听事件
+     *
+     * @param v 点击的控件
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -336,7 +325,7 @@ public class DataFlushActivity extends MyCommonActivity implements VolleyListene
 
 
     /**
-     * 更新所有商品
+     * 更新所有商品的价格
      */
     private void upPrice() {
         if (MyNetWorkUtils.isNetworkAvailable()) {
@@ -344,12 +333,12 @@ public class DataFlushActivity extends MyCommonActivity implements VolleyListene
             HttpHelper.getmInstants(sysApplication).questPrice(DataFlushActivity.this, sellerId, VOLLEY_UPDATE_PRICE);
             binding.tvPrice.setText("正在更新。。。");
         } else {
-            tvTitle.setText("无网络，请配置网络");
+            binding.tvTitle.setText("无网络，请配置网络");
         }
     }
 
     /**
-     * 获取检测结果
+     * 获取检测结果，环境功能测试
      */
     private void upInspect() {
         if (MyNetWorkUtils.isNetworkAvailable()) {
@@ -357,7 +346,7 @@ public class DataFlushActivity extends MyCommonActivity implements VolleyListene
             HttpHelper.getmInstants(sysApplication).questInspect(DataFlushActivity.this, sellerId, VOLLEY_UPDATE_INSPECT);
             binding.tvInspect.setText("正在更新。。。");
         } else {
-            tvTitle.setText("无网络，请配置网络");
+            binding.tvTitle.setText("无网络，请配置网络");
         }
     }
 
@@ -368,9 +357,9 @@ public class DataFlushActivity extends MyCommonActivity implements VolleyListene
         if (MyNetWorkUtils.isNetworkAvailable()) {
             String sellerId = MyPreferenceUtils.getSp().getString(SELLER_ID, DEFAULT_ID);
             HttpHelper.getmInstants(sysApplication).getSmallRoutine(DataFlushActivity.this, sellerId, VOLLEY_UPDATE_SMALL_QR);
-            tvSmallRoutine.setText("正在更新。。。");
+            binding.tvSmallRoutine.setText("正在更新。。。");
         } else {
-            tvTitle.setText("无网络，请配置网络");
+            binding.tvTitle.setText("无网络，请配置网络");
         }
     }
 
@@ -381,17 +370,15 @@ public class DataFlushActivity extends MyCommonActivity implements VolleyListene
         if (MyNetWorkUtils.isNetworkAvailable()) {
             String sellerId = MyPreferenceUtils.getSp().getString(SELLER_ID, DEFAULT_ID);
             HttpHelper.getmInstants(sysApplication).httpQuestImageEx22(DataFlushActivity.this, sellerId, VOLLEY_UPDATE_IMAGE);
-            tvSecondImage.setText("正在更新。。。");
+            binding.tvSecondImage.setText("正在更新。。。");
         } else {
-            tvTitle.setText("无网络，请配置网络");
+            binding.tvTitle.setText("无网络，请配置网络");
         }
     }
-
-
 }
 
+//
 //ups/uploads/file/20190830/tim.jpg;
 //ups/uploads/file/20190830/a315bb19e17f686b679ee773a1df5157.jpg;
 //ups/uploads/file/20190830/1F32Q05306-6.jpg
-//
-//        https://data.axebao.com/smartsz/assets/files/20190520094255772.png
+//https://data.axebao.com/smartsz/assets/files/20190520094255772.png

@@ -59,7 +59,7 @@ public class PriceBeanDao {
         return -1;
     }
 
-    // 删除数据
+    // 删除数据,不会删除表
     public int deleteAll() {
         try {
             return dao.deleteBuilder().delete();

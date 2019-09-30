@@ -75,4 +75,8 @@ public class HttpHelper implements IConstants {
         String url = BASE_IP_WEB + "/getimgcode.php?id=" + sellerId;
         application.volleyGet(url, listener, flag);
     }
+
+    public void  getSmallRQ(){
+
+    }
 }

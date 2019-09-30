@@ -1,34 +1,57 @@
 package com.advertising.screen.myadvertising.service;
 
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.graphics.BitmapFactory;
 import android.os.Binder;
 import android.os.IBinder;
 import android.text.TextUtils;
+import android.widget.RemoteViews;
+
+import com.advertising.screen.myadvertising.R;
 import com.advertising.screen.myadvertising.SysApplication;
-import com.advertising.screen.myadvertising.entity.*;
+import com.advertising.screen.myadvertising.entity.AdImageInfo;
+import com.advertising.screen.myadvertising.entity.AdUserBean;
+import com.advertising.screen.myadvertising.entity.AdUserInfo;
+import com.advertising.screen.myadvertising.entity.InspectBean;
+import com.advertising.screen.myadvertising.entity.PriceBean;
+import com.advertising.screen.myadvertising.entity.ResultInfo;
 import com.advertising.screen.myadvertising.entity.dao.AdUserDao;
 import com.advertising.screen.myadvertising.entity.dao.ImageDao;
 import com.advertising.screen.myadvertising.entity.dao.InspectBeanDao;
 import com.advertising.screen.myadvertising.entity.dao.PriceBeanDao;
+import com.advertising.screen.myadvertising.help.HttpHelper;
+import com.advertising.screen.myadvertising.ui.screen.ScreenActivity;
 import com.alibaba.fastjson.JSON;
 import com.android.volley.VolleyError;
-import com.advertising.screen.myadvertising.help.HttpHelper;
 import com.xuanyuan.library.MyToast;
 import com.xuanyuan.library.listener.VolleyListener;
 import com.xuanyuan.library.utils.LiveBus;
 import com.xuanyuan.library.utils.log.MyLog;
 import com.xuanyuan.library.utils.net.MyNetWorkUtils;
 import com.xuanyuan.library.utils.storage.MyPreferenceUtils;
+
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.advertising.screen.myadvertising.config.IEventBus.*;
-import static com.advertising.screen.myadvertising.config.IConstants.*;
+import static com.advertising.screen.myadvertising.config.IConstants.DATA_BOOTH_NUMBER;
+import static com.advertising.screen.myadvertising.config.IConstants.DATA_MARK_ID;
+import static com.advertising.screen.myadvertising.config.IConstants.DATA_MARK_NAME;
+import static com.advertising.screen.myadvertising.config.IConstants.DEFAULT_ID;
+import static com.advertising.screen.myadvertising.config.IConstants.SELLER_ID;
+import static com.advertising.screen.myadvertising.config.IConstants.VOLLEY_UPDATE_IMAGE;
+import static com.advertising.screen.myadvertising.config.IConstants.VOLLEY_UPDATE_INSPECT;
+import static com.advertising.screen.myadvertising.config.IConstants.VOLLEY_UPDATE_PRICE;
+import static com.advertising.screen.myadvertising.config.IEventBus.NOTIFY_BASE_INFO;
+import static com.advertising.screen.myadvertising.config.IEventBus.NOTIFY_BASE_INSPECT;
+import static com.advertising.screen.myadvertising.config.IEventBus.NOTIFY_BASE_PRICE;
+import static com.advertising.screen.myadvertising.config.IEventBus.NOTIFY_LIVEBUS_KEY;
 
 
 /**
@@ -44,8 +67,7 @@ public class WorkService extends Service implements VolleyListener {
 
     @Override
     public void onResponse(VolleyError volleyError, int flag) {
-//        if (flag == VOLLEY_UPDATE_IMAGE) {// 失败了啥也不用做
-//        }
+
     }
 
     /**
@@ -300,8 +322,35 @@ public class WorkService extends Service implements VolleyListener {
         super.onDestroy();
     }
 
+    /**
+     * @param intent  内容Intent
+     * @param flags   旗标
+     * @param startId  开始id
+     * @return    返回的开始命令的id
+     */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+       // 在API11之后构建Notification的方式
+        Notification.Builder builder = new Notification.Builder(this.getApplicationContext()); //获取一个Notification构造器
+        Intent nfIntent = new Intent(this, ScreenActivity.class);
+
+        RemoteViews remoteViews = new RemoteViews(this.getPackageName(), R.layout.layout_dialog_sellerid);// 获取remoteViews（参数一：包名；参数二：布局资源）
+        builder.setContentIntent(PendingIntent.
+                getActivity(this, 0, nfIntent, 0)) // 设置PendingIntent
+                .setLargeIcon(BitmapFactory.decodeResource(this.getResources(),
+                        R.mipmap.ic_launcher)) // 设置下拉列表中的图标(大图标)
+                .setContentTitle("下拉列表中的Title") // 设置下拉列表里的标题
+                .setSmallIcon(R.mipmap.ic_launcher) // 设置状态栏内的小图标
+                .setContentText("要显示的内容") // 设置上下文内容
+//                .setview(remoteViews)//  时光倒流
+                .setWhen(System.currentTimeMillis()); // 设置该通知发生的时间
+
+        //构建好Notifycation，设置为默认的声音。开始前台的服务。
+        Notification notification = builder.build(); // 获取构建好的Notification
+        notification.defaults = Notification.DEFAULT_SOUND; //设置为默认的声音
+        startForeground(110, notification);// 开始前台服务
         return super.onStartCommand(intent, flags, startId);
     }
+
+
 }
