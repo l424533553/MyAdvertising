@@ -1,49 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
+
     <data>
 
-        <variable name="priceBean" type="com.advertising.screen.myadvertising.entity.PriceBean"/>
-        <variable name="position" type="Integer"/>
+        <variable
+            name="priceBean"
+            type="com.advertising.screen.myadvertising.entity.PriceBean" />
+
+        <variable
+            name="position"
+            type="Integer" />
 
     </data>
+
     <LinearLayout
-            android:orientation="horizontal"
-            android:background="@{position%2==0 ? @color/transparent : @color/color_add2345}"
-            android:layout_width="match_parent"
-            android:padding="10dp"
-            android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@{position%2==0 ? @color/transparent : @color/color_add2345}"
+        android:orientation="horizontal"
+        android:padding="10dp">
 
         <TextView
-                android:layout_width="wrap_content"
-                android:paddingStart="20dp"
-                android:paddingEnd="20dp"
-                android:gravity="center"
-                android:textColor="@color/color_white"
-                android:layout_height="wrap_content"
-                android:text="@{String.valueOf(position+1)}"
-                android:textSize="30sp"
-        />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="@{String.valueOf(position+1)}"
+            android:textColor="@color/color_white"
+            android:textSize="16sp" />
 
         <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textColor="@color/color_white"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:text="@{priceBean.name}"
-                android:textSize="30sp"
-        />
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@{priceBean.name}"
+            android:textColor="@color/color_white"
+            android:textSize="16sp" />
 
         <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:singleLine="true"
-                android:textColor="@color/red_text"
-                android:text="@{priceBean.avgprice}"
-                android:textSize="30sp"
-                android:layout_height="wrap_content"/>
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@{priceBean.avgprice}"
+            android:textColor="@color/red_text"
+            android:textSize="16sp" />
 
     </LinearLayout>
 </layout>

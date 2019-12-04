@@ -1,7 +1,9 @@
 apply plugin: 'com.android.application'
+
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
 
 
 buildscript {
@@ -10,7 +12,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.0'
+        classpath 'com.android.tools.build:gradle:3.5.2'
     }
 }
 
@@ -36,17 +38,22 @@ android {
             keyPassword '123456'
         }
     }
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId "com.advertising.screen.myadvertising"
         minSdkVersion 21
-        targetSdkVersion 28
-        multiDexEnabled true
-        versionCode 15
-        versionName "1.1.5"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        targetSdkVersion 29
+        versionCode 16
+        versionName "1.1.6"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.release
         multiDexEnabled true    // true时，生成多个dex
+
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi-v7a', 'x86', 'armeabi'
+            //还可以添加 'arm64-v8a','x86', 'x86_64', 'mips', 'mips64'
+        }
     }
     buildTypes {
         release {
@@ -54,7 +61,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
             debuggable = true
-
 //            setMultiDexKeepFile file("multiDexKeep.txt")        // 当前项目中指定的classes，编译到class.dex中
         }
 
@@ -80,47 +86,45 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation 'android.arch.lifecycle:extensions:1.1.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
 
     //ormlite  框架引用包
     implementation 'com.j256.ormlite:ormlite-android:5.1'
     implementation 'com.j256.ormlite:ormlite-core:5.1'
     implementation 'com.j256.ormlite:ormlite-jdbc:5.1'
 
-    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'androidx.multidex:multidex:2.0.1'
     //volley 网络框架
     implementation 'eu.the4thfloor.volley:com.android.volley:2015.05.28'
     // json 解析框架
-    implementation 'com.alibaba:fastjson:1.2.60'
-
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.0'
-    implementation 'com.squareup.okhttp3:okhttp:4.2.0'
-    implementation 'com.squareup.okio:okio:2.4.0'
+    implementation 'com.alibaba:fastjson:1.2.62'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.2'
+    implementation 'com.squareup.okhttp3:okhttp:4.2.2'
+    implementation 'com.squareup.okio:okio:2.4.1'
 
     //轮播图片
     implementation 'com.youth.banner:banner:1.4.10'
     /*  glide  图片加载框架*/
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    implementation 'com.github.bumptech.glide:glide:4.10.0'
 
     /**********  retrofit2+Rxjava    主流框架*****************/
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.12'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.13'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
     //网络请求框架 retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.6.1'
-    implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.6.1'
-
+    implementation 'com.squareup.retrofit2:retrofit:2.6.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.6.2'
 
     /* 网络通信 框架 */
     implementation 'org.greenrobot:eventbus:3.1.1'
-    implementation 'com.android.support:recyclerview-v7:28.0.0'
-    implementation 'com.android.support:design:28.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
 
     /*  走马灯 框架*/
     implementation 'com.sunfusheng:marqueeview:1.3.3'
@@ -130,9 +134,6 @@ dependencies {
     implementation project(path: ':LibraryProject:arrlibrary')
 
     implementation 'com.github.garretyoder:Colorful:2.3.4'
-    implementation "com.android.support:multidex:1.0.3"
-
-//    implementation project(path: ':LibraryProject:arrlibrary')
-//    implementation project(path: ':LibraryProject:jarlibrary')
+    implementation 'androidx.multidex:multidex:2.0.1'
 
 }

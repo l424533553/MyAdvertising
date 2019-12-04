@@ -1,6 +1,6 @@
 package com.advertising.screen.myadvertising.activity;
 
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -24,7 +24,6 @@ import com.advertising.screen.myadvertising.help.HttpHelper;
 import com.advertising.screen.myadvertising.ui.screen.ScreenActivity;
 import com.alibaba.fastjson.JSON;
 import com.android.volley.VolleyError;
-import com.google.gson.Gson;
 import com.xuanyuan.library.MyToast;
 import com.xuanyuan.library.help.ActivityController;
 import com.xuanyuan.library.listener.VolleyListener;
@@ -115,7 +114,7 @@ public class DataFlushActivity extends MyCommonKtActivity implements VolleyListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_data_flush);
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_data_flush);
         binding.setOnClickListener(this);
         ActivityController.addActivity(this);
         sysApplication = (SysApplication) getApplication();

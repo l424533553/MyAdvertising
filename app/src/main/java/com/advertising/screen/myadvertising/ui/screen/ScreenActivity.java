@@ -1,16 +1,17 @@
 package com.advertising.screen.myadvertising.ui.screen;
 
 import android.app.AlertDialog;
-import android.arch.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
+
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -29,7 +30,6 @@ import com.xuanyuan.library.MyToast;
 import com.xuanyuan.library.adapter.AdvertiseLinearLayoutManager;
 import com.xuanyuan.library.utils.LiveBus;
 import com.xuanyuan.library.utils.storage.MyPreferenceUtils;
-import com.xuanyuan.library.utils.system.SystemInfoUtils;
 import com.xuanyuan.library.view.MarqueeTextviewNofocus;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -60,11 +60,15 @@ public class ScreenActivity extends AppCompatActivity implements IConstants, Vie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SystemInfoUtils.hideState(this);
+//        StatusBarUtil.setImageTranslucent(this, Color.RED, 0);
+
+//        SystemInfoUtils.hideState(this);
         binding = DataBindingUtil.setContentView(this, R.layout.screen_main);
+        setListener();
         viewModel = ViewModelProviders.of(this, new ViewModelFactory()).get(ScreenViewModel.class);
         binding.setScreenState(viewModel.getScreenState());
-//                viewModel.getScreenState().getIsWifi().get()
+        setObserve();
+        viewModel.init();
 
         LiveBus.observe(NOTIFY_LIVEBUS_KEY, String.class, this, viewModel.observer);
         context = this;
@@ -78,16 +82,11 @@ public class ScreenActivity extends AppCompatActivity implements IConstants, Vie
 //        handler.sendEmptyMessageDelayed(NOTIFY_PATCH_UPDATE, 4000);
 
 
-        setListener();
-        setObserve();
-
-        viewModel.init();
 
         SophixManager.getInstance().queryAndLoadNewPatch();
     }
 
     /**
-     *
      * 设置监听
      */
     private void setListener() {
@@ -131,7 +130,10 @@ public class ScreenActivity extends AppCompatActivity implements IConstants, Vie
 
             AdUserBean adUserBean = adInfoLiveBean.getAdUserBean();
             String adString = adInfoLiveBean.getReallyAdString();
-            binding.setAdUserBean(adUserBean);
+            if(adUserBean!=null){
+                binding.setAdUserBean(adUserBean);
+            }
+
             binding.marquee.setText(adString);
             // 初始化
             binding.marquee.init(getWindowManager());
@@ -302,7 +304,6 @@ public class ScreenActivity extends AppCompatActivity implements IConstants, Vie
 
     /**
      * VM  点击事件
-     * 
      */
     @Override
     public void onClick(View v) {

@@ -6,12 +6,9 @@
 
     <data>
         <import type="android.view.View" />
-
-
         <variable
             name="adUserBean"
             type="com.advertising.screen.myadvertising.entity.AdUserBean" />
-
 
         <variable
             name="onClickListener"
@@ -20,7 +17,6 @@
         <variable
             name="screenState"
             type="com.advertising.screen.myadvertising.data.ScreenState" />
-
     </data>
 
     <LinearLayout
@@ -35,7 +31,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="93"
+            android:layout_weight="90"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -47,7 +43,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"
                     android:layout_marginStart="0dp"
                     android:layout_marginEnd="10dp"
                     android:background="@color/color_add2"
@@ -65,22 +62,22 @@
                             android:layout_centerVertical="true"
                             android:gravity="center_horizontal|bottom"
                             android:paddingStart="0dp"
-                            android:paddingTop="18dp"
+                            android:paddingTop="2dp"
                             android:paddingEnd="10dp"
                             android:text='@{adUserBean.marketname+@string/unit}'
                             android:textColor="@color/color_white"
-                            android:textSize="48sp" />
+                            android:textSize="28sp" />
 
                      <!--   android:src="@drawable/ic_net"-->
                         <!--  android:id="@+id/ivNet"-->
                         <ImageView
                             android:id="@+id/ivWifi"
-                            android:layout_width="34dp"
-                            android:layout_height="41dp"
+                            android:layout_width="30dp"
+                            android:layout_height="36dp"
                             android:layout_alignParentTop="true"
                             android:layout_alignParentEnd="true"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="20dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="10dp"
                             android:src="@{screenState.getIsWifi().get()?@drawable/ic_net:@drawable/ic_net2}"
                             />
 
@@ -114,7 +111,7 @@
                             android:onClick="@{onClickListener}"
                             android:text="技术支持：深圳市安鑫宝科技发展有限公司"
                             android:textColor="@color/color_white"
-                            android:textSize="20sp" />
+                            android:textSize="16sp" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -126,7 +123,7 @@
 
                     <include
                         android:id="@+id/layout_main"
-                        layout="@layout/layout_main"
+                        layout="@layout/layout_main1"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginStart="10dp"
@@ -134,7 +131,7 @@
                         android:layout_marginBottom="10dp"
                         android:layout_weight="4"
                         bind:adUserBean="@{adUserBean}"
-                        tools:ignore="NestedWeights"/>
+                        />
 
                     <com.youth.banner.Banner
                         android:id="@+id/banner"
@@ -170,7 +167,8 @@
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="7"
+            android:layout_weight="10"
+            android:gravity="center_vertical"
             android:background="@color/color_add2"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent">
@@ -182,7 +180,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:textColor="@color/color_white"
-                android:textSize="36sp" />
+                android:textSize="18sp" />
 
 
 
@@ -232,4 +230,5 @@
         </LinearLayout>
 
     </LinearLayout>
+
 </layout>

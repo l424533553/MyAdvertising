@@ -1,9 +1,9 @@
 package com.advertising.screen.myadvertising.data;
 
 
-import android.databinding.BaseObservable;
-import android.databinding.ObservableArrayList;
-import android.databinding.ObservableBoolean;
+import androidx.databinding.BaseObservable;
+import androidx.databinding.ObservableArrayList;
+import androidx.databinding.ObservableBoolean;
 import android.graphics.Bitmap;
 
 import com.advertising.screen.myadvertising.entity.InspectBean;

@@ -46,9 +46,8 @@ public class HttpHelper implements IConstants {
         application.volleyGet(url, listener, flag);
     }
 
+
     /**
-     * 复制上面的  方法  ，监听接口不一样  而已
-     *
      * @param listener  监听
      * @param shellerid 商户id
      * @param flag      请求旗标
@@ -59,6 +58,7 @@ public class HttpHelper implements IConstants {
         String url = BASE_IP_ST + "/api/smartsz/getadinfo?desdata=" + desdata;
         application.volleyGet(url, listener, flag);
     }
+
 
 //    /**
 //     * 在线检测
@@ -76,7 +76,5 @@ public class HttpHelper implements IConstants {
         application.volleyGet(url, listener, flag);
     }
 
-    public void  getSmallRQ(){
-
-    }
+    //
 }

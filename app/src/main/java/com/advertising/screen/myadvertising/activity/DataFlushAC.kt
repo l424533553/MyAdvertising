@@ -1,9 +1,10 @@
 package com.advertising.screen.myadvertising.activity
 
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import androidx.databinding.ViewDataBinding
 import com.advertising.screen.myadvertising.R
 import com.advertising.screen.myadvertising.SysApplication
 import com.advertising.screen.myadvertising.config.IConstants
@@ -122,8 +123,6 @@ class DataFlushKtAC : MyCommonKtActivity(), IConstants, VolleyListener, View.OnC
                 }
             }
         }
-
-
     }
 
     private fun saveSecondImageUrl(adUserBean: AdUserBean) {
@@ -142,6 +141,8 @@ class DataFlushKtAC : MyCommonKtActivity(), IConstants, VolleyListener, View.OnC
 
         upPrice()
     }
+
+
 
     private fun upPrice() {
 
@@ -205,4 +206,19 @@ class DataFlushKtAC : MyCommonKtActivity(), IConstants, VolleyListener, View.OnC
 //    }
 
 
+    /**
+     * 测试网络的  使用情况
+     *
+     */
+    fun testVolley123() {
+
+    }
+
+    // 时间测试
+    /**
+     * 时间测试环境
+     */
+    fun testVolley() {
+
+    }
 }

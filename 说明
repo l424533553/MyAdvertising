@@ -15,11 +15,16 @@ NetworkBoundResource 类的完整实现作为 android 架构组件 GitHub 项目
 https://github.com/googlesamples/android-architecture-components/blob/88747993139224a4bb6dbe985adf652d557de621/GithubBrowserSample/app/src/main/java/com/android/example/github/repository/NetworkBoundResource.kt
 
 测试：
-//  界面开心使用，
+//  界面开心使用，时间测试环境
 Android 界面插桩测试     >>>>>>>>>>>>>>>>>>>>使用 Espresso 库
 
 // 时间和测试  时间和功能  使用功能  测试环境
 JUnit     >>>>>>>>>>>>>>>>>单元测试
 Test
 UnitTest  >>>>>>>>>>>>>>>>>测试环境
+
+
+ 大小  6.39    3120*1440    39::18
+ 大小  6.1     2240*1080    17:9
+
 

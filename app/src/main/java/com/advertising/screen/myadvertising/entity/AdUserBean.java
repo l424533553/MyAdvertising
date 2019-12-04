@@ -1,7 +1,7 @@
 package com.advertising.screen.myadvertising.entity;
 
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
