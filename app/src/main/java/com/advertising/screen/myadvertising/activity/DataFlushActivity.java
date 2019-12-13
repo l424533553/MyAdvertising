@@ -7,7 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.advertising.screen.myadvertising.R;
-import com.advertising.screen.myadvertising.SysApplication;
+import com.advertising.screen.myadvertising.func.application.SysApplication;
 import com.advertising.screen.myadvertising.databinding.ActivityDataFlushBinding;
 import com.advertising.screen.myadvertising.entity.AdImageInfo;
 import com.advertising.screen.myadvertising.entity.AdUserBean;
@@ -20,8 +20,8 @@ import com.advertising.screen.myadvertising.entity.dao.AdUserDao;
 import com.advertising.screen.myadvertising.entity.dao.ImageDao;
 import com.advertising.screen.myadvertising.entity.dao.InspectBeanDao;
 import com.advertising.screen.myadvertising.entity.dao.PriceBeanDao;
-import com.advertising.screen.myadvertising.help.HttpHelper;
-import com.advertising.screen.myadvertising.ui.screen.ScreenActivity;
+import com.advertising.screen.myadvertising.func.help.HttpHelper;
+import com.advertising.screen.myadvertising.mvvm.main.ui.MainActivity;
 import com.alibaba.fastjson.JSON;
 import com.android.volley.VolleyError;
 import com.xuanyuan.library.MyToast;
@@ -36,23 +36,23 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.advertising.screen.myadvertising.config.IConstants.DATA_BOOTH_NUMBER;
-import static com.advertising.screen.myadvertising.config.IConstants.DATA_MARK_ID;
-import static com.advertising.screen.myadvertising.config.IConstants.DATA_MARK_NAME;
-import static com.advertising.screen.myadvertising.config.IConstants.DEFAULT_ID;
-import static com.advertising.screen.myadvertising.config.IConstants.HANDLER_FINISH_INSPECT;
-import static com.advertising.screen.myadvertising.config.IConstants.HANDLER_FINISH_PRICE;
-import static com.advertising.screen.myadvertising.config.IConstants.HANDLER_SECOND_IMAGE;
-import static com.advertising.screen.myadvertising.config.IConstants.HANDLER_SMALL_ROUTINE;
-import static com.advertising.screen.myadvertising.config.IConstants.HANDLER_UPDATE_ALLGOOD;
-import static com.advertising.screen.myadvertising.config.IConstants.HANDLER_UPDATE_FINISH;
-import static com.advertising.screen.myadvertising.config.IConstants.IS_FIRST_LOGIN;
-import static com.advertising.screen.myadvertising.config.IConstants.SELLER_ID;
-import static com.advertising.screen.myadvertising.config.IConstants.SMALLROUTINE_URL;
-import static com.advertising.screen.myadvertising.config.IConstants.VOLLEY_UPDATE_IMAGE;
-import static com.advertising.screen.myadvertising.config.IConstants.VOLLEY_UPDATE_INSPECT;
-import static com.advertising.screen.myadvertising.config.IConstants.VOLLEY_UPDATE_PRICE;
-import static com.advertising.screen.myadvertising.config.IConstants.VOLLEY_UPDATE_SMALL_QR;
+import static com.advertising.screen.myadvertising.common.iinterface.IConstants.DATA_BOOTH_NUMBER;
+import static com.advertising.screen.myadvertising.common.iinterface.IConstants.DATA_MARK_ID;
+import static com.advertising.screen.myadvertising.common.iinterface.IConstants.DATA_MARK_NAME;
+import static com.advertising.screen.myadvertising.common.iinterface.IConstants.DEFAULT_ID;
+import static com.advertising.screen.myadvertising.common.iinterface.IConstants.HANDLER_FINISH_INSPECT;
+import static com.advertising.screen.myadvertising.common.iinterface.IConstants.HANDLER_FINISH_PRICE;
+import static com.advertising.screen.myadvertising.common.iinterface.IConstants.HANDLER_SECOND_IMAGE;
+import static com.advertising.screen.myadvertising.common.iinterface.IConstants.HANDLER_SMALL_ROUTINE;
+import static com.advertising.screen.myadvertising.common.iinterface.IConstants.HANDLER_UPDATE_ALLGOOD;
+import static com.advertising.screen.myadvertising.common.iinterface.IConstants.HANDLER_UPDATE_FINISH;
+import static com.advertising.screen.myadvertising.common.iinterface.IConstants.IS_FIRST_LOGIN;
+import static com.advertising.screen.myadvertising.common.iinterface.IConstants.SELLER_ID;
+import static com.advertising.screen.myadvertising.common.iinterface.IConstants.SMALLROUTINE_URL;
+import static com.advertising.screen.myadvertising.common.iinterface.IConstants.VOLLEY_UPDATE_IMAGE;
+import static com.advertising.screen.myadvertising.common.iinterface.IConstants.VOLLEY_UPDATE_INSPECT;
+import static com.advertising.screen.myadvertising.common.iinterface.IConstants.VOLLEY_UPDATE_PRICE;
+import static com.advertising.screen.myadvertising.common.iinterface.IConstants.VOLLEY_UPDATE_SMALL_QR;
 
 
 public class DataFlushActivity extends MyCommonKtActivity implements VolleyListener, View.OnClickListener {
@@ -86,7 +86,7 @@ public class DataFlushActivity extends MyCommonKtActivity implements VolleyListe
                     break;
                 case HANDLER_UPDATE_FINISH:
                     MyPreferenceUtils.getSp().edit().putBoolean(IS_FIRST_LOGIN, true).apply();
-                    jumpActivity(ScreenActivity.class, true);
+                    jumpActivity(MainActivity.class, true);
                     break;
             }
             return false;

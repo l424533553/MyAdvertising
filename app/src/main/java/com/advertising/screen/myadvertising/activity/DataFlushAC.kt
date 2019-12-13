@@ -4,17 +4,16 @@ import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import androidx.databinding.ViewDataBinding
 import com.advertising.screen.myadvertising.R
-import com.advertising.screen.myadvertising.SysApplication
-import com.advertising.screen.myadvertising.config.IConstants
-import com.advertising.screen.myadvertising.config.IConstants.*
+import com.advertising.screen.myadvertising.func.application.SysApplication
+import com.advertising.screen.myadvertising.common.iinterface.IConstants
+import com.advertising.screen.myadvertising.common.iinterface.IConstants.*
 import com.advertising.screen.myadvertising.databinding.ActivityDataFlushBinding
 import com.advertising.screen.myadvertising.entity.*
 import com.advertising.screen.myadvertising.entity.dao.InspectBeanDao
 import com.advertising.screen.myadvertising.entity.dao.PriceBeanDao
-import com.advertising.screen.myadvertising.help.HttpHelper
-import com.advertising.screen.myadvertising.ui.screen.ScreenActivity
+import com.advertising.screen.myadvertising.func.help.HttpHelper
+import com.advertising.screen.myadvertising.mvvm.main.ui.MainActivity
 import com.alibaba.fastjson.JSON
 import com.android.volley.VolleyError
 import com.xuanyuan.library.MyToast
@@ -31,7 +30,8 @@ import org.json.JSONObject
  * 说明：
  */
 
-class DataFlushKtAC : MyCommonKtActivity(), IConstants, VolleyListener, View.OnClickListener {
+class DataFlushKtAC : MyCommonKtActivity(),
+    IConstants, VolleyListener, View.OnClickListener {
     override fun onClick(v: View?) {
         if (v == null) {
             return
@@ -179,7 +179,7 @@ class DataFlushKtAC : MyCommonKtActivity(), IConstants, VolleyListener, View.OnC
                 HANDLER_UPDATE_FINISH -> {
                     MyPreferenceUtils.getSp().edit().putBoolean(IS_FIRST_LOGIN, true)
                         .apply()
-                    jumpActivity(ScreenActivity::class.java, true)
+                    jumpActivity(MainActivity::class.java, true)
                 }
             }
             false

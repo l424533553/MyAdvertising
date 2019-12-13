@@ -32,7 +32,7 @@
 
 -keep class android.support.multidex.**{*;}
 
--keepclassmembers com.advertising.screen.myadvertising.SysApplication {
+-keepclassmembers com.advertising.screen.myadvertising.func.application.SysApplication {
     public <init>();
 }
 # 如果不使用android.support.annotation.Keep则需加上此行

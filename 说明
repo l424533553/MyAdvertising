@@ -28,3 +28,20 @@ UnitTest  >>>>>>>>>>>>>>>>>测试环境
  大小  6.1     2240*1080    17:9
 
 
+// 用于同富市场的新版设计。
+
+https://data.axebao.com/api/smartex/getweather
+
+价格借口
+https://data.axebao.com/api/smartsz/getpriceinfo?companyid=1112
+
+监测数据接口
+https://data.axebao.com/api/smartsz/getinspectinfo?companyid=1112
+
+今日交易
+https://data.axebao.com/api/smartsz/gettjtoday?companyid=1112
+
+℃
+
+
+cannot generate view binders java.lang.StackOverflowError

@@ -46,7 +46,6 @@ public class My2OrmliteBaseHelper extends OrmLiteSqliteOpenHelper {
 
     // 获取本类单例对象的方法
     public static synchronized My2OrmliteBaseHelper getInstance() {
-        MyLog.mylog("数据库版本22================ getInstance");
         if (instance == null) {
             synchronized (My2OrmliteBaseHelper.class) {
                 if (instance == null) {
@@ -60,13 +59,11 @@ public class My2OrmliteBaseHelper extends OrmLiteSqliteOpenHelper {
     // 私有的构造方法
     protected My2OrmliteBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, version);
-        MyLog.mylog("数据库版本22================" + version);
     }
 
     // 私有的构造方法
     protected My2OrmliteBaseHelper(Context context, int version) {
         super(context, DATABASE_NAME, null, version);
-        MyLog.mylog("数据库版本22 =======  version  =========" + version);
     }
 
     // 根据传入的DAO的路径获取到这个DAO的单例对象（要么从daos这个Map中获取，要么新创建一个并存入daos）
@@ -85,7 +82,6 @@ public class My2OrmliteBaseHelper extends OrmLiteSqliteOpenHelper {
 
     @Override // 创建数据库时调用的方法
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
-        MyLog.mylog("数据库版本22 ================  onCreate");
         try {
             TableUtils.createTable(connectionSource, AdImageInfo.class);
             TableUtils.createTable(connectionSource, AdUserBean.class);

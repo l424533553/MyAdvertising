@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/back2"
     android:gravity="center"
-    tools:context=".activity.HomeActivity1">
+    tools:context=".activity.HomeActivity">
 
     <ImageView
         android:id="@+id/ivLog"

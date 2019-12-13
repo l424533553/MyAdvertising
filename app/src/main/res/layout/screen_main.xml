@@ -5,7 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
+
         <variable
             name="adUserBean"
             type="com.advertising.screen.myadvertising.entity.AdUserBean" />
@@ -16,219 +18,145 @@
 
         <variable
             name="screenState"
-            type="com.advertising.screen.myadvertising.data.ScreenState" />
+            type="com.advertising.screen.myadvertising.entity.ScreenState" />
     </data>
 
-    <LinearLayout
+    <!--    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/color_white"
         android:descendantFocusability="blocksDescendants"
         android:fitsSystemWindows="true"
-        android:orientation="vertical"
-        tools:context=".ui.screen.ScreenActivity">
+        tools:context=".mvvm.main.ui.ScreenActivity">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/llHead"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_weight="90"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="9"
-                android:orientation="vertical"
-                tools:ignore="NestedWeights">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="2"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginEnd="10dp"
-                    android:background="@color/color_add2"
-                    android:orientation="vertical">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerHorizontal="true"
-                            android:layout_centerVertical="true"
-                            android:gravity="center_horizontal|bottom"
-                            android:paddingStart="0dp"
-                            android:paddingTop="2dp"
-                            android:paddingEnd="10dp"
-                            android:text='@{adUserBean.marketname+@string/unit}'
-                            android:textColor="@color/color_white"
-                            android:textSize="28sp" />
-
-                     <!--   android:src="@drawable/ic_net"-->
-                        <!--  android:id="@+id/ivNet"-->
-                        <ImageView
-                            android:id="@+id/ivWifi"
-                            android:layout_width="30dp"
-                            android:layout_height="36dp"
-                            android:layout_alignParentTop="true"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginEnd="10dp"
-                            android:src="@{screenState.getIsWifi().get()?@drawable/ic_net:@drawable/ic_net2}"
-                            />
-
-                        <!-- android:src="@{screenState.getIsWifi().get()?@drawable/ic_net:@drawable/ic_net2}"   -->
-                        <!--  android:id="@+id/ivNet"-->
-                <!--    <ImageView
-                            android:layout_width="28dp"
-                            android:layout_height="23dp"
-                            android:layout_alignParentTop="true"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="20dp"
-                            android:src="@drawable/ic_net"
-                            android:visibility="@{screenState.wifi?View.VISIBLE:View.GONE}" />-->
-                    </RelativeLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:orientation="horizontal"
-                        android:paddingStart="25dp"
-                        android:paddingEnd="35dp">
-
-                        <TextView
-                            android:id="@+id/tvHelp"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="bottom|end"
-                            android:onClick="@{onClickListener}"
-                            android:text="技术支持：深圳市安鑫宝科技发展有限公司"
-                            android:textColor="@color/color_white"
-                            android:textSize="16sp" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="8"
-                    android:orientation="horizontal">
-
-                    <include
-                        android:id="@+id/layout_main"
-                        layout="@layout/layout_main1"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_weight="4"
-                        bind:adUserBean="@{adUserBean}"
-                        />
-
-                    <com.youth.banner.Banner
-                        android:id="@+id/banner"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:layout_weight="5"
-                        android:background="@color/color_add2"
-                        android:focusable="false"
-                        android:padding="10dp"
-                        android:paddingStart="5dp"
-                        android:paddingEnd="5dp"
-                        app:delay_time="9000"
-                        app:image_scale_type="fit_center"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- 加个栏 -->
-            <include
-                android:id="@+id/ilData"
-                layout="@layout/layout_price"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="3" />
-
-        </LinearLayout>
-
-        <!-- 最底部 消息栏 -->
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="10"
-            android:gravity="center_vertical"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="2"
             android:background="@color/color_add2"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent">
+            android:orientation="vertical"
+            app:layout_constraintEnd_toStartOf="@+id/ilData"
+            app:layout_constraintHeight_percent="0.15"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="1">
 
-            <!-- 可以 -->
-            <com.xuanyuan.library.view.MarqueeTextviewNofocus
-                android:id="@+id/marquee"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_horizontal|bottom"
+                    android:paddingStart="0dp"
+                    android:paddingTop="2dp"
+                    android:paddingEnd="10dp"
+                    android:text="@{adUserBean.marketname+@string/unit}"
+                    android:textColor="@color/color_white"
+                    android:textSize="28sp" />
+
+                <ImageView
+                    android:id="@+id/ivWifi"
+                    android:layout_width="30dp"
+                    android:layout_height="36dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="@string/todo" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tvHelp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:gravity="bottom|end"
+                android:onClick="@{onClickListener}"
+                android:paddingStart="25dp"
+                android:paddingEnd="35dp"
+                android:text="@string/rwer"
                 android:textColor="@color/color_white"
-                android:textSize="18sp" />
-
-
-
-            <!--     &lt;!&ndash; https://github.com/385841539/MarqueeView &ndash;&gt;
-                 <com.marquee.dingrui.marqueeviewlib.MarqueeView
-                         android:id="@+id/mvContent"
-                         android:visibility="gone"
-                         android:layout_width="match_parent"
-                         android:layout_height="match_parent"
-                         app:marqueeview_repet_type="repet_interval"
-                         app:marqueeview_text_size="36"
-                         app:marqueeview_text_speed="1" />
-
-                 <com.sunfusheng.marqueeview.MarqueeView
-                         android:id="@+id/marqueeView"
-                         android:layout_width="match_parent"
-                         android:layout_height="match_parent"
-                         android:paddingStart="10dp"
-                         android:paddingEnd="10dp"
-                         android:visibility="gone"
-                         android:paddingBottom="5dp"
-                         app:mvAnimDuration="7100"
-                         app:mvDirection="bottom_to_top"
-                         app:mvInterval="7000"
-                         app:mvSingleLine="true"
-                         app:mvTextColor="@color/color_white"
-                         app:mvTextSize="36sp"/>-->
-
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:visibility="gone"
-            android:layout_height="wrap_content">
-            <com.advertising.screen.myadvertising.MarqueeTextView
-                android:layout_width="match_parent"
-                android:background="#aaaaaa"
-                android:ellipsize="marquee"
-                android:focusable="true"
-                android:marqueeRepeatLimit="marquee_forever"
-                android:focusableInTouchMode="true"
-                android:scrollHorizontally="true"
-                android:singleLine="true"
-                android:textSize="36sp"
-                android:text="你发发发发发发发沙发沙发发发发发发发发  发骄傲拉法基爱福家安防垃圾啊法拉发建安费劲啊拉飞机啊拉法基放假拉飞机啊发建安费劲啊拉法基法法垃圾分类急啊发发件方垃圾"
-                android:layout_height="100dp"/>
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="8"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/marquee"
+            app:layout_constraintEnd_toStartOf="@+id/ilData"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llHead">
+
+            <include
+                android:id="@+id/layout_main"
+                layout="@layout/layout_main1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="4"
+                bind:adUserBean="@{adUserBean}" />
+
+            <com.youth.banner.Banner
+                android:id="@+id/banner"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_weight="5"
+                android:background="@color/color_add2"
+                android:focusable="false"
+                android:padding="10dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                app:delay_time="9000"
+                app:image_scale_type="fit_center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </LinearLayout>
 
-    </LinearLayout>
+        <include
+            android:id="@+id/ilData"
+            layout="@layout/layout_price"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/marquee"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.3" />
+
+        <!-- 可以 -->
+        <com.xuanyuan.library.view.MarqueeTextviewNofocus
+            android:id="@+id/marquee"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/color_add2"
+            android:gravity="center_vertical"
+            android:textColor="@color/color_white"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_percent="1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
