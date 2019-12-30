@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
+
     <data>
         <variable
             name="bean"
             type="com.advertising.screen.myadvertising.mvvm.main.persistence.entity.PriceEntity" />
+
         <variable
             name="position"
             type="Integer" />
@@ -13,25 +15,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_table"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="7dp"
             android:gravity="center"
             android:singleLine="true"
             android:text="@{String.valueOf(position+1)}"
             android:textColor="@{position%2==0 ? @color/color_userInfo2 : @color/color_userInfo}"
-            android:textSize="38sp" />
+            android:textSize="26sp" />
 
         <View
             android:layout_width="0.5dp"
-            android:background="@color/color_userInfo"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:background="@color/color_userInfo" />
 
         <TextView
+            android:padding="7dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -39,20 +42,22 @@
             android:singleLine="true"
             android:text="@{bean.name}"
             android:textColor="@{position%2==0 ? @color/color_userInfo2 : @color/color_userInfo}"
-            android:textSize="38sp" />
+            android:textSize="26sp" />
+
         <View
             android:layout_width="0.5dp"
-            android:background="@color/color_userInfo"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:background="@color/color_userInfo" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-
+            android:padding="7dp"
             android:gravity="center"
             android:singleLine="true"
             android:text="@{bean.avgprice}"
             android:textColor="@{position%2==0 ? @color/color_userInfo2 : @color/color_userInfo}"
-            android:textSize="38sp" />
+            android:textSize="26sp" />
     </LinearLayout>
 </layout>

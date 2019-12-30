@@ -1,6 +1,11 @@
 package com.advertising.screen.myadvertising.mvvm.main.ui;
 
+import android.app.AlarmManager;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -8,38 +13,47 @@ import android.os.Handler;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.advertising.screen.myadvertising.R;
+import com.advertising.screen.myadvertising.common.MyImageLoader;
 import com.advertising.screen.myadvertising.common.iinterface.IConstants;
+import com.advertising.screen.myadvertising.common.iinterface.IEventBus;
 import com.advertising.screen.myadvertising.databinding.ActivityMainBinding;
-import com.advertising.screen.myadvertising.func.service.WorkService;
+import com.advertising.screen.myadvertising.func.service.DownloadApkService;
+import com.advertising.screen.myadvertising.func.service.MyJobService;
 import com.advertising.screen.myadvertising.mvvm.ViewModelFactory;
+import com.advertising.screen.myadvertising.mvvm.main.persistence.entity.Weather;
 import com.advertising.screen.myadvertising.mvvm.main.vm.UIViewModel;
 import com.bumptech.glide.Glide;
+import com.xuanyuan.library.MyToast;
 import com.xuanyuan.library.adapter.AdvertiseLinearLayoutManager;
+import com.xuanyuan.library.apk_update.download.DownloadIntentService;
+import com.xuanyuan.library.utils.LiveBus;
+import com.xuanyuan.library.utils.log.MyLog;
+import com.xuanyuan.library.utils.net.MyNetWorkUtils;
 import com.xuanyuan.library.utils.storage.MyPreferenceUtils;
 import com.xuanyuan.library.utils.system.SystemInfoUtils;
 import com.xuanyuan.library.utils.view.StatusBarUtil;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
-import com.youth.banner.loader.ImageLoader;
 
 /**
  * Created by Administrator on 2018/7/20.
  */
-public class MainActivity extends AppCompatActivity implements IConstants, View.OnClickListener {
-    private String TAG = getClass().getName();
+public class MainActivity extends AppCompatActivity implements IEventBus, IConstants, View.OnClickListener {
+    //    private String TAG = getClass().getName();
     private UIViewModel viewModel;
     private ActivityMainBinding binding;
-
     private Context context;
 
     /*  使用  */
@@ -56,16 +70,67 @@ public class MainActivity extends AppCompatActivity implements IConstants, View.
         binding.setViewModel(viewModel);
         binding.setUiBean(viewModel.uiBean);
         binding.setOnClick(this);
-        initAdapter();
 
+        // 设置网络变化的
+        LiveBus.observe(NOTIFY_LIVEBUS_KEY, String.class, this, observer);
+
+        initAdapter();
         initHandler();
         initBanner();
 
         initSubscribe(this);
+        if (!MyNetWorkUtils.isNetworkAvailable()) {
+            viewModel.notifyData();
+        }
+        viewModel.checkVersion();
+        initJobScheduler();
 
-        viewModel.notifyData();
         handler.sendEmptyMessageDelayed(NOTIFY_DATA_MOVE, 5000);
+        String localVersion = SystemInfoUtils.getVersionName(context) + "." + SystemInfoUtils.getVersionCode(context);
+        binding.tvVersion.setText(localVersion);
     }
+
+    private void initJobScheduler() {
+
+        JobScheduler scheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
+        if (scheduler == null) {
+            return;
+        }
+        ComponentName jobService = new ComponentName(this, MyJobService.class);
+
+        JobInfo jobInfo = new JobInfo.Builder(100012, jobService) //任务Id等于100012
+//                .setMinimumLatency(1000)// 任务最少延迟时间为5s
+//                .setOverrideDeadline(60000)// 任务deadline，当到期没达到指定条件也会开始执行
+                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)// 需要满足网络条件，默认值NETWORK_TYPE_NONE
+                .setPeriodic(15 * 60 * 1000) //最小为15分钟
+//                .setPeriodic(AlarmManager.INTERVAL_FIFTEEN_MINUTES) //最小为15分钟
+                .setRequiresCharging(true)// 需要满足充电状态
+//                .setRequiresDeviceIdle(false)// 设备处于Idle(Doze)
+//                .setPersisted(true) //设备重启后是否继续执行
+                .setBackoffCriteria(3000, JobInfo.BACKOFF_POLICY_LINEAR) //设置退避/重试策略
+                .build();
+        scheduler.schedule(jobInfo);
+    }
+
+
+    /**
+     * 观察者
+     */
+    public Observer<String> observer = s -> {
+        if (s == null) {
+            return;
+        }
+        if (NOTIFY_NET_CHANGE.equals(s)) {//网络变化了
+            if (MyNetWorkUtils.isNetworkAvailable()) {
+                viewModel.uiBean.getIsWifi().set(true);
+            } else {
+                viewModel.uiBean.getIsWifi().set(false);
+            }
+        } else if (NOTIFY_WHILE_DATA.equals(s)) {
+            MyLog.sysLog("MyJobService", "收到数据更新的通知");
+            viewModel.notifyData();
+        }
+    };
 
     /**
      * 初始化Banner 设置功能
@@ -134,15 +199,17 @@ public class MainActivity extends AppCompatActivity implements IConstants, View.
      * 初始化订阅,有变化一般是数据有改变了
      */
     private void initSubscribe(@NonNull LifecycleOwner owner) {
-        viewModel.weatherLiveData.observe(owner, weather -> {
-            binding.setWeather(weather);
-        });
-
+        viewModel.weatherLiveData.observe(owner, (Weather weather) -> binding.setWeather(weather));
         viewModel.mainUILiveData.observe(owner, uiBean -> {
             binding.setUiBean(uiBean);
             if (uiBean.getBitmapZS() != null) {
                 binding.ivZS.setImageBitmap(uiBean.getBitmapZS());
             }
+        });
+        viewModel.versionInfoLiveData.observe(owner, versionInfo -> {
+            Intent intent = new Intent(context, DownloadApkService.class);
+            intent.putExtra("download_url", versionInfo);
+            startService(intent);
         });
 
 
@@ -156,7 +223,7 @@ public class MainActivity extends AppCompatActivity implements IConstants, View.
             }
 
             String photoString = userInfoEntity.getHeadUrl();
-            if (TextUtils.isEmpty(photoString)) {
+            if (!TextUtils.isEmpty(photoString)) {
                 Glide.with(context).load(photoString).error(R.mipmap.head).into(binding.ivHead);
             } else {
                 binding.ivHead.setImageResource(R.mipmap.head);
@@ -169,10 +236,12 @@ public class MainActivity extends AppCompatActivity implements IConstants, View.
         });
     }
 
-
     @Override
     public void onClick(View v) {
-
+        if (v.getId() == R.id.ivZS||v.getId() == R.id.tvMarketName) {
+            String sellerId = MyPreferenceUtils.getSp().getString(SELLER_ID, DEFAULT_ID);
+            showSellerIdDialog(sellerId);
+        }
     }
 
     @Override
@@ -187,39 +256,44 @@ public class MainActivity extends AppCompatActivity implements IConstants, View.
      */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-//       MyToast.toastShort(context,"按键 +=="+keyCode);
+//       F9,F10，F11,
         if (keyCode == 139 || keyCode == 140 || keyCode == 141) {
             String sellerId = MyPreferenceUtils.getSp().getString(SELLER_ID, DEFAULT_ID);
+            showSellerIdDialog(sellerId);
 
         }
         return super.onKeyDown(keyCode, event);
     }
 
     /**
-     * VM 初始化数据
+     * VM  显示设置商户id
      */
-    private void startService() {
-        /**
-         * 工作Intent
-         */
-        Intent workIntent = new Intent(this, WorkService.class);
-        startService(workIntent);
-    }
-
-
-    /**
-     * VM  此处用于Banner的图片加载
-     */
-    private class MyImageLoader extends ImageLoader {
-        @Override
-        public void displayImage(Context context, Object path, ImageView imageView) {
-            Glide.with(context.getApplicationContext()).load(path).into(imageView);
-//            //Glide 加载图片简单用法
-//            Glide.with(context).load(path).into(imageView);
+    private void showSellerIdDialog(String hint) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        View view = View.inflate(context, R.layout.layout_dialog_sellerid, null);   // 账号、密码的布局文件，自定义
+        builder.setIcon(R.mipmap.log);//设置对话框icon
+        builder.setTitle("SellerId设置");
+        final EditText etSellerId = view.findViewById(R.id.etSellerId);
+        if (hint != null) {
+            etSellerId.setText(hint);
         }
+        AlertDialog dialog = builder.create();
+        dialog.setView(view);
+        dialog.setButton(DialogInterface.BUTTON_POSITIVE, "确定", (dialog1, which) -> {
+            String sellerId = etSellerId.getText().toString();
+            if (TextUtils.isEmpty(sellerId)) {
+                MyToast.showError(context, "商户id不可为空");
+            } else {
+                MyPreferenceUtils.getSp().edit().putString(SELLER_ID, sellerId).apply();
+                MyToast.toastShort(context, "设置成功！");
+                dialog1.dismiss();//关闭对话框
+                viewModel.notifyData();
+            }
+        });
+        dialog.show();
     }
 
+    private void test() {
 
+    }
 }
-//https://data.axebao.com/smartsz/ups/uploads/file/20191206/%E4%B8%8B%E8%BD%BD%20(3).jpg
-//https://data.axebao.com/smartsz/ups/uploads/file/20191206/%E4%B8%8B%E8%BD%BD(3).jpg

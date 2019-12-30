@@ -1,10 +1,10 @@
 package com.advertising.screen.myadvertising.mvvm.main.ui;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
-
-import android.os.Bundle;
 
 import com.advertising.screen.myadvertising.R;
 import com.advertising.screen.myadvertising.databinding.ActivityTestBinding;

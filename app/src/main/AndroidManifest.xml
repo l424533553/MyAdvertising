@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.advertising.screen.myadvertising">
+    package="com.advertising.screen.myadvertising"
+    android:sharedUserId="android.uid.system">
+
+    <!--    &lt;!&ndash;&ndash;&gt;android:sharedUserId="android.uid.system"-->
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -45,25 +48,31 @@
             </intent-filter>
         </activity>
 
-
-
-        <activity
+ <!--       <activity
             android:name=".activity.DataFlushActivity"
             android:theme="@style/dialog1"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" /> <!-- <activity android:name=".ScreenActivity"/> -->
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" /> -->
+        <!-- <activity android:name=".ScreenActivity"/> -->
         <!-- <activity android:name=".download.ApkUpdateActivity"/> -->
-        <!-- <service android:name=".net.retrofit.DownloadIntentService"/> -->
+        <!-- <service android:name=".net.retrofit.DownloadApkService"/> -->
+
+        <service android:name=".func.service.DownloadApkService" />
+
+
         <service
+            android:name=".func.service.MyJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+ <!--       <service
             android:name=".func.service.WorkService"
             android:enabled="true"
             android:exported="true"
-            tools:ignore="ExportedService" />
+            tools:ignore="ExportedService" />-->
 
         <receiver
             android:name=".func.BootBroadcastReceiver"
             android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
             <intent-filter>
-
                 <!-- 注册开机广播地址 -->
                 <action android:name="com.axecom.destroy" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

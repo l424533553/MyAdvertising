@@ -7,7 +7,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.advertising.screen.myadvertising.mvvm.main.persistence.entity.Weather;
+import com.advertising.screen.myadvertising.mvvm.main.persistence.entity.TodayTradeInfo;
 
 import java.util.List;
 
@@ -17,8 +17,8 @@ import io.reactivex.Flowable;
  * dao  在编译期就会自动报错，强大的一匹
  */
 @Dao
-public interface WeatherDao {
-    String TABLE_NAME = "Weather";
+public interface TodayTradeDao {
+    String TABLE_NAME = "TodayTrade";
 
     /**
      * onConflict：表示当插入有冲突的时候的处理策略。OnConflictStrategy封装了Room解决冲突的相关策略：
@@ -29,31 +29,31 @@ public interface WeatherDao {
      * OnConflictStrategy.IGNORE：冲突策略是忽略冲突。
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertList(Weather... beans);
+    void insertList(TodayTradeInfo... beans);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    long insert(Weather bean);
+    long insert(TodayTradeInfo bean);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    List<Long> insertListRt(Weather... beans);
+    List<Long> insertListRt(TodayTradeInfo... beans);
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    int updateList(Weather... beans);
+    int updateList(TodayTradeInfo... beans);
 
     @Delete
-    int deleteList(Weather... beans);
+    int deleteList(TodayTradeInfo... beans);
 
     @Query("SELECT * FROM " + TABLE_NAME)
-    List<Weather> findAll();
+    List<TodayTradeInfo> findAll();
 
     @Query("SELECT * FROM " + TABLE_NAME + " WHERE id == :value")
-    List<Weather> findByColumnName(int value);
+    List<TodayTradeInfo> findByColumnName(int value);
 
 //    @Query("SELECT * FROM UserBean WHERE age BETWEEN :minAge AND :maxAge")
-//    List<Weather> loadAllUsersBetweenAges(int minAge, int maxAge);
+//    List<TodayTradeInfo> loadAllUsersBetweenAges(int minAge, int maxAge);
 
 //    @Query("SELECT * FROM UserBean WHERE first_name LIKE :search " + "OR last_name LIKE :search")
-//    List<Weather> findUserWithName(String search);
+//    List<TodayTradeInfo> findUserWithName(String search);
 
     /**
      * 只查询特定列信息
@@ -77,7 +77,7 @@ public interface WeatherDao {
      * Rxjava2 中的 对象
      */
     @Query("SELECT * from " + TABLE_NAME)
-    Flowable<List<Weather>> loadList();
+    Flowable<List<TodayTradeInfo>> loadList();
 
     /**
      * 直接返回cursor

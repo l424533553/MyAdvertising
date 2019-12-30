@@ -1,5 +1,7 @@
 package com.advertising.screen.myadvertising.mvvm.main.persistence.entity;
 
+import android.text.TextUtils;
+
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
@@ -29,11 +31,11 @@ public class Weather {
     //设置主键自增 ，每个类至少需要有一个 主键
     @PrimaryKey
     public int id;
-    private String city;
-    private String parent;
+    private String city="";
+    private String parent="";
     private String ymd;
     private String week;
-    private String type;
+    private String type="";
 
     public int getId() {
         return id;
@@ -55,7 +57,7 @@ public class Weather {
     }
 
     public String getParent() {
-        if (parent == null) {
+        if (TextUtils.isEmpty(parent)) {
             return "";
         }
         return parent;
@@ -68,7 +70,6 @@ public class Weather {
         }
         return type;
     }
-
 
     public void setParent(String parent) {
         this.parent = parent;
@@ -117,7 +118,6 @@ public class Weather {
 
     public void setMessage(String message) {
         this.message = message;
-
     }
 
     public int getStatus() {

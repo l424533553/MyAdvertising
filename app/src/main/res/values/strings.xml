@@ -66,4 +66,15 @@
     <string name="rrewr">你发发发发发发发沙发沙发发发发发发发发 发骄傲拉法基爱福家安防垃圾啊法拉发建安费劲啊拉飞机啊拉法基放假拉飞机啊发建安费劲啊拉法基法法垃圾分类急啊发发件方垃圾</string>
     <string name="rwer">技术支持：深圳市安鑫宝科技发展有限公司</string>
     <string name="image_start">星星图</string>
+    <string name="zsImage">追溯图片</string>
+    <string name="scanqr_zs">扫码追溯</string>
+    <string name="imageHead">头像图片</string>
+    <string name="textZFB">支付宝:&#160;</string>
+    <string name="imageWX">微信图片</string>
+    <string name="sellerName">档主名称：</string>
+      <string name="sellerNo">摊位号 ：</string>
+    <string name="industry">行业：</string>
+    <string name="creditRate">信用等级：</string>
+    <string name="imageZFB">支付宝图片</string>
+    <string name="textWX">微信:&#160;</string>
 </resources>

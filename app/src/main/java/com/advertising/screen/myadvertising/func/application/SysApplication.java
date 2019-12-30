@@ -2,9 +2,9 @@ package com.advertising.screen.myadvertising.func.application;
 
 import android.annotation.SuppressLint;
 
-import com.xuanyuan.library.help.security.DesBCBHelper;
 import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.xuanyuan.library.base.application.BaseVolleyApplication;
+import com.xuanyuan.library.help.security.DesBCBHelper;
 
 
 /**

@@ -3,9 +3,9 @@
 
     <data>
 
-        <variable
+<!--        <variable
             name="inspectBean"
-            type="com.advertising.screen.myadvertising.entity.InspectBean" />
+            type="com.advertising.screen.myadvertising.entity.InspectBean" />-->
 
         <variable
             name="position"
@@ -19,7 +19,7 @@
         android:orientation="horizontal"
         android:padding="10dp">
 
-        <TextView
+ <!--       <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -47,6 +47,6 @@
             android:singleLine="true"
             android:text="@{inspectBean.hgzt}"
             android:textColor="@{inspectBean.hgzt.equals(@string/check_result)? @color/color_add26 : @color/red_text}"
-            android:textSize="16sp"/>
+            android:textSize="16sp"/>-->
     </LinearLayout>
 </layout>

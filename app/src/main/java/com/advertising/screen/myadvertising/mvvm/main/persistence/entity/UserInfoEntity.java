@@ -1,6 +1,13 @@
 package com.advertising.screen.myadvertising.mvvm.main.persistence.entity;
 
 import android.graphics.Bitmap;
+import android.text.TextUtils;
+
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+import com.advertising.screen.myadvertising.mvvm.main.persistence.room.UserInfoDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +18,7 @@ import java.util.List;
  * 邮件：424533553@qq.com
  * 说明：
  */
+@Entity(tableName = UserInfoDao.TABLE_NAME)
 public class UserInfoEntity {
 
     /**
@@ -33,9 +41,11 @@ public class UserInfoEntity {
      * zfbnote :
      * baseurl : https://data.axebao.com/smartsz/ups/uploads/file/20191206/下载 (3).jpg
      */
-
+    @PrimaryKey
+    public int id;
     private String licence;
     private String ad;
+    @Ignore
     private String photo;
     private String marketname;
     private String commcontent;
@@ -48,20 +58,30 @@ public class UserInfoEntity {
     private int companyid;
     private String status;
     private String wx;
-    private String wxnote;
+    private String wxnote="";
     private String zfb;
-    private String zfbnote;
+    private String zfbnote="";
+
     private String baseurl;
 
-
     /* 非永久层数据**************************************************/
-    private Bitmap wxQR;
-    private Bitmap zfbQR;
-    //TODO 数据库字段
+    // 数据库字段
     private String headUrl;
 
+    @Ignore
+    private Bitmap wxQR;
+    @Ignore
+    private Bitmap zfbQR;
+    @Ignore
     private List<String> urls;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getHeadUrl() {
         if (headUrl == null) {
@@ -217,6 +237,9 @@ public class UserInfoEntity {
     }
 
     public String getWxnote() {
+        if(TextUtils.isEmpty(wxnote)){
+            return "";
+        }
         return wxnote;
     }
 
@@ -233,6 +256,9 @@ public class UserInfoEntity {
     }
 
     public String getZfbnote() {
+        if(TextUtils.isEmpty(zfbnote)){
+            return "";
+        }
         return zfbnote;
     }
 

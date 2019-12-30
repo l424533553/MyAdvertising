@@ -1,11 +1,4 @@
-########## 该软件为配合农贸市场使用，专用于21寸广告屏上
-
-检测见过 9点以后不再  请求  ，其他时间5分钟请求一次
-
-build.gradle步使用该插件。配置骤如下：
-1. 修改项目级目录下build.gradle（{project}/build.gradle）：
-2. 修改 网络循环访问时间，  并测试 新增内容数据
-3. 对于dataBinding 的配置，需要在Gradle中配置
+########## 该软件为配合农贸市场使用，专用于21寸广告屏上  ****  第二版UI
 
 // 参考学习 网址：
 https://github.com/googlesamples/android-architecture-components/blob/88747993139224a4bb6dbe985adf652d557de621/GithubBrowserSample/app/src/main/java/com/android/example/github/repository/NetworkBoundResource.kt
@@ -14,22 +7,19 @@ NetworkBoundResource 类的完整实现作为 android 架构组件 GitHub 项目
 
 https://github.com/googlesamples/android-architecture-components/blob/88747993139224a4bb6dbe985adf652d557de621/GithubBrowserSample/app/src/main/java/com/android/example/github/repository/NetworkBoundResource.kt
 
+
 测试：
 //  界面开心使用，时间测试环境
 Android 界面插桩测试     >>>>>>>>>>>>>>>>>>>>使用 Espresso 库
 
 // 时间和测试  时间和功能  使用功能  测试环境
 JUnit     >>>>>>>>>>>>>>>>>单元测试
-Test
+
 UnitTest  >>>>>>>>>>>>>>>>>测试环境
 
 
- 大小  6.39    3120*1440    39::18
- 大小  6.1     2240*1080    17:9
 
-
-// 用于同富市场的新版设计。
-
+天气数据
 https://data.axebao.com/api/smartex/getweather
 
 价格借口
@@ -41,7 +31,4 @@ https://data.axebao.com/api/smartsz/getinspectinfo?companyid=1112
 今日交易
 https://data.axebao.com/api/smartsz/gettjtoday?companyid=1112
 
-℃
 
-
-cannot generate view binders java.lang.StackOverflowError

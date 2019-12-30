@@ -1,8 +1,9 @@
 package com.advertising.screen.myadvertising.view;
 
 import android.content.Context;
-import androidx.appcompat.widget.AppCompatTextView;
 import android.util.AttributeSet;
+
+import androidx.appcompat.widget.AppCompatTextView;
 
 /**
  * 作者：罗发新

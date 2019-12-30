@@ -5,6 +5,8 @@ import android.content.Context;
 
 import com.advertising.screen.myadvertising.common.CustomException;
 import com.advertising.screen.myadvertising.common.iinterface.DataRequestBack;
+import com.advertising.screen.myadvertising.mvvm.main.persistence.entity.PriceEntity;
+import com.advertising.screen.myadvertising.mvvm.main.persistence.entity.TodayTradeInfo;
 import com.advertising.screen.myadvertising.mvvm.main.persistence.entity.UserInfoEntity;
 import com.advertising.screen.myadvertising.mvvm.main.persistence.entity.Weather;
 import com.advertising.screen.myadvertising.mvvm.main.persistence.room.RoomHelper;
@@ -29,7 +31,7 @@ public class LocalDataSource implements IDataRepository {
     }
 
     public void getWeather(@NotNull DataRequestBack<Weather> callBack) {
-        List<Weather> list = RoomHelper.getDataBase(context).weatherDao().findByColumnName( 1);
+        List<Weather> list = RoomHelper.getDataBase(context).weatherDao().findByColumnName(1);
         if (list != null) {
             if (list.size() >= 1) {
                 Weather weather = list.get(0);
@@ -41,9 +43,41 @@ public class LocalDataSource implements IDataRepository {
         callBack.onFailure(e, DataRequestBack.DATA_TYPE_DATABASE);
     }
 
-    @Override
-    public void getUserInfo(String shellerId, boolean isLocalData, @NotNull DataRequestBack<UserInfoEntity> callBack) {
 
+    public void getUserInfo(@NotNull DataRequestBack<UserInfoEntity> callBack) {
+        List<UserInfoEntity> list = RoomHelper.getDataBase(context).userInfoDao().findByColumnName(1);
+        if (list != null) {
+            if (list.size() >= 1) {
+                UserInfoEntity bean = list.get(0);
+                callBack.onResponse(bean, DataRequestBack.DATA_TYPE_DATABASE);
+                return;
+            }
+        }
+        CustomException e = new CustomException("未获取到有效数据");
+        callBack.onFailure(e, DataRequestBack.DATA_TYPE_DATABASE);
+    }
+
+    public void todayTrade(@NotNull DataRequestBack<TodayTradeInfo> callBack) {
+        List<TodayTradeInfo> list = RoomHelper.getDataBase(context).todayTradeDao().findByColumnName(1);
+        if (list != null) {
+            if (list.size() >= 1) {
+                TodayTradeInfo bean = list.get(0);
+                callBack.onResponse(bean, DataRequestBack.DATA_TYPE_DATABASE);
+                return;
+            }
+        }
+        CustomException e = new CustomException("未获取到有效数据");
+        callBack.onFailure(e, DataRequestBack.DATA_TYPE_DATABASE);
+    }
+
+    public void getTodayPrice(@NotNull DataRequestBack<List<PriceEntity>> callBack) {
+        List<PriceEntity> list = RoomHelper.getDataBase(context).priceDao().findAll();
+        if (list != null) {
+            callBack.onResponse(list, DataRequestBack.DATA_TYPE_DATABASE);
+            return;
+        }
+        CustomException e = new CustomException("未获取到有效数据");
+        callBack.onFailure(e, DataRequestBack.DATA_TYPE_DATABASE);
     }
 
 

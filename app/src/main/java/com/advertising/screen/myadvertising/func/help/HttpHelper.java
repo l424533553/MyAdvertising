@@ -1,7 +1,7 @@
 package com.advertising.screen.myadvertising.func.help;
 
-import com.advertising.screen.myadvertising.func.application.SysApplication;
 import com.advertising.screen.myadvertising.common.iinterface.IConstants;
+import com.advertising.screen.myadvertising.func.application.SysApplication;
 import com.xuanyuan.library.listener.VolleyListener;
 
 /**

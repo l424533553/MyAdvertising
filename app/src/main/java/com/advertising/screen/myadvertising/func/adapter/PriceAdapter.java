@@ -1,11 +1,12 @@
 package com.advertising.screen.myadvertising.func.adapter;
 
-import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ObservableArrayList;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ObservableArrayList;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.advertising.screen.myadvertising.R;
 import com.advertising.screen.myadvertising.databinding.ItemAdapterBinding;

@@ -13,5 +13,6 @@ public interface IEventBus {
     String NOTIFY_BASE_PRICE = "notifyBasePrice";//更新价格信息
     String NOTIFY_BASE_INSPECT = "notifyBaseInspect";//更新检测信息
     String NOTIFY_NET_CHANGE = "notifyNetChange";//网络变化了
+    String NOTIFY_WHILE_DATA = "NOTIFY_WHILE_DATA";//网络变化了
 
 }

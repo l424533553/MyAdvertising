@@ -1,5 +1,6 @@
 package com.advertising.screen.myadvertising.func.retrofit;
 
+import com.advertising.screen.myadvertising.mvvm.main.persistence.entity.ApkBean;
 import com.advertising.screen.myadvertising.mvvm.main.persistence.entity.NetResultInfo;
 import com.advertising.screen.myadvertising.mvvm.main.persistence.entity.PriceEntity;
 import com.advertising.screen.myadvertising.mvvm.main.persistence.entity.TodayTradeInfo;
@@ -44,6 +45,9 @@ public interface IRetrofitAPI {
     //    /api/smartsz/getadinfo?companyid=1112
     @GET("/api/smartsz/getadinfo?")
     Observable<NetResultInfo<UserInfoEntity>> getUserInfo(@Query("companyid") String shellerId);
+
+    @GET("/api/smartsz/getvbymarketid?")
+    Observable<NetResultInfo<ApkBean>> getNewVersion(@Query("marketid") String marketId, @Query("vtype") String vtype);
 
 
     /**

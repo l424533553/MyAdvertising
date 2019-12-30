@@ -3,12 +3,11 @@ package com.advertising.screen.myadvertising.mvvm;
 
 import android.app.Application;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.annotation.NonNull;
 
-import com.advertising.screen.myadvertising.mvvm.main.vm.ScreenViewModel;
 import com.advertising.screen.myadvertising.mvvm.main.vm.UIViewModel;
 
 /**
@@ -33,10 +32,8 @@ public class ViewModelFactory extends ViewModelProvider.AndroidViewModelFactory 
     @Override
     @SuppressWarnings("unchecked")
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        if (modelClass.isAssignableFrom(ScreenViewModel.class)) {
-            return (T) new ScreenViewModel();
-        } else if (modelClass.isAssignableFrom(UIViewModel.class)) {
-            return (T) new UIViewModel(application, owner);
+       if (modelClass.isAssignableFrom(UIViewModel.class)) {
+            return (T) new UIViewModel(application);
         }
         throw new IllegalArgumentException("Unknown ViewModel class");
 

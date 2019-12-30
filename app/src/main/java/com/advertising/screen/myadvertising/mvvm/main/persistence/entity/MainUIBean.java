@@ -3,9 +3,6 @@ package com.advertising.screen.myadvertising.mvvm.main.persistence.entity;
 import android.graphics.Bitmap;
 
 import androidx.databinding.ObservableField;
-import androidx.room.Entity;
-import androidx.room.Ignore;
-import androidx.room.PrimaryKey;
 
 /**
  * 作者：罗发新
@@ -13,16 +10,14 @@ import androidx.room.PrimaryKey;
  * 邮件：424533553@qq.com
  * 说明：mainActivity 数据字段更新实体
  */
-
-
 public class MainUIBean {
 
     public int id;
+    private Bitmap bitmapZS;
 
     private ObservableField<Integer> todayCount = new ObservableField<>();
-    private ObservableField<String> todayWeight = new ObservableField<>();
-
-    private Bitmap bitmapZS;
+    private ObservableField<String> todayWeight = new ObservableField<>("0");
+    private ObservableField<Boolean> isWifi = new ObservableField<>();
 
     public Bitmap getBitmapZS() {
         return bitmapZS;
@@ -38,6 +33,10 @@ public class MainUIBean {
 
     public ObservableField<String> getTodayWeight() {
         return todayWeight;
+    }
+
+    public ObservableField<Boolean> getIsWifi() {
+        return isWifi;
     }
 
 }

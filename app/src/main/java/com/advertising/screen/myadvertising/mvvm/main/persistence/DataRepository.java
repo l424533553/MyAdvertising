@@ -5,6 +5,7 @@ import android.app.Application;
 
 import com.advertising.screen.myadvertising.common.CustomException;
 import com.advertising.screen.myadvertising.common.iinterface.DataRequestBack;
+import com.advertising.screen.myadvertising.mvvm.main.persistence.entity.ApkBean;
 import com.advertising.screen.myadvertising.mvvm.main.persistence.entity.PriceEntity;
 import com.advertising.screen.myadvertising.mvvm.main.persistence.entity.TodayTradeInfo;
 import com.advertising.screen.myadvertising.mvvm.main.persistence.entity.UserInfoEntity;
@@ -50,25 +51,67 @@ public class DataRepository implements IDataRepository {
         }
     }
 
-    @Override
-    public void getUserInfo(String shellerId, boolean isLocalData, @NotNull DataRequestBack<UserInfoEntity> callBack) {
+    public void getNewVersion(String marketId, @NotNull DataRequestBack<ApkBean> callBack) {
         if (MyNetWorkUtils.isNetworkAvailable()) {
-            netDataSource.getUserInfo(shellerId, isLocalData, callBack);
-        } else {
-            localDataSource.getUserInfo(shellerId, isLocalData, callBack);
+            netDataSource.getNewVersion(marketId, callBack);
+        }
+    }
+
+    public void getUserInfo(String shellerId, int dataType, @NotNull DataRequestBack<UserInfoEntity> callBack) {
+        if (dataType == DataRequestBack.DATA_TYPE_AUTO) {
+            if (MyNetWorkUtils.isNetworkAvailable()) {
+                netDataSource.getUserInfo(shellerId, callBack);
+            } else {
+                localDataSource.getUserInfo(callBack);
+            }
+        } else if (dataType == DataRequestBack.DATA_TYPE_NET) {
+            if (MyNetWorkUtils.isNetworkAvailable()) {
+                netDataSource.getUserInfo(shellerId, callBack);
+            } else {
+                CustomException e = new CustomException("无网络");
+                callBack.onFailure(e, DATA_TYPE_NET);
+            }
+        } else if (dataType == DataRequestBack.DATA_TYPE_DATABASE) {
+            localDataSource.getUserInfo(callBack);
         }
     }
 
 
-    public void todayTrade(String shllerId, boolean isLocalData, @NotNull DataRequestBack<TodayTradeInfo> callBack) {
-        if (MyNetWorkUtils.isNetworkAvailable()) {
-            netDataSource.todayTrade(shllerId, isLocalData, callBack);
+    public void todayTrade(int dataType, String shllerId, @NotNull DataRequestBack<TodayTradeInfo> callBack) {
+        if (dataType == DataRequestBack.DATA_TYPE_AUTO) {
+            if (MyNetWorkUtils.isNetworkAvailable()) {
+                netDataSource.todayTrade(shllerId, callBack);
+            } else {
+                localDataSource.todayTrade(callBack);
+            }
+        } else if (dataType == DataRequestBack.DATA_TYPE_NET) {
+            if (MyNetWorkUtils.isNetworkAvailable()) {
+                netDataSource.todayTrade(shllerId, callBack);
+            } else {
+                CustomException e = new CustomException("无网络");
+                callBack.onFailure(e, DATA_TYPE_NET);
+            }
+        } else if (dataType == DataRequestBack.DATA_TYPE_DATABASE) {
+            localDataSource.todayTrade(callBack);
         }
     }
 
-    public void getTodayPrice(String shllerId, boolean isLocalData, @NotNull DataRequestBack<List<PriceEntity>> callBack) {
-        if (MyNetWorkUtils.isNetworkAvailable()) {
-            netDataSource.getTodayPrice(shllerId, isLocalData, callBack);
+    public void getTodayPrice(String shllerId, int dataType, @NotNull DataRequestBack<List<PriceEntity>> callBack) {
+        if (dataType == DataRequestBack.DATA_TYPE_AUTO) {
+            if (MyNetWorkUtils.isNetworkAvailable()) {
+                netDataSource.getTodayPrice(shllerId, callBack);
+            } else {
+                localDataSource.getTodayPrice(callBack);
+            }
+        } else if (dataType == DataRequestBack.DATA_TYPE_NET) {
+            if (MyNetWorkUtils.isNetworkAvailable()) {
+                netDataSource.getTodayPrice(shllerId, callBack);
+            } else {
+                CustomException e = new CustomException("无网络");
+                callBack.onFailure(e, DATA_TYPE_NET);
+            }
+        } else if (dataType == DataRequestBack.DATA_TYPE_DATABASE) {
+            localDataSource.getTodayPrice(callBack);
         }
     }
 
