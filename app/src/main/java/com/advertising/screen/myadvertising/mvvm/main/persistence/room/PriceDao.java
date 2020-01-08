@@ -56,41 +56,10 @@ public interface PriceDao {
     @Query("SELECT * FROM " + TABLE_NAME + " WHERE id == :value")
     List<PriceEntity> findByColumnName(int value);
 
-//    @Query("SELECT * FROM UserBean WHERE age BETWEEN :minAge AND :maxAge")
-//    List<PriceEntity> loadAllUsersBetweenAges(int minAge, int maxAge);
-
-//    @Query("SELECT * FROM UserBean WHERE first_name LIKE :search " + "OR last_name LIKE :search")
-//    List<PriceEntity> findUserWithName(String search);
-
-    /**
-     * 只查询特定列信息
-     */
-//    @Query("SELECT first_name, last_name FROM UserBean")
-//    List<NameTuple> loadFullName();
-
-    /**
-     * 传递一组的参数
-     */
-//    @Query("SELECT first_name, last_name FROM " + TABLE_NAME + " WHERE school IN (:regions)")
-//    public List<NameTuple> loadUsersFromRegions(List<String> regions);
-
-    /**
-     * LiveData
-     */
-//    @Query("SELECT first_name, last_name FROM UserBean WHERE school IN (:regions)")
-//    LiveData<List<NameTuple>> loadUsersFromRegionsSync(List<String> regions);
-
     /**
      * Rxjava2 中的 对象
      */
     @Query("SELECT * from " + TABLE_NAME)
     Flowable<List<PriceEntity>> loadList();
-
-    /**
-     * 直接返回cursor
-     */
-//    @Query("SELECT * FROM "+TABLE_NAME+" WHERE age > :minAge LIMIT 5")
-//    Cursor loadRawUsersOlderThan(int minAge);
-
 
 }

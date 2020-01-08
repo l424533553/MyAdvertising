@@ -20,5 +20,8 @@ public interface IConstants {
     //    String BASE_IP_ST = "http://119.23.43.64";
     String BASE_IP_WEB = "https://data.axebao.com/smartsz";
 
+    String ACTION_BOOT = "android.intent.action.BOOT_COMPLETED";
+    String CONNECTIVITY_CHANGE = "android.net.conn.CONNECTIVITY_CHANGE";
+
 
 }

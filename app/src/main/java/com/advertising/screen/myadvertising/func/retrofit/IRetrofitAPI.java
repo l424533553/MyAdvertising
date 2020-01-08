@@ -91,10 +91,7 @@ public interface IRetrofitAPI {
 //下面列举“客户端内置证书”时的配置方法，其他方式请参考
 //        http://blog.csdn.net/dd864140130/article/details/52625666
 //
-//
 //        （这里文件类型以png图片为例，所以MediaType为"image/png"，
 //        不同文件类型对应不同的type，具体请参考http://tool.oschina.net/commons）
 //
-//
 //        参考自https://zhuanlan.zhihu.com/p/21966621
-//

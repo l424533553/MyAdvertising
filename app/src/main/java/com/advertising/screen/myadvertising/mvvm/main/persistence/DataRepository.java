@@ -24,8 +24,8 @@ import static com.advertising.screen.myadvertising.common.iinterface.DataRequest
  */
 public class DataRepository implements IDataRepository {
 
-    private LocalDataSource localDataSource;
-    private NetDataSource netDataSource;
+    private final LocalDataSource localDataSource;
+    private final NetDataSource netDataSource;
 
     public DataRepository(Application application) {
         localDataSource = new LocalDataSource(application);
@@ -114,26 +114,4 @@ public class DataRepository implements IDataRepository {
             localDataSource.getTodayPrice(callBack);
         }
     }
-
-
-    /**
-     * 获取天气
-     */
-//    public void getWeather(boolean isLocalData, DataRequestBack<Weather> callBack) {
-//        if (MyNetWorkUtils.isNetworkAvailable()) {
-//            netDataSource.getWeather(callBack);
-//        } else {
-//            localDataSource.getWeather(callBack);
-//        }
-//    }
-
-
-//    public void getWeather(MutableLiveData<Weather> weatherLiveData) {
-////        if (MyNetWorkUtils.isNetworkAvailable()) {
-////            netDataSource.getWeather();
-////        } else {
-////            localDataSource.getWeather();
-////        }
-////    }
-
 }

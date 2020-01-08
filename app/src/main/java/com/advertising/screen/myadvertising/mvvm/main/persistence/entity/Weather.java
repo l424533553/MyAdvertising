@@ -63,7 +63,6 @@ public class Weather {
         return parent;
     }
 
-
     public String getType() {
         if (type == null) {
             return "";

@@ -22,15 +22,15 @@ import java.util.List;
  * 邮件：424533553@qq.com
  * 说明：
  */
-public class LocalDataSource implements IDataRepository {
+class LocalDataSource implements IDataRepository {
 
-    private Context context;
+    private final Context context;
 
-    public LocalDataSource(Application application) {
+    LocalDataSource(Application application) {
         context = application.getApplicationContext();
     }
 
-    public void getWeather(@NotNull DataRequestBack<Weather> callBack) {
+    void getWeather(@NotNull DataRequestBack<Weather> callBack) {
         List<Weather> list = RoomHelper.getDataBase(context).weatherDao().findByColumnName(1);
         if (list != null) {
             if (list.size() >= 1) {
@@ -43,8 +43,7 @@ public class LocalDataSource implements IDataRepository {
         callBack.onFailure(e, DataRequestBack.DATA_TYPE_DATABASE);
     }
 
-
-    public void getUserInfo(@NotNull DataRequestBack<UserInfoEntity> callBack) {
+    void getUserInfo(@NotNull DataRequestBack<UserInfoEntity> callBack) {
         List<UserInfoEntity> list = RoomHelper.getDataBase(context).userInfoDao().findByColumnName(1);
         if (list != null) {
             if (list.size() >= 1) {
@@ -57,7 +56,7 @@ public class LocalDataSource implements IDataRepository {
         callBack.onFailure(e, DataRequestBack.DATA_TYPE_DATABASE);
     }
 
-    public void todayTrade(@NotNull DataRequestBack<TodayTradeInfo> callBack) {
+    void todayTrade(@NotNull DataRequestBack<TodayTradeInfo> callBack) {
         List<TodayTradeInfo> list = RoomHelper.getDataBase(context).todayTradeDao().findByColumnName(1);
         if (list != null) {
             if (list.size() >= 1) {
@@ -70,7 +69,7 @@ public class LocalDataSource implements IDataRepository {
         callBack.onFailure(e, DataRequestBack.DATA_TYPE_DATABASE);
     }
 
-    public void getTodayPrice(@NotNull DataRequestBack<List<PriceEntity>> callBack) {
+    void getTodayPrice(@NotNull DataRequestBack<List<PriceEntity>> callBack) {
         List<PriceEntity> list = RoomHelper.getDataBase(context).priceDao().findAll();
         if (list != null) {
             callBack.onResponse(list, DataRequestBack.DATA_TYPE_DATABASE);

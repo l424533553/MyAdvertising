@@ -1,6 +1,5 @@
 package com.advertising.screen.myadvertising.mvvm.main.ui;
 
-import android.app.AlarmManager;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.ComponentName;
@@ -37,7 +36,6 @@ import com.advertising.screen.myadvertising.mvvm.main.vm.UIViewModel;
 import com.bumptech.glide.Glide;
 import com.xuanyuan.library.MyToast;
 import com.xuanyuan.library.adapter.AdvertiseLinearLayoutManager;
-import com.xuanyuan.library.apk_update.download.DownloadIntentService;
 import com.xuanyuan.library.utils.LiveBus;
 import com.xuanyuan.library.utils.log.MyLog;
 import com.xuanyuan.library.utils.net.MyNetWorkUtils;
@@ -64,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements IEventBus, IConst
         SystemInfoUtils.hideState(this);
         context = this;
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        ViewModelFactory factory = new ViewModelFactory(getApplication(), this);
+        ViewModelFactory factory = new ViewModelFactory(getApplication());
         viewModel = ViewModelProviders.of(this, factory).get(UIViewModel.class);
 
         binding.setViewModel(viewModel);
@@ -72,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements IEventBus, IConst
         binding.setOnClick(this);
 
         // 设置网络变化的
-        LiveBus.observe(NOTIFY_LIVEBUS_KEY, String.class, this, observer);
+        LiveBus.observeForever(NOTIFY_LIVEBUS_KEY, String.class, observer);
 
         initAdapter();
         initHandler();
@@ -91,7 +89,6 @@ public class MainActivity extends AppCompatActivity implements IEventBus, IConst
     }
 
     private void initJobScheduler() {
-
         JobScheduler scheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
         if (scheduler == null) {
             return;
@@ -112,11 +109,10 @@ public class MainActivity extends AppCompatActivity implements IEventBus, IConst
         scheduler.schedule(jobInfo);
     }
 
-
     /**
      * 观察者
      */
-    public Observer<String> observer = s -> {
+    private Observer<String> observer = s -> {
         if (s == null) {
             return;
         }
@@ -247,8 +243,7 @@ public class MainActivity extends AppCompatActivity implements IEventBus, IConst
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        stopService(workIntent);
-//        LiveBus.removeObserver(NOTIFY_LIVEBUS_KEY, String.class, viewModel.observer);
+        LiveBus.removeObserver(NOTIFY_LIVEBUS_KEY, String.class, observer);
     }
 
     /**
@@ -293,7 +288,4 @@ public class MainActivity extends AppCompatActivity implements IEventBus, IConst
         dialog.show();
     }
 
-    private void test() {
-
-    }
 }

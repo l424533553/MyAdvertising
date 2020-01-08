@@ -4,7 +4,6 @@ package com.advertising.screen.myadvertising.mvvm;
 import android.app.Application;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -19,13 +18,11 @@ import com.advertising.screen.myadvertising.mvvm.main.vm.UIViewModel;
  * 说明： ViewModel的构造工厂
  */
 public class ViewModelFactory extends ViewModelProvider.AndroidViewModelFactory {
-    private LifecycleOwner owner;
     private final Application application;
 
-    public ViewModelFactory(@NonNull Application application, @NonNull LifecycleOwner owner) {
+    public ViewModelFactory(final Application application) {
         super(application);
         this.application = application;
-        this.owner = owner;
     }
 
     @NonNull
@@ -36,7 +33,6 @@ public class ViewModelFactory extends ViewModelProvider.AndroidViewModelFactory 
             return (T) new UIViewModel(application);
         }
         throw new IllegalArgumentException("Unknown ViewModel class");
-
     }
 
 }

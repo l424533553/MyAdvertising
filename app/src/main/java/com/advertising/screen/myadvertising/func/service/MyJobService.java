@@ -2,15 +2,12 @@ package com.advertising.screen.myadvertising.func.service;
 
 import android.app.job.JobParameters;
 import android.app.job.JobService;
-import android.util.Log;
 
+import com.advertising.screen.myadvertising.common.iinterface.IEventBus;
 import com.xuanyuan.library.utils.LiveBus;
 import com.xuanyuan.library.utils.log.MyLog;
 
-import static com.advertising.screen.myadvertising.common.iinterface.IEventBus.NOTIFY_LIVEBUS_KEY;
-import static com.advertising.screen.myadvertising.common.iinterface.IEventBus.NOTIFY_WHILE_DATA;
-
-public class MyJobService extends JobService {
+public class MyJobService extends JobService implements IEventBus {
     @Override
     public boolean onStartJob(JobParameters params) {
         MyLog.sysLog("MyJobService","开始了onStartJob");

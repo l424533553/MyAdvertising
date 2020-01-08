@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#999999"
     android:gravity="center"
     android:orientation="horizontal"
     android:paddingStart="15dp"
@@ -25,10 +24,9 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="我的应用"
+            android:text="@string/downUp"
             android:textColor="#333333"
             android:textSize="16sp"
             />
@@ -48,7 +46,7 @@
             android:id="@+id/tv_progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="已下载"
+            android:text="@string/uploaded"
             android:textColor="#333333"
             />
     </LinearLayout>

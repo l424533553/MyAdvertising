@@ -1,80 +1,85 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">证照屏</string>
-    <string name="unit"> ，欢迎您</string>
-    <string name="check_result">合格</string>
 
-    <string name="string_previous_page">上一页</string>
-    <string name="string_next_page">下一页</string>
-    <string name="string_prev_day">前一天</string>
-    <string name="string_next_day">后一天</string>
-    <string name="string_login_txt">登&#160;录</string>
-    <string name="string_home_txt1">高效</string>
-    <string name="string_home_txt2">便捷</string>
-    <string name="string_home_txt3">优质</string>
-    <string name="string_home_txt4">廉价</string>
-    <string name="string_home_user_hint_txt">请刷买方卡</string>
-    <string name="string_home_pwd_hint_txt">请输入密码</string>
-    <string name="string_home_remember_pwd_txt">记住密码</string>
+    <string name="string_previous_page" tools:keep="@string/string_previous_page">上一页</string>
+    <string name="string_next_page" tools:keep="@string/string_next_page">下一页</string>
+    <string name="string_prev_day" tools:keep="@string/string_prev_day">前一天</string>
+    <string name="string_next_day" tools:keep="@string/string_next_day">后一天</string>
+    <string name="string_home_txt1" tools:keep="@string/string_home_txt1">高效</string>
+    <string name="string_home_txt2" tools:keep="@string/string_home_txt2">便捷</string>
+    <string name="string_home_txt3" tools:keep="@string/string_home_txt3">优质</string>
+    <string name="string_home_txt4" tools:keep="@string/string_home_txt4">廉价</string>
+    <string name="string_home_user_hint_txt" tools:keep="@string/string_home_user_hint_txt">请刷买方卡</string>
+    <string name="string_home_pwd_hint_txt" tools:keep="@string/string_home_pwd_hint_txt">请输入密码</string>
+    <string name="string_home_remember_pwd_txt" tools:keep="@string/string_home_remember_pwd_txt">记住密码</string>
     <string name="string_confirm">确&#160;认</string>
-    <string name="string_cancel">取&#160;消</string>
-    <string name="string_settings">设置</string>
-    <string name="string_pay_cash">现金</string>
-    <string name="string_scan_pay">扫码</string>
-    <string name="string_clear">置&#160;零</string>
-    <string name="string_bank_card">银行卡</string>
-    <string name="string_cash">现&#160;金</string>
-    <string name="string_compony_name">深圳市安鑫宝科技发展有限公司</string>
-    <string name="string_stall_number">摊位号：</string>
-    <string name="string_operator">司磅员：</string>
-    <string name="string_grand_total_txt">累&#160;计</string>
-    <string name="string_clear_txt">清除</string>
-    <string name="string_useing_card">刷卡结算中...</string>
-    <string name="string_cancel_txt">取&#160;&#160;&#160;消</string>
-    <string name="string_cash_dialog_title">收银</string>
-    <string name="string_weight_txt">重量：</string>
-    <string name="string_weight_unit_txt">斤</string>
-    <string name="string_weight_unit_txt2">元/斤</string>
-    <string name="string_variety_txt">品种：</string>
+    <string name="string_cancel" tools:keep="@string/string_cancel">取&#160;消</string>
+    <string name="string_settings" tools:keep="@string/string_settings">设置</string>
+    <string name="string_pay_cash" tools:keep="@string/string_pay_cash">现金</string>
+    <string name="string_scan_pay" tools:keep="@string/string_scan_pay">扫码</string>
+    <string name="string_clear" tools:keep="@string/string_clear">置&#160;零</string>
+    <string name="string_bank_card" tools:keep="@string/string_bank_card">银行卡</string>
+    <string name="string_cash" tools:keep="@string/string_cash">现&#160;金</string>
+    <string name="string_compony_name" tools:keep="@string/string_compony_name">深圳市安鑫宝科技发展有限公司</string>
+    <string name="string_stall_number" tools:keep="@string/string_stall_number">摊位号：</string>
+    <string name="string_operator" tools:keep="@string/string_operator">司磅员：</string>
+    <string name="string_grand_total_txt" tools:keep="@string/string_grand_total_txt">累&#160;计</string>
+    <string name="string_clear_txt" tools:keep="@string/string_clear_txt">清除</string>
+    <string name="string_cash_dialog_title" tools:keep="@string/string_cash_dialog_title">收银</string>
+    <string name="string_weight_txt" tools:keep="@string/string_weight_txt">重量：</string>
+    <string name="string_weight_unit_txt" tools:keep="@string/string_weight_unit_txt">斤</string>
+    <string name="string_weight_unit_txt2" tools:keep="@string/string_weight_unit_txt2">元/斤</string>
+    <string name="string_variety_txt" tools:keep="@string/string_variety_txt">品种：</string>
 
     <!--<string name="string_simple_mode_setting_txt">切换简易</string>-->
-    <string name="string_settings_back_txt">返回设置</string>
+    <string name="string_settings_back_txt" tools:keep="@string/string_settings_back_txt">返回设置</string>
     <!--<string name="string_payment_setting_txt">支付设置</string>-->
-    <string name="string_confirm_invalid_txt">确认作废数据</string>
-    <string name="string_refreshing">扫描蓝牙中…</string>
-    <string name="devices">设备列表</string>
-    <string name="connecting">正在连接</string>
-    <string name="scan">扫描</string>
-    <string name="save_txt">保存</string>
-    <string name="string_choose">选择</string>
+    <string name="string_confirm_invalid_txt" tools:keep="@string/string_confirm_invalid_txt">确认作废数据</string>
+    <string name="string_refreshing" tools:keep="@string/string_refreshing">扫描蓝牙中…</string>
+    <string name="devices" tools:keep="@string/devices">设备列表</string>
+    <string name="connecting" tools:keep="@string/connecting">正在连接</string>
+    <string name="scan" tools:keep="@string/scan">扫描</string>
+    <string name="save_txt" tools:keep="@string/save_txt">保存</string>
+    <string name="string_choose" tools:keep="@string/string_choose">选择</string>
 
-    <string name="str_printer_conn_normal">打印机连接正常</string>
-    <string name="str_printer_out_of_paper">打印机缺纸</string>
-    <string name="str_printer_open_cover">打印机开盖</string>
-    <string name="str_printer_error">打印机出错</string>
-    <string name="str_state">状态：</string>
-    <string name="kilogram">kg</string>
-    <string name="Administrators_pwd">123456</string>
-    <string name="string_login_auto_txt">自动登录</string>
-    <string name="Default_Initial_Price">0.00</string>
-    <string name="btnSysSet">系统设置按钮</string>
+    <string name="str_printer_conn_normal" tools:keep="@string/str_printer_conn_normal">打印机连接正常</string>
+    <string name="str_printer_out_of_paper" tools:keep="@string/str_printer_out_of_paper">打印机缺纸</string>
+    <string name="str_printer_open_cover" tools:keep="@string/str_printer_open_cover">打印机开盖</string>
+    <string name="str_printer_error" tools:keep="@string/str_printer_error">打印机出错</string>
+    <string name="str_state" tools:keep="@string/str_state">状态：</string>
+    <string name="kilogram" tools:keep="@string/kilogram">kg</string>
+    <string name="Administrators_pwd" tools:keep="@string/Administrators_pwd">123456</string>
+    <string name="string_login_auto_txt" tools:keep="@string/string_login_auto_txt">自动登录</string>
+    <string name="Default_Initial_Price" tools:keep="@string/Default_Initial_Price">0.00</string>
+    <string name="btnSysSet" tools:keep="@string/btnSysSet">系统设置按钮</string>
     <string name="downlogo">下载log</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="test22222">今日检测</string>
-    <string name="todo">TODO</string>
-    <string name="rrewr">你发发发发发发发沙发沙发发发发发发发发 发骄傲拉法基爱福家安防垃圾啊法拉发建安费劲啊拉飞机啊拉法基放假拉飞机啊发建安费劲啊拉法基法法垃圾分类急啊发发件方垃圾</string>
-    <string name="rwer">技术支持：深圳市安鑫宝科技发展有限公司</string>
+    <string name="hello_blank_fragment" tools:keep="@string/hello_blank_fragment">Hello blank fragment</string>
+    <string name="test22222" tools:keep="@string/test22222">今日检测</string>
+    <string name="todo" tools:keep="@string/todo">TODO</string>
+    <string name="rrewr" tools:keep="@string/rrewr">你发发发发发发发沙发沙发发发发发发发发 发骄傲拉法基爱福家安防垃圾啊法拉发建安费劲啊拉飞机啊拉法基放假拉飞机啊发建安费劲啊拉法基法法垃圾分类急啊发发件方垃圾</string>
+    <string name="rwer" tools:keep="@string/rwer">技术支持：深圳市安鑫宝科技发展有限公司</string>
     <string name="image_start">星星图</string>
     <string name="zsImage">追溯图片</string>
     <string name="scanqr_zs">扫码追溯</string>
     <string name="imageHead">头像图片</string>
-    <string name="textZFB">支付宝:&#160;</string>
+    <string name="textZFB" tools:keep="@string/textZFB">支付宝:&#160;</string>
     <string name="imageWX">微信图片</string>
-    <string name="sellerName">档主名称：</string>
-      <string name="sellerNo">摊位号 ：</string>
+    <string name="sellerName">商户：</string>
+      <string name="sellerNo">摊 位 号 ：</string>
     <string name="industry">行业：</string>
     <string name="creditRate">信用等级：</string>
     <string name="imageZFB">支付宝图片</string>
-    <string name="textWX">微信:&#160;</string>
+    <string name="textWX" tools:keep="@string/textWX">微信:&#160;</string>
+    <string name="shellerId">商户ID:</string>
+    <string name="downUp">更新下载</string>
+    <string name="uploaded">已下载</string>
+    <string name="todayCount">今日交易笔数</string>
+    <string name="wifi_show_picture">wifi展示图片</string>
+    <string name="today_kg">今日交易量/kg</string>
+    <string name="price_adv">商户菜品均价</string>
+    <string name="three_day_price">(3日均价)</string>
+    <string name="index">序号</string>
+    <string name="goodName">菜品名称</string>
+    <string name="price_kg">均价(元/kg)</string>
 </resources>

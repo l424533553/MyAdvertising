@@ -22,10 +22,8 @@ public class RoomHelper {
      * Room 数据库
      */
     private static MyAppDataBase mAppDataBase;
-    private Context context;
 
-    public RoomHelper(Context context) {
-        this.context = context;
+    public RoomHelper() {
     }
 
 
@@ -73,7 +71,7 @@ public class RoomHelper {
     /**
      * 数据库版本 1->2 user表格新增了age列
      */
-    private static Migration MIGRATION_1_2 = new Migration(1, 2) {
+    private final static Migration MIGRATION_1_2 = new Migration(1, 2) {
         @Override
         public void migrate(@NotNull SupportSQLiteDatabase database) {
 //            database.execSQL("ALTER TABLE User ADD COLUMN age integer");
@@ -83,7 +81,7 @@ public class RoomHelper {
     /**
      * 数据库版本 2->3 新增book表格
      */
-    private static Migration MIGRATION_2_3 = new Migration(2, 3) {
+    private final static Migration MIGRATION_2_3 = new Migration(2, 3) {
         @Override
         public void migrate(@NotNull SupportSQLiteDatabase database) {
 //            database.execSQL("CREATE TABLE IF NOT EXISTS `book` (`uid` INTEGER PRIMARY KEY autoincrement, `name` TEXT , `userId` INTEGER, 'time' INTEGER)");

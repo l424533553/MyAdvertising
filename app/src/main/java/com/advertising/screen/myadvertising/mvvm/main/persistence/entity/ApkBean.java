@@ -7,14 +7,6 @@ package com.advertising.screen.myadvertising.mvvm.main.persistence.entity;
  * 说明：
  */
 public class ApkBean {
-
-
-    /**
-     * status : 0
-     * msg : ok
-     * data : {"id":8,"name":"APP升级","version":"1.4","vtype":"0","filepath":"http://data.axebao.com/smartsz/assets/files/20181112125615467.apk","description":"","date":"2018-11-17","marketid":1}
-     */
-
         /**
          * id : 8
          * name : APP升级
@@ -25,7 +17,6 @@ public class ApkBean {
          * date : 2018-11-17
          * marketid : 1
          */
-
         private int id;
         private String name;
         private String version;
@@ -99,4 +90,6 @@ public class ApkBean {
             this.marketid = marketid;
         }
 
+    public ApkBean() {
+    }
 }

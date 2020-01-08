@@ -6,8 +6,7 @@ package com.advertising.screen.myadvertising.mvvm.main.persistence;
  * 邮件：424533553@qq.com
  * 说明：
  */
-public interface IDataRepository {
-
+interface IDataRepository {
 
 
 }

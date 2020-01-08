@@ -41,8 +41,8 @@ import static com.advertising.screen.myadvertising.common.iinterface.DataRequest
  */
 public class UIViewModel extends AndroidViewModel implements IConstants {
 
-    private String TAG = getClass().getName();
-    private DataRepository dataRepository;
+    private final String TAG = getClass().getName();
+    private final DataRepository dataRepository;
     public MutableLiveData<MainUIBean> mainUILiveData;
     public MutableLiveData<String> versionInfoLiveData;
     public MutableLiveData<Weather> weatherLiveData;
@@ -53,6 +53,10 @@ public class UIViewModel extends AndroidViewModel implements IConstants {
     private int priceIndex;
     private Application application;
 
+    @NotNull
+    public Application getApplication() {
+        return application;
+    }
 
     public UIViewModel(@NonNull Application application) {
         super(application);
@@ -77,16 +81,15 @@ public class UIViewModel extends AndroidViewModel implements IConstants {
 
     public void notifyData() {
 
-        MyLog.sysLog("MyJobService","开始了main 中的 notifyData");
+        MyLog.sysLog("MyJobService", "开始了main 中的 notifyData");
         //设定网络
         if (MyNetWorkUtils.isNetworkAvailable()) {
             uiBean.getIsWifi().set(true);
-        }else {
+        } else {
             uiBean.getIsWifi().set(false);
         }
 
-        // TODO seller 关于 设置
-        String shellerId = MyPreferenceUtils.getString(SELLER_ID, "0");
+        String shellerId = MyPreferenceUtils.getString(IConstants.SELLER_ID, "0");
         if ("0".equals(shellerId)) {
             return;
         }
@@ -107,7 +110,7 @@ public class UIViewModel extends AndroidViewModel implements IConstants {
      * 检查版本
      */
     public void checkVersion() {
-        int marketId = MyPreferenceUtils.getInt(DATA_MARK_ID, 0);
+        int marketId = MyPreferenceUtils.getInt(IConstants.DATA_MARK_ID, 0);
         if (0 != (marketId)) {
             getNewVersion(String.valueOf(marketId));
         }
@@ -146,8 +149,8 @@ public class UIViewModel extends AndroidViewModel implements IConstants {
                 priceData.addAll(entitys);
                 adapter.notifyDataSetChanged();
                 if (dataType == DataRequestBack.DATA_TYPE_NET) {
-                    RoomHelper.getDataBase(application.getApplicationContext()).priceDao().deleteAll();
-                    RoomHelper.getDataBase(application.getApplicationContext()).priceDao().insertList(entitys);
+                    RoomHelper.getDataBase(getApplication().getApplicationContext()).priceDao().deleteAll();
+                    RoomHelper.getDataBase(getApplication().getApplicationContext()).priceDao().insertList(entitys);
                 }
             }
 
@@ -204,9 +207,7 @@ public class UIViewModel extends AndroidViewModel implements IConstants {
 
             @Override
             public void onFailure(@NotNull Throwable t, int dataType) {
-                if (dataType == DataRequestBack.DATA_TYPE_NET) {
 
-                }
             }
         });
     }
@@ -237,7 +238,7 @@ public class UIViewModel extends AndroidViewModel implements IConstants {
                 userInfoEntity.getUrls().addAll(licences);
                 userInfoEntity.getUrls().addAll(ads);
                 userInfoLiveData.postValue(userInfoEntity);
-                MyPreferenceUtils.getSp().edit().putInt(DATA_MARK_ID, userInfoEntity.getMarketid()).apply();
+                MyPreferenceUtils.getSp().edit().putInt(IConstants.DATA_MARK_ID, userInfoEntity.getMarketid()).apply();
 
                 if (dataType == DataRequestBack.DATA_TYPE_NET) {
                     userInfoEntity.setId(1);

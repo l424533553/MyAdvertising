@@ -5,19 +5,15 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.advertising.screen.myadvertising.common.iinterface.IConstants;
+import com.advertising.screen.myadvertising.common.iinterface.IEventBus;
 import com.advertising.screen.myadvertising.mvvm.main.ui.MainActivity;
 import com.xuanyuan.library.utils.LiveBus;
 
-import static com.advertising.screen.myadvertising.common.iinterface.IEventBus.NOTIFY_LIVEBUS_KEY;
-import static com.advertising.screen.myadvertising.common.iinterface.IEventBus.NOTIFY_NET_CHANGE;
 
 /**
  * 注册广播
  */
-public class BootBroadcastReceiver extends BroadcastReceiver implements IConstants {
-
-    private static final String ACTION_BOOT = "android.intent.action.BOOT_COMPLETED";
-    private static final String CONNECTIVITY_CHANGE = "android.net.conn.CONNECTIVITY_CHANGE";
+public class BootBroadcastReceiver extends BroadcastReceiver implements IConstants , IEventBus {
 
     @Override
     public void onReceive(Context context, Intent intent) {

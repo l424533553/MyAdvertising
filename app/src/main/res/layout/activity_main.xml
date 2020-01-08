@@ -57,29 +57,28 @@
                 app:layout_constraintWidth_percent="0.32" />
 
 
-
-    <!--        <TextView
-                android:id="@+id/tvWeek"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginEnd="10dp"
-                android:gravity="center_vertical"
-                android:text="@{weather.week}"
-                android:textColor="@color/color_weather"
-                android:textSize="26sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imageWifi"
-                app:layout_constraintHeight_percent="0.3"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1"/>-->
+            <!--        <TextView
+                        android:id="@+id/tvWeek"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginEnd="10dp"
+                        android:gravity="center_vertical"
+                        android:text="@{weather.week}"
+                        android:textColor="@color/color_weather"
+                        android:textSize="26sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/imageWifi"
+                        app:layout_constraintHeight_percent="0.3"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="1"/>-->
 
             <TextClock
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_marginEnd="10dp"
+                android:format24Hour="yyyy-MM-dd  hh:mm:ss  EEEE"
                 android:textColor="@color/color_weather"
                 android:textSize="26sp"
-                android:format24Hour="yyyy-MM-dd  hh:mm:ss  EEEE"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/imageWifi"
                 app:layout_constraintHeight_percent="0.3"
@@ -91,6 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
+                android:contentDescription="@string/wifi_show_picture"
                 android:src="@{uiBean.isWifi?@drawable/ic_wifi:@drawable/ic_wifi_no}"
                 android:textColor="@color/color_weather"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -99,44 +99,44 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="1" />
 
-     <!--       <TextView
-                android:id="@+id/tvTime"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="10dp"
-                android:gravity="center_vertical"
-                android:text="09:42:15"
-                android:textColor="@color/color_weather"
-                android:textSize="26sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/tvWeek"
-                app:layout_constraintHeight_percent="0.3"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1" />
-            <TextView
-                android:id="@+id/tvDate"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginEnd="10dp"
-                android:gravity="center_vertical"
-                android:text="@{weather.ymd}"
-                android:textColor="@color/color_weather"
-                android:textSize="26sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/tvTime"
-                app:layout_constraintHeight_percent="0.3"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1" />-->
+            <!--       <TextView
+                       android:id="@+id/tvTime"
+                       android:layout_width="wrap_content"
+                       android:layout_height="0dp"
+                       android:layout_marginStart="30dp"
+                       android:layout_marginEnd="10dp"
+                       android:gravity="center_vertical"
+                       android:text="09:42:15"
+                       android:textColor="@color/color_weather"
+                       android:textSize="26sp"
+                       app:layout_constraintBottom_toBottomOf="parent"
+                       app:layout_constraintEnd_toStartOf="@id/tvWeek"
+                       app:layout_constraintHeight_percent="0.3"
+                       app:layout_constraintTop_toTopOf="parent"
+                       app:layout_constraintVertical_bias="1" />
+                   <TextView
+                       android:id="@+id/tvDate"
+                       android:layout_width="wrap_content"
+                       android:layout_height="0dp"
+                       android:layout_marginEnd="10dp"
+                       android:gravity="center_vertical"
+                       android:text="@{weather.ymd}"
+                       android:textColor="@color/color_weather"
+                       android:textSize="26sp"
+                       app:layout_constraintBottom_toBottomOf="parent"
+                       app:layout_constraintEnd_toStartOf="@id/tvTime"
+                       app:layout_constraintHeight_percent="0.3"
+                       app:layout_constraintTop_toTopOf="parent"
+                       app:layout_constraintVertical_bias="1" />-->
 
             <TextView
                 android:id="@+id/tvMarketName"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:gravity="center"
+                android:onClick="@{onClick}"
                 android:text="@{userInfoEntity.marketname}"
                 android:textColor="@color/white"
-                android:onClick="@{onClick}"
                 android:textSize="48sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -186,7 +186,7 @@
                     android:gravity="center"
                     android:onClick="@{onClick}"
                     android:orientation="horizontal"
-                    android:src="@drawable/qrcode"
+                    android:src="@mipmap/qrcode"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHeight_percent="0.60"
@@ -201,8 +201,9 @@
                     android:text="@string/scanqr_zs"
                     android:textColor="@color/color_userInfo"
                     android:textSize="28sp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/ivZS"
                     app:layout_constraintStart_toEndOf="@+id/ivHead"
+                    app:layout_constraintStart_toStartOf="@+id/ivZS"
                     app:layout_constraintTop_toBottomOf="@+id/ivZS" />
 
                 <ImageView
@@ -241,7 +242,7 @@
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                            android:layout_weight="4"
                             android:gravity="center_vertical|start"
                             android:orientation="horizontal">
 
@@ -265,8 +266,8 @@
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical|end">
+                            android:layout_weight="5"
+                            android:gravity="center_vertical">
 
                             <TextView
                                 android:id="@+id/tvTitleTw"
@@ -291,12 +292,14 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:baselineAligned="false"
                         android:orientation="horizontal">
 
                         <LinearLayout
                             android:id="@+id/llTitleHy"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="4"
                             android:gravity="center_vertical">
 
                             <TextView
@@ -320,9 +323,8 @@
                             android:id="@+id/cL2"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical|end"
+                            android:layout_weight="5"
+                            android:gravity="center_vertical"
                             android:orientation="horizontal"
                             android:textColor="@color/white">
 
@@ -350,31 +352,31 @@
                                     android:layout_width="36dp"
                                     android:layout_height="36dp"
                                     android:contentDescription="@string/image_start"
-                                    android:src="@drawable/star" />
+                                    android:src="@mipmap/star" />
 
                                 <ImageView
                                     android:layout_width="36dp"
                                     android:layout_height="36dp"
                                     android:contentDescription="@string/image_start"
-                                    android:src="@drawable/star" />
+                                    android:src="@mipmap/star" />
 
                                 <ImageView
                                     android:layout_width="36dp"
                                     android:layout_height="36dp"
                                     android:contentDescription="@string/image_start"
-                                    android:src="@drawable/star" />
+                                    android:src="@mipmap/star" />
 
                                 <ImageView
                                     android:layout_width="36dp"
                                     android:layout_height="36dp"
                                     android:contentDescription="@string/image_start"
-                                    android:src="@drawable/star" />
+                                    android:src="@mipmap/star" />
 
                                 <ImageView
                                     android:layout_width="36dp"
                                     android:layout_height="36dp"
                                     android:contentDescription="@string/image_start"
-                                    android:src="@drawable/star" />
+                                    android:src="@mipmap/star" />
 
                             </LinearLayout>
                         </LinearLayout>
@@ -418,7 +420,7 @@
                         android:layout_marginEnd="20dp"
                         android:contentDescription="@string/imageZFB"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/qrcode"
+                        android:src="@mipmap/qrcode"
                         android:textColor="@color/white" />
 
                     <!-- 时间 功能 -->
@@ -457,7 +459,7 @@
                         android:layout_marginEnd="20dp"
                         android:contentDescription="@string/imageWX"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/qrcode"
+                        android:src="@mipmap/qrcode"
                         android:textColor="@color/white" />
 
                     <TextView
@@ -494,7 +496,7 @@
                         android:paddingStart="20dp"
                         android:paddingTop="10dp"
                         android:paddingEnd="20dp"
-                        android:text="今日交易量/kg"
+                        android:text="@string/today_kg"
                         android:textColor="@color/white"
                         android:textSize="30sp" />
 
@@ -524,7 +526,7 @@
                         android:paddingStart="20dp"
                         android:paddingTop="10dp"
                         android:paddingEnd="20dp"
-                        android:text="今日交易笔数"
+                        android:text="@string/todayCount"
                         android:textColor="@color/white"
                         android:textSize="30sp" />
 
@@ -549,12 +551,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
+                    android:textIsSelectable="true"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.youth.banner.Banner
@@ -563,7 +564,9 @@
                 android:layout_height="0dp"
                 android:gravity="center"
                 android:orientation="horizontal"
+
                 android:textColor="@color/white"
+                app:image_scale_type="fit_center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_percent="1.0"
@@ -587,21 +590,24 @@
                 app:layout_constraintHeight_percent="0.5"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.28">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="18dp"
-                        android:text="商户菜品均价"
+                        android:text="@string/price_adv"
                         android:textColor="@color/color_title"
                         android:textSize="26sp" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="18dp"
-                        android:text="(3日均价)"
+                        android:text="@string/three_day_price"
                         android:textColor="@color/color_title"
                         android:textSize="20sp" />
                 </LinearLayout>
@@ -618,7 +624,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="序号"
+                        android:text="@string/index"
                         android:textColor="@color/white"
                         android:textSize="30sp" />
 
@@ -633,7 +639,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="2"
                         android:gravity="center"
-                        android:text="菜品名称"
+                        android:text="@string/goodName"
                         android:textColor="@color/white"
                         android:textSize="30sp" />
 
@@ -648,7 +654,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="2"
                         android:gravity="center"
-                        android:text="均价(元/kg)"
+                        android:text="@string/price_kg"
                         android:textColor="@color/white"
                         android:textSize="30sp" />
                 </LinearLayout>

@@ -20,7 +20,7 @@ public class TestActivity extends AppCompatActivity {
 
         ActivityTestBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_test);
 
-        ViewModelFactory factory = new ViewModelFactory(getApplication(), this);
+        ViewModelFactory factory = new ViewModelFactory(getApplication());
         UIViewModel viewModel = ViewModelProviders.of(this, factory).get(UIViewModel.class);
         binding.setViewModel(viewModel);
 

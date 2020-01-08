@@ -19,7 +19,6 @@ import com.xuanyuan.library.apk_update.download.NotificationHelpter;
 import com.xuanyuan.library.listener.DownloadCallBack;
 import com.xuanyuan.library.net.retrofit.RetrofitHttp;
 
-
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -44,20 +43,12 @@ public class DownloadApkService extends IntentService implements DownloadCallBac
         super("InitializeService");
     }
 
-    private Context context;
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        context = this;
-    }
-
     @Override
     public int onStartCommand(@Nullable Intent intent, int flags, int startId) {
         return super.onStartCommand(intent, flags, startId);
     }
 
-    private int downloadId = 1;
+    private final int downloadId = 1;
     private RemoteViews remoteViews;
     private File file;
 
@@ -71,6 +62,9 @@ public class DownloadApkService extends IntentService implements DownloadCallBac
 
     private void startDown(Intent intent) {
         String downloadUrl = intent.getStringExtra("download_url");
+        if (downloadUrl == null) {
+            return;
+        }
         String mDownloadFileName = downloadUrl.substring(downloadUrl.lastIndexOf('/') + 1);
 
         file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), mDownloadFileName);
@@ -146,13 +140,13 @@ public class DownloadApkService extends IntentService implements DownloadCallBac
     }
 
     private void insallApk(Context context) {
-//        String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + File.separator + "pp.apk";
-//        File apkFile = new File(path);
-//        Intent intent = new Intent(Intent.ACTION_VIEW);
-//        Uri uri = Uri.fromFile(apkFile);
-//        intent.setDataAndType(uri, "application/vnd.android.package-archive");
-//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        context.startActivity(intent);
+        String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + File.separator + "pp.apk";
+        File apkFile = new File(path);
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        Uri uri = Uri.fromFile(apkFile);
+        intent.setDataAndType(uri, "application/vnd.android.package-archive");
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
     }
 
     public static String execCommand(File file) {
@@ -166,7 +160,7 @@ public class DownloadApkService extends IntentService implements DownloadCallBac
             process = new ProcessBuilder().command("pm", "install", "-f", apkPath).start();
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            int read = -1;
+            int read;
             errIs = process.getErrorStream();
             while ((read = errIs.read()) != -1) {
                 baos.write(read);
@@ -243,10 +237,8 @@ public class DownloadApkService extends IntentService implements DownloadCallBac
 
     /**
      * 该方法测试过可靠可行
-     *
-     * @return
      */
-    private boolean installApp(File file) {
+    private void installApp(File file) {
         String apkPath = file.getPath();
         String packageName = getPackageName();
         Process process = null;
@@ -266,7 +258,7 @@ public class DownloadApkService extends IntentService implements DownloadCallBac
                 errorMsg.append(s);
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         } finally {
             try {
                 if (successResult != null) {
@@ -276,7 +268,7 @@ public class DownloadApkService extends IntentService implements DownloadCallBac
                     errorResult.close();
                 }
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
             if (process != null) {
                 process.destroy();
@@ -284,7 +276,7 @@ public class DownloadApkService extends IntentService implements DownloadCallBac
         }
         Log.e("result", "" + errorMsg.toString());
         //如果含有“success”认为安装成功
-        return successMsg.toString().equalsIgnoreCase("success");
+//        successMsg.toString();
     }
 
 

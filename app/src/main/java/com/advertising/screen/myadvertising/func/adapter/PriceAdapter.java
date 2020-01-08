@@ -48,13 +48,13 @@ public class PriceAdapter extends RecyclerView.Adapter<PriceAdapter.UserAdapterH
         return beans.size();
     }
 
-    class UserAdapterHolder extends RecyclerView.ViewHolder {
+    static class UserAdapterHolder extends RecyclerView.ViewHolder {
         private ItemAdapterBinding binding;
         UserAdapterHolder(ItemAdapterBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
-        public ItemAdapterBinding getBinding() {
+        ItemAdapterBinding getBinding() {
             return binding;
         }
     }

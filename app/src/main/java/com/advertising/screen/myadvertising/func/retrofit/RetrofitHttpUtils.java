@@ -62,7 +62,7 @@ public class RetrofitHttpUtils {
         getRetrofit();
     }
 
-    public synchronized Retrofit getRetrofit() {
+    private synchronized Retrofit getRetrofit() {
         //初始化retrofit的配置
         if (retrofit == null) {
             Gson gson = new GsonBuilder()
@@ -86,7 +86,7 @@ public class RetrofitHttpUtils {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         // 设置log拦截器 ，这样设置后，可以在log中看到网络请求的相关信息
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+        logging.level(HttpLoggingInterceptor.Level.BODY);
 
         //缓存文件 及文件名
         File cacheFile = new File(context.getExternalCacheDir(), "HttpCache");//缓存地址
@@ -97,7 +97,7 @@ public class RetrofitHttpUtils {
 
         //连接 超时的时间，单位：秒
         int DEFAULT_TIMEOUT = 8;
-        OkHttpClient client = builder.
+        return builder.
                 connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS).//设置连接超时时间
                 readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS).//设置读取超时时间
                 writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS). //设置写入超时时间
@@ -118,7 +118,6 @@ public class RetrofitHttpUtils {
                 .addInterceptor(cacheIntercepter)
                 .cache(cache)
                 .build();
-        return client;
     }
 
 
@@ -143,9 +142,7 @@ public class RetrofitHttpUtils {
 
                 @SuppressLint("TrustAllX509TrustManager")
                 @Override
-                public void checkClientTrusted(
-                        java.security.cert.X509Certificate[] chain,
-                        String authType) throws CertificateException {
+                public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) {
                 }
 
                 //客户端并为对ssl证书的有效性进行校验
@@ -181,9 +178,8 @@ public class RetrofitHttpUtils {
 
                     String encoded = new BigInteger(1 /* positive */, pubkey.getEncoded()).toString(16);
                     // Pin it!
-                    final boolean expected = PUB_KEY.equalsIgnoreCase(encoded);
-
-                    if (!expected) {
+                    final boolean expected = !PUB_KEY.equalsIgnoreCase(encoded);
+                    if (expected) {
                         throw new CertificateException("checkServerTrusted: Expected public key: "
                                 + PUB_KEY + ", got public key:" + encoded);
                     }
@@ -197,14 +193,10 @@ public class RetrofitHttpUtils {
 
             // Install the all-trusting trust manager
             final SSLContext sslContext = SSLContext.getInstance("TLS");
-            sslContext.init(null, trustAllCerts,
-                    new SecureRandom());
+            sslContext.init(null, trustAllCerts, new SecureRandom());
             // Create an ssl socket factory with our all-trusting manager
             return sslContext.getSocketFactory();
-        } catch (
-                NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (KeyManagementException e) {
+        } catch (NoSuchAlgorithmException | KeyManagementException e) {
             e.printStackTrace();
         }
         return null;
@@ -229,7 +221,6 @@ public class RetrofitHttpUtils {
                 InputStream is = context.getResources().openRawResource(certificates[i]);
                 keyStore.setCertificateEntry(String.valueOf(i), certificateFactory
                         .generateCertificate(is));
-
                 is.close();
             }
 
@@ -244,7 +235,7 @@ public class RetrofitHttpUtils {
             return sslContext.getSocketFactory();
 
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
         return null;
     }

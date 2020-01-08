@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <dimen name="common_circle_width">3dp</dimen>
-    <dimen name="yy320">32dp</dimen>
-    <dimen name="xx560">56dp</dimen>
-    <dimen name="sp12">12sp</dimen>
-    <dimen name="sp16">16sp</dimen>
-    <dimen name="sp18">18sp</dimen>
-    <dimen name="sp20">20sp</dimen>
-    <dimen name="sp25">25sp</dimen>
-    <dimen name="sp30">30sp</dimen>
-    <dimen name="sp40">40sp</dimen>
 
+    <dimen name="sp12" tools:keep="@dimen/sp12">12sp</dimen>
+    <dimen name="sp16" tools:keep="@dimen/sp16">16sp</dimen>
+    <dimen name="sp18" tools:keep="@dimen/sp18">18sp</dimen>
+    <dimen name="sp20" tools:keep="@dimen/sp20">20sp</dimen>
+    <dimen name="sp25" tools:keep="@dimen/sp25">25sp</dimen>
+    <dimen name="sp30" tools:keep="@dimen/sp30">30sp</dimen>
+    <dimen name="sp40" tools:keep="@dimen/sp40">40sp</dimen>
 
-    <dimen name="sp18_text">40sp</dimen>
-    <dimen name="sp40_text">42sp</dimen>
-    <!--    <dimen name="btnHeight">70dp</dimen>-->
 </resources>

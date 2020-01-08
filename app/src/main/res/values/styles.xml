@@ -9,7 +9,7 @@
     </style>
 
     <style name="SplashTheme" parent="AppTheme">
-        <item name="android:windowBackground">@drawable/back2</item>
+        <item name="android:windowBackground">@mipmap/back2</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowNoTitle">true</item> <!-- 设置无标题 -->
 
@@ -17,23 +17,8 @@
         <!-- <item name="android:windowIsTranslucent">true</item> --> <!-- 透明背景不要了 -->
     </style>
 
-    <!--  动画  -->
-    <style name="share_animation" parent="android:Animation">
-        <item name="android:windowEnterAnimation">@anim/dialog_enter</item>
-        //进入时的动画
-        <item name="android:windowExitAnimation">@anim/dialog_exit</item>
-        //退出时的动画
-    </style>
 
-    <style name="layout_style">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-
-        <item name="android:background">@drawable/shape_bg</item>
-    </style>
-
-
-    <style name="Item">
+<!--    <style name="Item">
         <item name="android:textColor">@android:color/black</item>
     </style>
 
@@ -46,68 +31,13 @@
     <style name="Item.Label">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+    </style>-->
 
-    </style>
-
-    <style name="Item.Edit">
+<!--    <style name="Item.Edit">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_marginLeft">120dip</item>
         <item name="android:layout_marginRight">100dip</item>
-
-    </style>
-
-    <style name="ImageStytle">
-        <item name="android:layout_width">50dp</item>
-        <item name="android:layout_height">50dp</item>
-    </style>
-
-    <!-- Base application theme. -->
-    <style name="AppTheme2" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
-    <!-- 沉浸式风格配置文件  -->
-    <style name="Immersive1" parent="AppTheme2">
-        <!-- 中英文大小写 -->
-        <item name="android:textAllCaps">false</item>
-        <item name="textAllCaps">false</item>
-        <!--  无ActionBar  -->
-        <item name="android:windowActionBar">false</item>
-        <item name="windowActionBar">false</item>
-        <!-- 修改默认的动画风格 -->
-        <item name="android:windowAnimationStyle">@style/AnimationActivity</item>
-        <!--  无标题  -->
-        <item name="windowNoTitle">true</item>
-        <item name="android:windowNoTitle">true</item>
-
-        <item name="android:windowFullscreen">true</item>
-        <!--     <item name="android:windowIsTranslucent">true</item>-->
-        <item name="android:windowTranslucentNavigation">true</item>
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-    </style>
-
-
-    <!-- 给Activity用的Dialog类型 -->
-    <style name="dialog" parent="@android:style/Theme.Dialog">
-        <item name="android:windowFrame">@null</item>
-        <!--边框-->
-        <item name="android:windowIsFloating">true</item>
-        <!--是否浮现在activity之上-->
-        <item name="android:windowIsTranslucent">false</item>
-        <!--半透明-->
-        <item name="android:windowNoTitle">true</item>
-        <!--无标题-->
-        <item name="android:windowBackground">@color/gray_eee</item>
-        <!--背景透明-->
-        <item name="android:backgroundDimEnabled">true</item>
-        <!--     <item name="android:windowBackground">@null</item>-->
-        <!--模糊-->
-    </style>
+    </style>-->
 
 </resources>

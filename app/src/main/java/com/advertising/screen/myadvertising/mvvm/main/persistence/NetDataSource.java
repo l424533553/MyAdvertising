@@ -32,9 +32,9 @@ import static com.advertising.screen.myadvertising.common.iinterface.DataRequest
  * 邮件：424533553@qq.com
  * 说明：
  */
-public class NetDataSource implements IDataRepository {
+class NetDataSource implements IDataRepository {
 
-    public void getWeather(@NotNull DataRequestBack<Weather> callBack) {
+    void getWeather(@NotNull DataRequestBack<Weather> callBack) {
         Call<Weather> call = RetrofitHttpUtils.getRetrofitAPI(IRetrofitAPI.class).getWeather();
         call.enqueue(new Callback<Weather>() {
             @Override
@@ -60,8 +60,9 @@ public class NetDataSource implements IDataRepository {
         });
     }
 
-    public void getNewVersion(String marketId, @NotNull DataRequestBack<ApkBean> callBack) {
+    void getNewVersion(String marketId, @NotNull DataRequestBack<ApkBean> callBack) {
         Observable<NetResultInfo<ApkBean>> call = RetrofitHttpUtils.getRetrofitAPI(IRetrofitAPI.class).getNewVersion(marketId, "2");
+
         call.observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<NetResultInfo<ApkBean>>() {
@@ -92,10 +93,9 @@ public class NetDataSource implements IDataRepository {
 
                     }
                 });
-
     }
 
-    public void getUserInfo(String shellerId, @NotNull DataRequestBack<UserInfoEntity> callBack) {
+    void getUserInfo(String shellerId, @NotNull DataRequestBack<UserInfoEntity> callBack) {
         Observable<NetResultInfo<UserInfoEntity>> call = RetrofitHttpUtils.getRetrofitAPI(IRetrofitAPI.class).getUserInfo(shellerId);
         call.observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -128,7 +128,7 @@ public class NetDataSource implements IDataRepository {
                 });
     }
 
-    public void getTodayPrice(String shellerId, @NotNull DataRequestBack<List<PriceEntity>> callBack) {
+    void getTodayPrice(String shellerId, @NotNull DataRequestBack<List<PriceEntity>> callBack) {
         Observable<NetResultInfo<List<PriceEntity>>> call = RetrofitHttpUtils.getRetrofitAPI(IRetrofitAPI.class).getTodayPrice(shellerId);
         call.observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -163,7 +163,7 @@ public class NetDataSource implements IDataRepository {
     }
 
 
-    public void todayTrade(String shllerId, @NotNull DataRequestBack<TodayTradeInfo> callBack) {
+    void todayTrade(String shllerId, @NotNull DataRequestBack<TodayTradeInfo> callBack) {
         Observable<TodayTradeInfo> call = RetrofitHttpUtils.getRetrofitAPI(IRetrofitAPI.class).todayTrade(shllerId);
         call.observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
